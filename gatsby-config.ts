@@ -35,6 +35,13 @@ const config: GatsbyConfig = {
       __key: "pages",
     },
     "gatsby-plugin-sass",
+    "gatsby-plugin-use-query-params",
+    {
+      resolve: `gatsby-plugin-offline`,
+      options: {
+        precachePages: [`/index/`],
+      },
+    },
   ],
 }
 
