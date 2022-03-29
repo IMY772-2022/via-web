@@ -41,6 +41,7 @@
   "scripts": {
     "develop": "gatsby develop",
     "start": "gatsby develop",
+    "start-local": "gatsby develop -H 0.0.0.0",
     "build": "gatsby build",
     "serve": "gatsby serve",
     "clean": "gatsby clean",

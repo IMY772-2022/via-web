@@ -116,6 +116,18 @@ yarn start
 gatsby develop
 ```
 
+To preview the locally running site on an external device on your local network, run the following command:
+
+```bash
+yarn start-local
+```
+
+or
+
+```bash
+gatsby develop -H 0.0.0.0
+```
+
 ### Commmitting Changes
 
 **Code must NEVER be commited directly to the `main` branch.**
