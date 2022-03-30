@@ -1,7 +1,7 @@
 {
   "name": "via-web",
   "version": "1.0.0",
-  "private": true,
+  "private": "false",
   "description": "via-web",
   "author": "Christoff Linde",
   "contributors": [
@@ -36,20 +36,24 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+"
+    "url": "git+https://github.com/IMY772-2022/via-web"
   },
   "scripts": {
     "develop": "gatsby develop",
     "start": "gatsby develop",
+    "start-local": "gatsby develop -H 0.0.0.0",
     "build": "gatsby build",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "typecheck": "tsc --noEmit",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,scss,css}\"",
+    "lint": "eslint \"**/*.{js,jsx,ts,tsx,json,md,scss,css}\""
   },
   "dependencies": {
     "@mdx-js/mdx": "v1",
     "@mdx-js/react": "v1",
+    "bulma": "^0.9.3",
     "commitizen": "^4.2.4",
     "gatsby": "^4.10.3",
     "gatsby-plugin-image": "^2.10.1",
@@ -57,14 +61,18 @@
     "gatsby-plugin-mdx": "^3.10.2",
     "gatsby-plugin-offline": "^5.10.2",
     "gatsby-plugin-react-helmet": "^5.10.0",
+    "gatsby-plugin-sass": "^5.10.2",
     "gatsby-plugin-sharp": "^4.10.2",
     "gatsby-plugin-sitemap": "^5.10.2",
+    "gatsby-plugin-use-query-params": "^1.0.1",
     "gatsby-source-filesystem": "^4.10.1",
     "gatsby-transformer-sharp": "^4.10.0",
     "lighthouse": "^9.5.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-helmet": "^6.1.0"
+    "react-helmet": "^6.1.0",
+    "sass": "^1.49.9",
+    "use-query-params": "^1.2.3"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.17.0",
