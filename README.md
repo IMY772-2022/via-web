@@ -1,3 +1,9 @@
+
+## :chart_with_upwards_trend:	Repo Stats
+
+![Alt](https://repobeats.axiom.co/api/embed/594b8cfecea1fea621805b072575cf761b68504e.svg "Repobeats analytics image")
+
+
 ## 🚀 Quick start
 
 ### :package: Package Manager
