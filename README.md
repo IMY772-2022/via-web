@@ -1,14 +1,14 @@
-
-## :chart_with_upwards_trend:	Repo Stats
+## :chart_with_upwards_trend: Repo Stats
 
 ![Alt](https://repobeats.axiom.co/api/embed/594b8cfecea1fea621805b072575cf761b68504e.svg "Repobeats analytics image")
-
 
 ## 🚀 Quick start
 
 ### :package: Package Manager
 
 #### Yarn
+
+**This is needed for our project, so please install both Yarn and NPM**
 
 Before you start using Yarn, you'll first need to install it on your system. There are many different ways to install Yarn, but a single one is recommended and cross-platform:
 
@@ -225,18 +225,17 @@ Grouped per component, with global styles, utils, and types in the `src` folder.
 node_modules/
 src/
     components/
-        Dashboard/
-            Dashboard.tsx
-            Dashboard.scss
-            hooks.ts
-            types.ts
+        Card
+            card.tsx
+            card.spec.ts
         Home/
-            Home.tsx
-            Home.scss
-            types.ts
+            index.tsx
+            index.scss
+        hooks
+          useCamera.ts
+        utils
+          constants.ts
     style.scss
     index.tsx
-    types.ts
-    utils.ts
 package.json
 ```
