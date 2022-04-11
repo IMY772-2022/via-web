@@ -1,20 +1,16 @@
 ---
 name: New Feature
 about: A feature that is to be added to the project
-title: "[FEATURE]"
+title: ""
 labels: enhancement
 assignees: ''
 
 ---
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+### Description
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+Here, a short description on what the feature entails
 
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
+#### Notes
 
-**Additional context**
-Add any other context or screenshots about the feature request here.
+Any additional notes or information that would be needed/helpful when working on this task, for e.g., mentioning any related issues, potential breaking changes, etc.
