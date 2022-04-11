@@ -10,6 +10,12 @@
       "StackName": "amplify-viaweb-dev-194052",
       "StackId": "arn:aws:cloudformation:eu-west-1:906501394119:stack/amplify-viaweb-dev-194052/e2a553e0-b699-11ec-8f72-02f8ff289f71",
       "AmplifyAppId": "d2ux2cwqlfzdy9"
+    },
+    "categories": {
+      "auth": {
+        "viaweb22e998c1": {},
+        "true": {}
+      }
     }
   }
 }
