@@ -40,6 +40,7 @@ module.exports = {
       files: ["*.ts", "*.tsx"],
       excludedFiles: [
         "*.test.js",
+        "*.d.ts",
         "gatsby-node.js",
         "gatsby-config.js",
         "gatsby-browser.js",
@@ -56,7 +57,7 @@ module.exports = {
       ],
       rules: {
         "react/prop-types": "off", // Disable prop-types as we use TypeScript for type checking
-        "@typescript-eslint/no-explicit-any": "error",
+        // "@typescript-eslint/no-explicit-any": "error",
         "prettier/prettier": [
           "error",
           {

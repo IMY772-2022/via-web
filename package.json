@@ -51,8 +51,10 @@
     "lint": "eslint \"**/*.{js,jsx,ts,tsx,json,md,scss,css}\""
   },
   "dependencies": {
+    "@aws-amplify/ui-react": "^2.15.1",
     "@mdx-js/mdx": "v1",
     "@mdx-js/react": "v1",
+    "aws-amplify": "^4.3.19",
     "bulma": "^0.9.3",
     "commitizen": "^4.2.4",
     "gatsby": "^4.10.3",
