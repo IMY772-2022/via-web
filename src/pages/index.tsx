@@ -15,10 +15,14 @@ Auth.configure(awsconfig)
 Predictions.addPluggable(new AmazonAIPredictionsProvider())
 
 const IndexPage = (): JSX.Element => (
-  <div className="container">
-    <div className="columns is-two-fifths">
+  <div className="section">
+    <div className="container is-fluid">
       <Layout pageTitle="VIA">
-        <Landing title="image labelling" />
+        <div className="columns">
+          <div className="column is-4 is-offset-one-quarter">
+            <Landing title="image labelling" />
+          </div>
+        </div>
       </Layout>
     </div>
   </div>
