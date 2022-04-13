@@ -4,9 +4,13 @@ import Analysis from "../components/PhotoAnalysis"
 
 const PhotoAnalysis = () => {
   return (
-    <Layout pageTitle="Photo Analysis">
-      <Analysis />
-    </Layout>
+    <div className="section">
+      <div className="container is-fluid">
+        <Layout pageTitle="Photo Analysis">
+          <Analysis />
+        </Layout>
+      </div>
+    </div>
   )
 }
 
