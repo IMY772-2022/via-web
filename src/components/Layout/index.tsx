@@ -10,7 +10,7 @@ export const Layout = (props: LayoutProps) => {
   const { pageTitle, children } = props
   const heading = <h1>{pageTitle}</h1>
   return (
-    <div>
+    <div className="container">
       <Navigation />
       {heading}
       {children}
