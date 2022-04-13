@@ -4,7 +4,7 @@ import BrandIcon from "../icons/BrandIcon"
 
 export const Navigation = () => {
   return (
-    <nav className="navbar" role="navigation" aria-label="main navigation">
+    <nav className="navbar mb-5" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
         <Link className="navbar-item" to="/">
           <BrandIcon />
@@ -16,7 +16,7 @@ export const Navigation = () => {
       <Link className="navbar-item" to="/photo-analysis">
         Photo Analysis
       </Link>
-      <Link
+      {/* <Link
         role="button"
         className="navbar-burger"
         aria-label="menu"
@@ -26,7 +26,7 @@ export const Navigation = () => {
         <span aria-hidden="true" />
         <span aria-hidden="true" />
         <span aria-hidden="true" />
-      </Link>
+      </Link> */}
     </nav>
   )
 }
