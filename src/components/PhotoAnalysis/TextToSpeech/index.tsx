@@ -3,6 +3,8 @@ import { useState } from "react"
 import { Predictions } from "@aws-amplify/predictions"
 import Button from "../../Button"
 import { useEffect } from "react"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faVolumeUp } from "@fortawesome/free-solid-svg-icons"
 
 interface TextToSpeechProps {
   labels: string[]
@@ -49,7 +51,7 @@ const TextToSpeech: React.FC<TextToSpeechProps> = props => {
     audio.src = audioStream
     audio.play()
   }
-
+  const icon = <FontAwesomeIcon icon="phone-volume"></FontAwesomeIcon>
   return (
     <div className="is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
       <button
@@ -60,7 +62,12 @@ const TextToSpeech: React.FC<TextToSpeechProps> = props => {
         Text to speech
       </button>
       <div className="mt-3"> {pollyResponse} </div>
-      {!isLoading && <Button onClick={play} />}
+      {!isLoading && (
+        <Button
+          icon={<FontAwesomeIcon icon={faVolumeUp} fontSize="20" />}
+          onClick={play}
+        />
+      )}
     </div>
   )
 }
