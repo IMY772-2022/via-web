@@ -3,13 +3,16 @@ import React, { useState } from "react"
 import { Predictions } from "@aws-amplify/predictions"
 import TextToSpeech from "./TextToSpeech"
 
-const PhotoAnalysis: React.FC = () => {
+const Analysis: React.FC = () => {
   const [rekognitionResponse, setRekognitionResponse] = useState<
     string | string[]
   >("Click upload for test")
   const [rekognitionLabels, setRekognitionLabels] = useState<string[]>([""])
 
+  const [isLoading, setIsLoading] = useState(false)
+
   const indentifyImageLabels = (event: any) => {
+    setIsLoading(true)
     setRekognitionResponse("searching...")
 
     const files = (event.target as HTMLInputElement).files
@@ -34,14 +37,16 @@ const PhotoAnalysis: React.FC = () => {
         })
         setRekognitionResponse(JSON.stringify(response, null, 2))
         setRekognitionLabels(labelValues)
+        setIsLoading(false)
       })
       .catch(err => setRekognitionResponse(JSON.stringify(err, null, 2)))
   }
+
   /* tslint:disable-next-line */
   console.log(rekognitionResponse) // this is just to allow the build to pass currently; we will likely use this value at a later stage to process the bounding box
   const pageData = (
     <div>
-      <div className="file">
+      <div className="file is-flex-direction-column is-justify-content-center is-align-items-center">
         <label className="file-label">
           <input
             className="file-input"
@@ -58,10 +63,11 @@ const PhotoAnalysis: React.FC = () => {
         Analyse photo
       </button> */}
       <p>{rekognitionLabels.join(", ")}</p>
-      <TextToSpeech labels={rekognitionLabels} />
+
+      <TextToSpeech disabled={isLoading} labels={rekognitionLabels} />
     </div>
   )
   return pageData
 }
 
-export default PhotoAnalysis
+export default Analysis
