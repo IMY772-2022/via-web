@@ -44,7 +44,10 @@ const config: GatsbyConfig = {
         icon: "src/images/via-logo.svg",
       },
     },
-    "gatsby-plugin-offline",
+    {
+      resolve: "gatsby-plugin-offline",
+      options: { precachePages: ["/"] },
+    },
   ],
 }
 
