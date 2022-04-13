@@ -41,7 +41,7 @@ const config: GatsbyConfig = {
         background_color: "#ffffff",
         theme_color: "#ffffff",
         display: "standalone",
-        icon: "src/images/icon.png",
+        icon: "src/images/via-logo.svg",
       },
     },
     "gatsby-plugin-offline",
