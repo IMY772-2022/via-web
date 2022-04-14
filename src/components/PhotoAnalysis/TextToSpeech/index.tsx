@@ -51,7 +51,7 @@ const TextToSpeech: React.FC<TextToSpeechProps> = props => {
     audio.src = audioStream
     audio.play()
   }
-  const icon = <FontAwesomeIcon icon="phone-volume"></FontAwesomeIcon>
+
   return (
     <div className="is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
       <button
