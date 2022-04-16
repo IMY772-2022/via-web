@@ -3,7 +3,6 @@ import React from "react"
 interface Props {
   label?: string
   id?: string
-  onSliderClicked: () => void
   maxvalue?: number
   minvalue?: number
 }
@@ -13,7 +12,6 @@ const Slider: React.FC<Props> = ({
   id = "Slider",
   maxvalue = 100,
   minvalue = 1,
-  onSliderClicked,
 }) => {
   return (
     <div className="slidecontainer">

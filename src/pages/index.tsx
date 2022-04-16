@@ -11,14 +11,11 @@ import Slider from "../components/Slider"
 import { Layout } from "../components/Layout/index"
 import "../styles.scss"
 import Settings from "../components/Settings"
+import Radio from "../components/Radio"
 
 Amplify.configure(awsconfig)
 Auth.configure(awsconfig)
 Predictions.addPluggable(new AmazonAIPredictionsProvider())
-
-const sayHello = () => {
-  //console.log("Hello")
-}
 
 const IndexPage = (): JSX.Element => (
   <div className="section">
@@ -27,7 +24,6 @@ const IndexPage = (): JSX.Element => (
         <div className="columns">
           <div className="column is-4 is-full-mobile ">
             <Landing title="image labelling" />
-            <Settings />
           </div>
         </div>
       </Layout>
