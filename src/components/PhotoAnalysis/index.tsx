@@ -2,6 +2,7 @@
 import React, { useState } from "react"
 import { Predictions } from "@aws-amplify/predictions"
 import TextToSpeech from "./TextToSpeech"
+import Slider from "../Slider"
 
 const Analysis: React.FC = () => {
   const [rekognitionResponse, setRekognitionResponse] = useState<
@@ -10,6 +11,10 @@ const Analysis: React.FC = () => {
   const [rekognitionLabels, setRekognitionLabels] = useState<string[]>([""])
 
   const [isLoading, setIsLoading] = useState(false)
+
+  const sayHello = () => {
+    console.log(`Hello`)
+  }
 
   const indentifyImageLabels = (event: any) => {
     setIsLoading(true)
@@ -65,6 +70,10 @@ const Analysis: React.FC = () => {
       <p>{rekognitionLabels.join(", ")}</p>
 
       <TextToSpeech disabled={isLoading} labels={rekognitionLabels} />
+
+      <br />
+
+      <Slider label="Font Size" onSliderClicked={sayHello} />
     </div>
   )
   return pageData
