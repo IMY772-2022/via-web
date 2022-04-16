@@ -3235,6 +3235,32 @@
     "minimatch" "^3.0.4"
     "strip-json-comments" "^3.1.1"
 
+"@fortawesome/fontawesome-common-types@6.1.1":
+  "integrity" "sha512-wVn5WJPirFTnzN6tR95abCx+ocH+3IFLXAgyavnf9hUmN0CfWoDjPT/BAWsUVwSlYYVBeCLJxaqi7ZGe4uSjBA=="
+  "resolved" "https://registry.npmjs.org/@fortawesome/fontawesome-common-types/-/fontawesome-common-types-6.1.1.tgz"
+  "version" "6.1.1"
+
+"@fortawesome/fontawesome-svg-core@^6.1.1", "@fortawesome/fontawesome-svg-core@~1 || ~6":
+  "integrity" "sha512-NCg0w2YIp81f4V6cMGD9iomfsIj7GWrqmsa0ZsPh59G7PKiGN1KymZNxmF00ssuAlo/VZmpK6xazsGOwzKYUMg=="
+  "resolved" "https://registry.npmjs.org/@fortawesome/fontawesome-svg-core/-/fontawesome-svg-core-6.1.1.tgz"
+  "version" "6.1.1"
+  dependencies:
+    "@fortawesome/fontawesome-common-types" "6.1.1"
+
+"@fortawesome/free-solid-svg-icons@^6.1.1":
+  "integrity" "sha512-0/5exxavOhI/D4Ovm2r3vxNojGZioPwmFrKg0ZUH69Q68uFhFPs6+dhAToh6VEQBntxPRYPuT5Cg1tpNa9JUPg=="
+  "resolved" "https://registry.npmjs.org/@fortawesome/free-solid-svg-icons/-/free-solid-svg-icons-6.1.1.tgz"
+  "version" "6.1.1"
+  dependencies:
+    "@fortawesome/fontawesome-common-types" "6.1.1"
+
+"@fortawesome/react-fontawesome@^0.1.18":
+  "integrity" "sha512-RwLIB4TZw0M9gvy5u+TusAA0afbwM4JQIimNH/j3ygd6aIvYPQLqXMhC9ErY26J23rDPyDZldIfPq/HpTTJ/tQ=="
+  "resolved" "https://registry.npmjs.org/@fortawesome/react-fontawesome/-/react-fontawesome-0.1.18.tgz"
+  "version" "0.1.18"
+  dependencies:
+    "prop-types" "^15.8.1"
+
 "@gatsbyjs/parcel-namer-relative-to-cwd@0.0.2":
   "integrity" "sha512-ZeGxCbx13+zjpE/0HuJ/tjox9zfiYq9fGoAAi+RHP5vHSJCmJVO5hZbexQ/umlUyAkkkzC4p1WIpw1cYQTA8SA=="
   "resolved" "https://registry.npmjs.org/@gatsbyjs/parcel-namer-relative-to-cwd/-/parcel-namer-relative-to-cwd-0.0.2.tgz"
@@ -6722,6 +6748,11 @@
     "base64-js" "^1.0.2"
     "ieee754" "^1.1.4"
     "isarray" "^1.0.0"
+
+"bulma-modal-fx@^1.1.1":
+  "integrity" "sha512-Ma1e/uczogPd0MzpeOsYJau1ocavO2wlnGg1ZVg+/mrsKyeasrdtyfbOH1kRdzqCH9DMrZAw7WEW0Oa3lKr6Fw=="
+  "resolved" "https://registry.npmjs.org/bulma-modal-fx/-/bulma-modal-fx-1.1.1.tgz"
+  "version" "1.1.1"
 
 "bulma@^0.9.3":
   "integrity" "sha512-0d7GNW1PY4ud8TWxdNcP6Cc8Bu7MxcntD/RRLGWuiw/s0a9P+XlH/6QoOIrmbj6o8WWJzJYhytiu9nFjTszk1g=="
@@ -15001,7 +15032,7 @@
     "invariant" "^2.2.4"
     "tslib" "^1.0.0"
 
-"react@^16.0.0 || ^17.0.0", "react@^16.13.1 || ^17.0.0", "react@^16.3.0 || ^17.0.0", "react@^16.8 || ^17.0", "react@^16.8.0 || ^17.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^16.9.0 || ^17.0.0", "react@^17.0.1", "react@^18.0.0", "react@>= 16.7.0", "react@>= 16.8.0", "react@>=16", "react@>=16.3.0", "react@>=16.8", "react@>=16.8.0", "react@15.x || 16.x || 17.x", "react@17.0.2":
+"react@^16.0.0 || ^17.0.0", "react@^16.13.1 || ^17.0.0", "react@^16.3.0 || ^17.0.0", "react@^16.8 || ^17.0", "react@^16.8.0 || ^17.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^16.9.0 || ^17.0.0", "react@^17.0.1", "react@^18.0.0", "react@>= 16.7.0", "react@>= 16.8.0", "react@>=16", "react@>=16.3.0", "react@>=16.8", "react@>=16.8.0", "react@>=16.x", "react@15.x || 16.x || 17.x", "react@17.0.2":
   "integrity" "sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.2.tgz"
   "version" "17.0.2"
