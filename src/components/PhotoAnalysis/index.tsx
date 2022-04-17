@@ -70,10 +70,6 @@ const Analysis: React.FC = () => {
       <p>{rekognitionLabels.join(", ")}</p>
 
       <TextToSpeech disabled={isLoading} labels={rekognitionLabels} />
-
-      <br />
-
-      <Slider label="Font Size" onSliderClicked={sayHello} />
     </div>
   )
   return pageData

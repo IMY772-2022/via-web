@@ -6741,11 +6741,6 @@
     "ieee754" "^1.1.4"
     "isarray" "^1.0.0"
 
-"bulma-modal-fx@^1.1.1":
-  "integrity" "sha512-Ma1e/uczogPd0MzpeOsYJau1ocavO2wlnGg1ZVg+/mrsKyeasrdtyfbOH1kRdzqCH9DMrZAw7WEW0Oa3lKr6Fw=="
-  "resolved" "https://registry.npmjs.org/bulma-modal-fx/-/bulma-modal-fx-1.1.1.tgz"
-  "version" "1.1.1"
-
 "bulma@^0.9.3":
   "integrity" "sha512-0d7GNW1PY4ud8TWxdNcP6Cc8Bu7MxcntD/RRLGWuiw/s0a9P+XlH/6QoOIrmbj6o8WWJzJYhytiu9nFjTszk1g=="
   "resolved" "https://registry.npmjs.org/bulma/-/bulma-0.9.3.tgz"
@@ -9663,6 +9658,11 @@
   "integrity" "sha1-FQStJSMVjKpA20onh8sBQRmU6k8="
   "resolved" "https://registry.npmjs.org/fs.realpath/-/fs.realpath-1.0.0.tgz"
   "version" "1.0.0"
+
+"fsevents@^2.3.2", "fsevents@~2.3.2":
+  "integrity" "sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA=="
+  "resolved" "https://registry.npmjs.org/fsevents/-/fsevents-2.3.2.tgz"
+  "version" "2.3.2"
 
 "function-bind@^1.1.1":
   "integrity" "sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A=="
@@ -14555,7 +14555,7 @@
   dependencies:
     "fast-diff" "^1.1.2"
 
-"prettier@>=2.0.0", "prettier@2.6.2":
+"prettier@>=2.0.0":
   "integrity" "sha512-PkUpF+qoXTqhOeWL9fu7As8LXsIUZ1WYaJiY/a7McAQzxjk82OF0tibkFXVCDImZtWxbvojFjerkiLb0/q8mew=="
   "resolved" "https://registry.npmjs.org/prettier/-/prettier-2.6.2.tgz"
   "version" "2.6.2"
