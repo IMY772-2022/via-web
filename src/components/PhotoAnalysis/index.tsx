@@ -6,9 +6,7 @@ import {
   BoundingBox,
 } from "@aws-amplify/predictions"
 import TextToSpeech from "./TextToSpeech"
-import { label } from "aws-amplify"
 
-import { useIdentifyImageLabels } from "./hooks/useIdentifyImageLabels"
 interface Label {
   name: string
   boundingBoxes: BoundingBox[]
@@ -25,8 +23,9 @@ const Analysis: React.FC = () => {
   const [rekognitionResponse, setRekognitionResponse] = useState<
     IdentifyLabelsOutput | string
   >("")
-  const [rekognitionLabels, setRekognitionLabels] = useState<string[]>([""])
-
+  const [imageSrc, setImageSrc] = useState<string>()
+  let labels: string[] = [""]
+  let labelData: Label[]
   const [isLoading, setIsLoading] = useState(false)
 
   const identifyImageLabels = async (event: any) => {
@@ -34,6 +33,7 @@ const Analysis: React.FC = () => {
 
     const files = (event.target as HTMLInputElement).files
     const file = files![0]
+    setImageSrc(URL.createObjectURL(file))
 
     await Predictions.identify({
       labels: {
@@ -44,19 +44,8 @@ const Analysis: React.FC = () => {
       },
     })
       .then(response => {
-        const { labels } = response
-        // labels?.forEach(object => {
-        //   const { name, boundingBoxes } = object
-        // })
-
-        const labelValues = labels!.map(label => {
-          return label.name
-        })
         setRekognitionResponse(response)
-        setRekognitionLabels(labelValues)
         setIsLoading(false)
-        //console.log(rekognitionResponse)
-        // processRekognitionLabels(rekognitionResponse as IdentifyLabelsOutput)
       })
       .catch(err => setRekognitionResponse(JSON.stringify(err, null, 2)))
   }
@@ -75,10 +64,12 @@ const Analysis: React.FC = () => {
         }
       })
     }
-    console.log(labelsArray)
+    labelData = labelsArray
+    const labelValues = labelsArray.map(label => {
+      return label.name
+    })
+    labels = labelValues
   }
-  /* tslint:disable-next-line */
-  console.log(JSON.stringify(rekognitionResponse)) // this is just to allow the build to pass currently; we will likely use this value at a later stage to process the bounding box
   const pageData = (
     <div>
       <div className="file is-flex-direction-column is-justify-content-center is-align-items-center">
@@ -94,18 +85,11 @@ const Analysis: React.FC = () => {
         </label>
       </div>
       <br />
-      {/* <button className="button is-dark" onClick={indentifyImageLabels}>
-        Analyse photo
-      </button> */}
-      <p>
-        {" "}
-        {processRekognitionLabels(
-          rekognitionResponse as IdentifyLabelsOutput
-        )}{" "}
-      </p>
-      <p>{rekognitionLabels.join(", ")}</p>
+      <img src={imageSrc} />
+      {processRekognitionLabels(rekognitionResponse as IdentifyLabelsOutput)}
+      <p>{labels.join(", ")}</p>
 
-      <TextToSpeech disabled={isLoading} labels={rekognitionLabels} />
+      <TextToSpeech disabled={isLoading} labels={labels} />
     </div>
   )
   return pageData
