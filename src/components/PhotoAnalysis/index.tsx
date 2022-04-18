@@ -1,24 +1,41 @@
 /* eslint-disable  */
 import React, { useState } from "react"
-import { Predictions } from "@aws-amplify/predictions"
+import {
+  Predictions,
+  IdentifyLabelsOutput,
+  BoundingBox,
+} from "@aws-amplify/predictions"
 import TextToSpeech from "./TextToSpeech"
+import { label } from "aws-amplify"
 
+import { useIdentifyImageLabels } from "./hooks/useIdentifyImageLabels"
+interface Label {
+  name: string
+  boundingBoxes: BoundingBox[]
+}
+
+interface ParentLabel {
+  name: string
+}
+interface Metadata {
+  confidence: number
+  parents: ParentLabel[]
+}
 const Analysis: React.FC = () => {
   const [rekognitionResponse, setRekognitionResponse] = useState<
-    string | string[]
-  >("Click upload for test")
+    IdentifyLabelsOutput | string
+  >("")
   const [rekognitionLabels, setRekognitionLabels] = useState<string[]>([""])
 
   const [isLoading, setIsLoading] = useState(false)
 
-  const indentifyImageLabels = (event: any) => {
+  const identifyImageLabels = async (event: any) => {
     setIsLoading(true)
-    setRekognitionResponse("searching...")
 
     const files = (event.target as HTMLInputElement).files
     const file = files![0]
 
-    Predictions.identify({
+    await Predictions.identify({
       labels: {
         source: {
           file,
@@ -32,18 +49,36 @@ const Analysis: React.FC = () => {
         //   const { name, boundingBoxes } = object
         // })
 
-        const labelValues = labels!.map(object => {
-          return object.name
+        const labelValues = labels!.map(label => {
+          return label.name
         })
-        setRekognitionResponse(JSON.stringify(response, null, 2))
+        setRekognitionResponse(response)
         setRekognitionLabels(labelValues)
         setIsLoading(false)
+        //console.log(rekognitionResponse)
+        // processRekognitionLabels(rekognitionResponse as IdentifyLabelsOutput)
       })
       .catch(err => setRekognitionResponse(JSON.stringify(err, null, 2)))
   }
 
+  const processRekognitionLabels = (
+    rekognitionResponse: IdentifyLabelsOutput
+  ) => {
+    let labelsArray: Label[] = []
+    if (rekognitionResponse != "") {
+      rekognitionResponse.labels!.forEach(label => {
+        const metadata = label.metadata as Metadata
+
+        const { confidence, parents } = metadata
+        if (confidence > 85 && parents.length >= 1) {
+          labelsArray.push(label)
+        }
+      })
+    }
+    console.log(labelsArray)
+  }
   /* tslint:disable-next-line */
-  console.log(rekognitionResponse) // this is just to allow the build to pass currently; we will likely use this value at a later stage to process the bounding box
+  console.log(JSON.stringify(rekognitionResponse)) // this is just to allow the build to pass currently; we will likely use this value at a later stage to process the bounding box
   const pageData = (
     <div>
       <div className="file is-flex-direction-column is-justify-content-center is-align-items-center">
@@ -51,7 +86,7 @@ const Analysis: React.FC = () => {
           <input
             className="file-input"
             type="file"
-            onChange={indentifyImageLabels}
+            onChange={identifyImageLabels}
           ></input>
           <span className="file-cta">
             <span className="file-label">Choose a file…</span>
@@ -62,6 +97,12 @@ const Analysis: React.FC = () => {
       {/* <button className="button is-dark" onClick={indentifyImageLabels}>
         Analyse photo
       </button> */}
+      <p>
+        {" "}
+        {processRekognitionLabels(
+          rekognitionResponse as IdentifyLabelsOutput
+        )}{" "}
+      </p>
       <p>{rekognitionLabels.join(", ")}</p>
 
       <TextToSpeech disabled={isLoading} labels={rekognitionLabels} />
