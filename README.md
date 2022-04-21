@@ -6,27 +6,9 @@
 
 ### :package: Package Manager
 
-#### Yarn
+##### Intall NPM
 
-**This is needed for our project, so please install both Yarn and NPM**
-
-Before you start using Yarn, you'll first need to install it on your system. There are many different ways to install Yarn, but a single one is recommended and cross-platform:
-
-##### Intall via NPM
-
-It is recommended to install Yarn through the [npm package manager](http://npmjs.org/), which comes bundled with [Node.js](https://nodejs.org/) when you install it on your system.
-
-Once you have npm installed you can run the following both to install and **upgrade** Yarn:
-
-```bash
-npm install --global yarn
-```
-
-You can verify that Yarn is installed by running:
-
-```bash
-yarn --version
-```
+[Node Package Manager](http://npmjs.org/) comes bundled with [Node.js](https://nodejs.org/), so to install npm you first need to install Node.js.
 
 ### GitHub CLI
 
@@ -78,12 +60,6 @@ The repo can also be cloned from within VSCode.
 
 To install all the dependencies required by the project, run the command:
 
-**Yarn**
-
-```bash
-yarn
-```
-
 **npm**
 
 ```bash
@@ -110,29 +86,13 @@ npm install -g gatsby-cli
 
 (in the project directory) run the following command:
 
-**Yarn**
-
-```bash
-yarn start
-```
-
 **npm**
 
 ```bash
-gatsby develop
+npm run develop
 ```
 
-To preview the locally running site on an external device on your local network, run the following command:
-
-```bash
-yarn start-local
-```
-
-or
-
-```bash
-gatsby develop -H 0.0.0.0
-```
+This will serve the project on you local network, enabling it to be acccessed from any other device on the same network.
 
 ### Commmitting Changes
 
@@ -172,9 +132,9 @@ Code changes can be merged into the `develop` branch.
 
 Pull request templates are set up on GitHub. In general, PRs can only be merged when:
 
-- [ ] Someone other than the author has reviewed and approved the changes
-- [ ] All the build checks from Amplify has completed successfully
-- [ ] The branch is synched with the latest changes from the `develop` branch **(optional)**
+- Someone other than the author has reviewed and approved the changes
+- All the build checks from Amplify has completed successfully
+- The branch is synched with the latest changes from the `develop` branch **(optional)**
 
 ### :palm_tree: Branching Rules
 

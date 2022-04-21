@@ -39,9 +39,8 @@
     "url": "git+https://github.com/IMY772-2022/via-web"
   },
   "scripts": {
-    "develop": "gatsby develop",
+    "develop": "gatsby develop -H 0.0.0.0 -p 8000",
     "start": "gatsby develop",
-    "start-local": "gatsby develop -H 0.0.0.0",
     "build": "gatsby build",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
