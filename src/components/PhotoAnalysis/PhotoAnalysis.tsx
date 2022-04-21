@@ -5,7 +5,7 @@ import {
   IdentifyLabelsOutput,
   BoundingBox,
 } from "@aws-amplify/predictions"
-import TextToSpeech from "./TextToSpeech"
+import TextToSpeech from "./TextToSpeech/TextToSpeech"
 
 interface Label {
   name: string
