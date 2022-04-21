@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React from "react"
-import PhotoAnalysis from "../PhotoAnalysis"
+import PhotoAnalysis from "../PhotoAnalysis/PhotoAnalyisIndex"
 
 import "./index.scss"
 

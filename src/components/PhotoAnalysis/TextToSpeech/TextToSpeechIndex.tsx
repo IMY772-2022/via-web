@@ -1,7 +1,7 @@
 import React from "react"
 import { useState } from "react"
 import { Predictions } from "@aws-amplify/predictions"
-import Button from "../../Button"
+import Button from "../../Button/ButtonIndex"
 import { useEffect } from "react"
 
 interface TextToSpeechProps {

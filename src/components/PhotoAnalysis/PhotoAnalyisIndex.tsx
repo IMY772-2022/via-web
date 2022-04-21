@@ -1,8 +1,8 @@
 /* eslint-disable  */
 import React, { useState } from "react"
 import { Predictions } from "@aws-amplify/predictions"
-import TextToSpeech from "./TextToSpeech"
-import Slider from "../Slider"
+import TextToSpeech from "./TextToSpeech/TextToSpeechIndex"
+import Slider from "../Slider/SliderIndex"
 
 const Analysis: React.FC = () => {
   const [rekognitionResponse, setRekognitionResponse] = useState<

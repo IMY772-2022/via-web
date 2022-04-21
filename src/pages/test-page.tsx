@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
-import Fab from "../components/Fab"
-import { Layout } from "../components/Layout"
+import Fab from "../components/Fab/FabIndex"
+import { Layout } from "../components/Layout/LayoutIndex"
 import SettingsModal from "../components/SettingsModal/SettingsModal"
 
 const TestPage = () => {

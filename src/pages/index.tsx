@@ -6,12 +6,12 @@ import {
 } from "@aws-amplify/predictions"
 
 import awsconfig from "../aws-exports"
-import Landing from "../components/Landing"
-import Slider from "../components/Slider"
-import { Layout } from "../components/Layout/index"
+import Landing from "../components/Landing/LandingIndex"
+import Slider from "../components/Slider/SliderIndex"
+import { Layout } from "../components/Layout/LayoutIndex"
 import "../styles.scss"
-import Settings from "../components/Settings"
-import Radio from "../components/Radio"
+import Settings from "../components/Settings/SettingsIndex"
+import Radio from "../components/Radio/RadioIndex"
 
 Amplify.configure(awsconfig)
 Auth.configure(awsconfig)
