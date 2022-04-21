@@ -85,7 +85,7 @@ const Analysis: React.FC = () => {
         </label>
       </div>
       <br />
-      <img src={imageSrc} alt="user's uploaded file" />
+      <img src={imageSrc} />
       {processRekognitionLabels(rekognitionResponse as IdentifyLabelsOutput)}
       <p>{labels.join(", ")}</p>
 
