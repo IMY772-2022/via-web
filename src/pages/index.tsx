@@ -6,10 +6,10 @@ import {
 } from "@aws-amplify/predictions"
 
 import awsconfig from "../aws-exports"
-import Landing from "../components/Landing"
-import { Layout } from "../components/Layout/index"
+import Landing from "../components/Landing/Landing"
+import { Layout } from "../components/Layout/Layout"
 import "../styles.scss"
-import Seo from "../components/Seo"
+import Seo from "../components/Seo/Seo"
 
 Amplify.configure(awsconfig)
 Auth.configure(awsconfig)
