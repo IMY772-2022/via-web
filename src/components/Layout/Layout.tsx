@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Navigation } from "../Navigation"
+import { Navigation } from "../Navigation/Navigation"
 
 export interface LayoutProps {
   pageTitle: string
