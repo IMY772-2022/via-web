@@ -1,6 +1,6 @@
 import React from "react"
-import { Layout } from "../components/Layout"
-import Analysis from "../components/PhotoAnalysis"
+import { Layout } from "../components/Layout/Layout"
+import Analysis from "../components/PhotoAnalysis/PhotoAnalysis"
 
 const PhotoAnalysis = () => {
   return (
