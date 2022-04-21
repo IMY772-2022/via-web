@@ -2,7 +2,7 @@
 import React from "react"
 import PhotoAnalysis from "../PhotoAnalysis/PhotoAnalysis"
 
-import "./index.scss"
+import "./landing.scss"
 
 interface Props {
   title: string
