@@ -2,19 +2,15 @@ import type { GatsbyConfig } from "gatsby"
 
 const config: GatsbyConfig = {
   siteMetadata: {
-    title: `new`,
+    title: `VIA`,
     siteUrl: `https://www.yourdomain.tld`,
+    description:
+      "A service to assist visually impaired users to “see” the world around them.",
   },
   plugins: [
     "gatsby-plugin-image",
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-sitemap",
-    {
-      resolve: "gatsby-plugin-manifest",
-      options: {
-        icon: "src/images/icon.png",
-      },
-    },
     "gatsby-plugin-mdx",
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
@@ -37,10 +33,20 @@ const config: GatsbyConfig = {
     "gatsby-plugin-sass",
     "gatsby-plugin-use-query-params",
     {
-      resolve: `gatsby-plugin-offline`,
+      resolve: "gatsby-plugin-manifest",
       options: {
-        precachePages: [`/index/`],
+        name: "VIA",
+        short_name: "VIA",
+        start_url: "/",
+        background_color: "#ffffff",
+        theme_color: "#ffffff",
+        display: "standalone",
+        icon: "src/images/via-logo.svg",
       },
+    },
+    {
+      resolve: "gatsby-plugin-offline",
+      options: { precachePages: ["/"] },
     },
   ],
 }
