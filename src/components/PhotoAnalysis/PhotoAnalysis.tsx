@@ -6,8 +6,9 @@ import {
   BoundingBox,
 } from "@aws-amplify/predictions"
 import TextToSpeech from "./TextToSpeech/TextToSpeech"
+import { isValidFileType } from "./rekognitionUtils"
 
-interface Label {
+export interface Label {
   name: string
   boundingBoxes: BoundingBox[]
 }
@@ -28,26 +29,27 @@ const Analysis: React.FC = () => {
   let labelData: Label[]
   const [isLoading, setIsLoading] = useState(false)
 
-  const identifyImageLabels = async (event: any) => {
-    setIsLoading(true)
-
+  const identifyImageResponse = async (event: any) => {
     const files = (event.target as HTMLInputElement).files
     const file = files![0]
-    setImageSrc(URL.createObjectURL(file))
-
-    await Predictions.identify({
-      labels: {
-        source: {
-          file,
+    if (isValidFileType(file)) {
+      setIsLoading(true)
+      setImageSrc(URL.createObjectURL(file))
+      console.log("test")
+      await Predictions.identify({
+        labels: {
+          source: {
+            file,
+          },
+          type: "ALL",
         },
-        type: "ALL",
-      },
-    })
-      .then(response => {
-        setRekognitionResponse(response)
-        setIsLoading(false)
       })
-      .catch(err => setRekognitionResponse(JSON.stringify(err, null, 2)))
+        .then(response => {
+          setRekognitionResponse(response)
+          setIsLoading(false)
+        })
+        .catch(err => setRekognitionResponse(JSON.stringify(err, null, 2)))
+    } else return <div> Please upload a jpg or png image</div>
   }
 
   const processRekognitionLabels = (
@@ -55,21 +57,25 @@ const Analysis: React.FC = () => {
   ) => {
     let labelsArray: Label[] = []
     if (rekognitionResponse != "") {
-      rekognitionResponse.labels!.forEach(label => {
-        const metadata = label.metadata as Metadata
+      if (rekognitionResponse.labels) {
+        rekognitionResponse.labels!.forEach(label => {
+          const metadata = label.metadata as Metadata
 
-        const { confidence, parents } = metadata
-        if (confidence > 85 && parents.length >= 1) {
-          labelsArray.push(label)
-        }
-      })
+          const { confidence, parents } = metadata
+          if (confidence > 85 && parents.length >= 1) {
+            labelsArray.push(label)
+          }
+        })
+      }
     }
     labelData = labelsArray
     const labelValues = labelsArray.map(label => {
       return label.name
     })
     labels = labelValues
+    // labelImage(labelData, imageSrc as string)
   }
+
   const pageData = (
     <div>
       <div className="file is-flex-direction-column is-justify-content-center is-align-items-center">
@@ -77,7 +83,7 @@ const Analysis: React.FC = () => {
           <input
             className="file-input"
             type="file"
-            onChange={identifyImageLabels}
+            onChange={identifyImageResponse}
           ></input>
           <span className="file-cta">
             <span className="file-label">Choose a file…</span>
@@ -88,7 +94,6 @@ const Analysis: React.FC = () => {
       <img src={imageSrc} />
       {processRekognitionLabels(rekognitionResponse as IdentifyLabelsOutput)}
       <p>{labels.join(", ")}</p>
-
       <TextToSpeech disabled={isLoading} labels={labels} />
     </div>
   )
