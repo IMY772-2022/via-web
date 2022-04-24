@@ -5,14 +5,14 @@ import {
   IdentifyLabelsOutput,
   BoundingBox,
 } from "@aws-amplify/predictions"
-import TextToSpeech from "./TextToSpeech/TextToSpeech"
-import { isValidFileType } from "./rekognitionUtils"
 
-export interface Label {
+import TextToSpeech from "./TextToSpeech/TextToSpeech"
+import { isValidFileType, labelImage, printLabels } from "./rekognitionUtils"
+
+export interface LabelType {
   name: string
   boundingBoxes: BoundingBox[]
 }
-
 interface ParentLabel {
   name: string
 }
@@ -26,7 +26,7 @@ const Analysis: React.FC = () => {
   >("")
   const [imageSrc, setImageSrc] = useState<string>()
   let labels: string[] = [""]
-  let labelData: Label[]
+  let labelData: LabelType[]
   const [isLoading, setIsLoading] = useState(false)
 
   const identifyImageResponse = async (event: any) => {
@@ -35,7 +35,6 @@ const Analysis: React.FC = () => {
     if (isValidFileType(file)) {
       setIsLoading(true)
       setImageSrc(URL.createObjectURL(file))
-      console.log("test")
       await Predictions.identify({
         labels: {
           source: {
@@ -55,7 +54,7 @@ const Analysis: React.FC = () => {
   const processRekognitionLabels = (
     rekognitionResponse: IdentifyLabelsOutput
   ) => {
-    let labelsArray: Label[] = []
+    let labelsArray: LabelType[] = []
     if (rekognitionResponse != "") {
       if (rekognitionResponse.labels) {
         rekognitionResponse.labels!.forEach(label => {
@@ -73,7 +72,7 @@ const Analysis: React.FC = () => {
       return label.name
     })
     labels = labelValues
-    // labelImage(labelData, imageSrc as string)
+    labelImage(labelData, imageSrc as string)
   }
 
   const pageData = (
@@ -93,7 +92,7 @@ const Analysis: React.FC = () => {
       <br />
       <img src={imageSrc} />
       {processRekognitionLabels(rekognitionResponse as IdentifyLabelsOutput)}
-      <p>{labels.join(", ")}</p>
+      {isLoading ? <span className="loader"></span> : printLabels(labels)}
       <TextToSpeech disabled={isLoading} labels={labels} />
     </div>
   )
