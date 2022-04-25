@@ -1,10 +1,11 @@
 import React from "react"
 import { useState } from "react"
 import { Predictions } from "@aws-amplify/predictions"
-import Button from "../../Button/Button"
 import { useEffect } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faVolumeUp } from "@fortawesome/free-solid-svg-icons"
+
+import Button from "../../Button/Button"
 
 interface TextToSpeechProps {
   labels: string[]
