@@ -7,8 +7,7 @@ import {
 } from "@aws-amplify/predictions"
 
 import TextToSpeech from "./TextToSpeech/TextToSpeech"
-import { isValidFileType, labelImage, printLabels } from "./rekognitionUtils"
-
+import { isValidFileType, labelImage } from "./rekognitionUtils"
 export interface LabelType {
   name: string
   boundingBoxes: BoundingBox[]
@@ -26,8 +25,9 @@ const Analysis: React.FC = () => {
   >("")
   const [imageSrc, setImageSrc] = useState<string>()
   let labels: string[] = [""]
-  let labelData: LabelType[]
+  let labelData: LabelType[] = []
   const [isLoading, setIsLoading] = useState(false)
+  const [isError, setError] = useState(false)
 
   const identifyImageResponse = async (event: any) => {
     const files = (event.target as HTMLInputElement).files
@@ -48,7 +48,7 @@ const Analysis: React.FC = () => {
           setIsLoading(false)
         })
         .catch(err => setRekognitionResponse(JSON.stringify(err, null, 2)))
-    } else return <div> Please upload a jpg or png image</div>
+    } else setError(true)
   }
 
   const processRekognitionLabels = (
@@ -72,7 +72,18 @@ const Analysis: React.FC = () => {
       return label.name
     })
     labels = labelValues
-    labelImage(labelData, imageSrc as string)
+  }
+
+  const displayError = (error: string) => {
+    const dismissError = () => {
+      setError(false)
+    }
+    return (
+      <div className="notification is-danger is-light">
+        <button className="delete" onClick={dismissError}></button>
+        {error}
+      </div>
+    )
   }
 
   const pageData = (
@@ -89,10 +100,20 @@ const Analysis: React.FC = () => {
           </span>
         </label>
       </div>
+      {isError ? displayError("Please upload a jpeg or png file") : null}
       <br />
-      <img src={imageSrc} />
-      {processRekognitionLabels(rekognitionResponse as IdentifyLabelsOutput)}
-      {isLoading ? <span className="loader"></span> : printLabels(labels)}
+      <div className="rekognitionImage">
+        <img src={imageSrc} />
+        {processRekognitionLabels(rekognitionResponse as IdentifyLabelsOutput)}
+        <div className="tags are-medium">
+          {isLoading ? (
+            <span className="loader"></span>
+          ) : (
+            labelImage(labelData, imageSrc as string)
+          )}
+        </div>
+      </div>
+      <br />
       <TextToSpeech disabled={isLoading} labels={labels} />
     </div>
   )
