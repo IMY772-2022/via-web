@@ -1,4 +1,3 @@
-/* eslint-disable  */
 import React, { useState } from "react"
 import {
   Predictions,
@@ -54,7 +53,7 @@ const Analysis: React.FC = () => {
   const processRekognitionLabels = (
     rekognitionResponse: IdentifyLabelsOutput
   ) => {
-    let labelsArray: LabelType[] = []
+    const labelsArray: LabelType[] = []
     if (rekognitionResponse != "") {
       if (rekognitionResponse.labels) {
         rekognitionResponse.labels!.forEach(label => {
@@ -103,6 +102,7 @@ const Analysis: React.FC = () => {
       {isError ? displayError("Please upload a jpeg or png file") : null}
       <br />
       <div className="rekognitionImage">
+        {/* eslint-disable-next-line */}
         <img src={imageSrc} />
         {processRekognitionLabels(rekognitionResponse as IdentifyLabelsOutput)}
         <div className="tags are-medium">
