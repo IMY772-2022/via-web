@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react"
-import Fab from "../components/Fab/FabIndex"
 import { Layout } from "../components/Layout/LayoutIndex"
 import SettingsModal from "../components/SettingsModal/SettingsModal"
 
@@ -14,7 +13,7 @@ const TestPage = () => {
   }, [openModal])
   return (
     <>
-      <Fab type="settings" onClick={() => setOpenModal(true)} />
+      {/* <Fab type="settings" onClick={() => setOpenModal(true)} /> */}
       {openModal && <SettingsModal setOpenModal={setOpenModal} />}
     </>
   )
