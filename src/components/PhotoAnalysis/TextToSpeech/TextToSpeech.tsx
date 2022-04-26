@@ -3,6 +3,8 @@ import { useState } from "react"
 import { Predictions } from "@aws-amplify/predictions"
 import Button from "../../Button/Button"
 import { useEffect } from "react"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faVolumeUp } from "@fortawesome/free-solid-svg-icons"
 
 interface TextToSpeechProps {
   labels: string[]
@@ -62,7 +64,7 @@ const TextToSpeech: React.FC<TextToSpeechProps> = props => {
       <div className="mt-3"> {pollyResponse} </div>
       {!isLoading && (
         <Button
-          //icon={<FontAwesomeIcon icon={faVolumeUp} fontSize="20" />}
+          icon={<FontAwesomeIcon icon={faVolumeUp} fontSize="20" />}
           onClick={play}
         />
       )}
