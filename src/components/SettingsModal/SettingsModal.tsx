@@ -1,40 +1,34 @@
-import React, { Dispatch, SetStateAction } from "react"
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+import React from "react"
 import "./SettingsModal.scss"
 
 interface Props {
-  setOpenModal: Dispatch<SetStateAction<boolean>>
+  isActive: boolean
+  toggle: () => void
 }
 
-const SettingsModal: React.FC<Props> = ({ setOpenModal }) => {
+const SettingsModal: React.FC<Props> = ({ isActive, toggle }) => {
+  if (!isActive) {
+    return null
+  }
   return (
-    <div className="modalBackground">
-      <div className="modalContainer">
-        <div className="titleCloseBtn">
-          <button
-            onClick={() => {
-              setOpenModal(false)
-            }}
-          >
-            CLOSE
-          </button>
-        </div>
-        <div className="title">
-          <h1>Are You Sure You Want to Continue?</h1>
-        </div>
-        <div className="body">
-          <p>The next page looks amazing. Hope you want to go there!</p>
-        </div>
-        <div className="footer">
-          <button
-            onClick={() => {
-              setOpenModal(false)
-            }}
-            id="cancelBtn"
-          >
+    <div className="modal is-active">
+      <div className="modal-background" onClick={() => toggle} />
+      <div className="modal-card">
+        <header className="modal-card-head">
+          <p className="modal-card-title">MODAL</p>
+          <button className="delete" onClick={() => toggle} />
+        </header>
+        <section className="modal-card-body">
+          <div className="content">{isActive}</div>
+        </section>
+        <footer className="modal-card-foot">
+          {/* eslint-disable-next-line no-console */}
+          <button className="button" onClick={toggle}>
             Cancel
           </button>
-          <button>Continue</button>
-        </div>
+        </footer>
       </div>
     </div>
   )
