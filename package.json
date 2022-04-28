@@ -58,6 +58,8 @@
     "@mdx-js/react": "v1",
     "aws-amplify": "^4.3.19",
     "bulma": "^0.9.3",
+    "bulma-slider": "^2.0.5",
+    "bulma-switch": "^2.0.4",
     "commitizen": "^4.2.4",
     "gatsby": "^4.10.3",
     "gatsby-plugin-fontawesome-css": "^1.2.0",
