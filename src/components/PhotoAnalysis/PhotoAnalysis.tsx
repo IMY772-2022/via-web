@@ -1,4 +1,4 @@
-/* eslint-disable  */
+/* eslint-disable */
 import React, { useState } from "react"
 import {
   Predictions,
@@ -6,6 +6,9 @@ import {
   BoundingBox,
 } from "@aws-amplify/predictions"
 import TextToSpeech from "./TextToSpeech/TextToSpeech"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faCamera } from "@fortawesome/free-solid-svg-icons"
+import "./PhotoAnalysis.scss"
 
 interface Label {
   name: string
@@ -80,12 +83,15 @@ const Analysis: React.FC = () => {
             onChange={identifyImageLabels}
           ></input>
           <span className="file-cta">
-            <span className="file-label">Choose a file…</span>
+            <span className="file-label">
+              <FontAwesomeIcon icon={faCamera} fontSize="25" />
+            </span>
           </span>
         </label>
       </div>
       <br />
-      <img src={imageSrc} alt="user's uploaded file" />
+
+      <img src={imageSrc} />
       {processRekognitionLabels(rekognitionResponse as IdentifyLabelsOutput)}
       <p>{labels.join(", ")}</p>
 
