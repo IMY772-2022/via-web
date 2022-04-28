@@ -24,7 +24,25 @@ const SettingsModal: React.FC<Props> = ({ isActive, toggle }) => {
             <button className="delete" onClick={toggle} />
           </header>
           <section className="modal-card-body">
-            <div className="content is-flex is-flex-direction-column">
+            <div className="">
+              <div className="field">
+                <input
+                  id="switchLarge"
+                  type="checkbox"
+                  name="switchLarge"
+                  className="switch is-outlined is-large is-rtl"
+                />
+                <label htmlFor="switchLarge">Colour detect</label>
+              </div>
+              <div className="field">
+                <input
+                  id="switchLarge"
+                  type="checkbox"
+                  name="switchLarge"
+                  className="switch is-outlined is-large is-rtl"
+                />
+                <label htmlFor="switchLarge">Cash detect</label>
+              </div>
               <div className="is-flex is-flex-direction-row is-justify-content-space-between is-align-items-center">
                 <p>Font size</p>
                 <input
@@ -47,13 +65,16 @@ const SettingsModal: React.FC<Props> = ({ isActive, toggle }) => {
                   type={"range"}
                 />
               </div>
+              <div className="select">
+                <select>
+                  <option>Colour mode</option>
+                  <option>With options</option>
+                </select>
+              </div>
             </div>
           </section>
-          <footer className="modal-card-foot">
-            {/* eslint-disable-next-line no-console */}
-            <button className="button" onClick={toggle}>
-              Cancel
-            </button>
+          <footer className="modal-card-foot is-flex is-justify-content-center">
+            <button className="button is-success">Apply</button>
           </footer>
         </div>
       </div>
