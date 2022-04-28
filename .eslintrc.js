@@ -1,10 +1,4 @@
 module.exports = {
-  parser: "@typescript-eslint/parser",
-  settings: {
-    react: {
-      version: "detect", // detect react version
-    },
-  },
   plugins: ["@typescript-eslint", "prettier", "react-hooks", "jsx-a11y"],
   rules: {
     "react/prop-types": "off", // Disable prop-types as we use TypeScript for type checking
@@ -12,14 +6,6 @@ module.exports = {
       "error",
       {
         endOfLine: "auto",
-      },
-    ],
-    "@typescript-eslint/no-unused-vars": [
-      "error",
-      {
-        argsIgnorePattern: "^_",
-        varsIgnorePattern: "^_",
-        caughtErrorsIgnorePattern: "^_",
       },
     ],
     "no-console": [
@@ -30,56 +16,68 @@ module.exports = {
     ],
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
+    "@typescript-eslint/member-delimiter-style": [
+      "error",
+      {
+        multiline: {
+          delimiter: "none",
+          requireLast: false,
+        },
+        singleline: {
+          delimiter: "comma",
+          requireLast: false,
+        },
+      },
+    ],
+    // note you must disable the base rule as it can report incorrect errors
+    camelcase: "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/ban-ts-ignore": "off",
+    "@typescript-eslint/no-unused-vars": "error",
   },
+  extends: [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:jsx-a11y/recommended",
+  ],
   env: {
     browser: true,
+    node: true,
+    es2021: true,
+  },
+  globals: {
+    console: false,
+    alert: false,
+    require: false,
+    setTimeout: false,
+    clearTimeout: false,
+    setInterval: false,
+    clearInterval: false,
+    process: false,
+    fetch: false,
+    localStorage: false,
+    Intl: false,
+  },
+  parser: "@typescript-eslint/parser",
+  parserOptions: {
+    ecmaVersion: 2021,
+    sourceType: "module",
+    ecmaFeatures: {
+      jsx: true,
+    },
   },
   overrides: [
-    // typescript
+    // Override some TypeScript rules just for .js files
     {
-      files: ["*.ts", "*.tsx"],
-      excludedFiles: [
-        "*.test.js",
-        "*.d.ts",
-        "gatsby-node.js",
-        "gatsby-config.js",
-        "gatsby-browser.js",
-        "gatsby-ssr.js",
-        "__mocks__/**",
-      ],
-      plugins: ["@typescript-eslint", "prettier"],
-      extends: [
-        "eslint:recommended", // use recommended configs
-        "plugin:react/recommended",
-        "plugin:@typescript-eslint/recommended",
-        "plugin:jsx-a11y/recommended",
-        "prettier",
-      ],
-      rules: {
-        "react/prop-types": "off", // Disable prop-types as we use TypeScript for type checking
-        // "@typescript-eslint/no-explicit-any": "error",
-        "prettier/prettier": [
-          "error",
-          {
-            endOfLine: "auto",
-          },
-        ],
-      },
-    },
-    // gatsby and eslint config files
-    {
-      plugins: ["prettier"],
-      extends: ["eslint:recommended", "prettier"],
-      files: [
-        ".eslintrc.js",
-        "gatsby-node.js",
-        "gatsby-config.js",
-        "gatsby-browser.js",
-        "gatsby-ssr.js",
-        "./scripts/**",
-      ],
+      files: ["*.js"],
       env: {
-        node: true,
+        jest: true,
+      },
+      rules: {
+        "@typescript-eslint/no-var-requires": "off",
       },
     },
   ],
