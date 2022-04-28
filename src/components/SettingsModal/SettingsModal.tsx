@@ -24,9 +24,29 @@ const SettingsModal: React.FC<Props> = ({ isActive, toggle }) => {
             <button className="delete" onClick={toggle} />
           </header>
           <section className="modal-card-body">
-            <div className="content">
-              <h1>Font size</h1>
-              <input className="slider is-Large" />
+            <div className="content is-flex is-flex-direction-column">
+              <div className="is-flex is-flex-direction-row is-justify-content-space-between is-align-items-center">
+                <p>Font size</p>
+                <input
+                  className="slider is-Large"
+                  min={0}
+                  max={100}
+                  value={50}
+                  step={1}
+                  type={"range"}
+                />
+              </div>
+              <div className="is-flex is-flex-direction-row is-justify-content-space-between is-align-items-center">
+                <p>contrast</p>
+                <input
+                  className="slider is-Large"
+                  min={0}
+                  max={100}
+                  value={50}
+                  step={1}
+                  type={"range"}
+                />
+              </div>
             </div>
           </section>
           <footer className="modal-card-foot">
