@@ -30,7 +30,7 @@ module.exports = {
       },
     ],
     // note you must disable the base rule as it can report incorrect errors
-    camelcase: "off",
+    camelcase: "error",
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/ban-ts-ignore": "off",
     "@typescript-eslint/no-unused-vars": "error",
