@@ -1,5 +1,11 @@
-.file {
-  top: 580px;
+p.instructions{
+  font-style: italic;
+  font-size: large;
+}
+
+.cameraButton{
+  position: relative;
+  top: 425px;
 }
 
 span.file-cta {
@@ -13,4 +19,9 @@ span.file-cta {
   height: 89px;
   width: 89px;
   cursor: hand;
+}
+
+.card-image > img{
+  border-top-left-radius: 32px !important;
+  border-top-right-radius: 32px !important;
 }

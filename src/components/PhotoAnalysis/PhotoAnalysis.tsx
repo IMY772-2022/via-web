@@ -53,6 +53,31 @@ const Analysis: React.FC = () => {
       .catch(err => setRekognitionResponse(JSON.stringify(err, null, 2)))
   }
 
+  const displayUploadButton = () => {
+    if (!isLoading && rekognitionResponse === "")
+      return (
+        <div>
+          <p className="instructions">Take or upload photo</p>
+          <div className="cameraButton">
+            <div className="is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
+              <label className="file-label">
+                <input
+                  className="file-input"
+                  type="file"
+                  onChange={identifyImageLabels}
+                ></input>
+                <span className="file-cta">
+                  <span className="file-label">
+                    <FontAwesomeIcon icon={faCamera} fontSize="25" />
+                  </span>
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+      )
+    else return null
+  }
   const processRekognitionLabels = (
     rekognitionResponse: IdentifyLabelsOutput
   ) => {
@@ -75,27 +100,26 @@ const Analysis: React.FC = () => {
   }
   const pageData = (
     <div>
-      <div className="file is-flex-direction-column is-justify-content-center is-align-items-center">
-        <label className="file-label">
-          <input
-            className="file-input"
-            type="file"
-            onChange={identifyImageLabels}
-          ></input>
-          <span className="file-cta">
-            <span className="file-label">
-              <FontAwesomeIcon icon={faCamera} fontSize="25" />
-            </span>
-          </span>
-        </label>
+      <div class="card-image">
+        <img src={imageSrc} />
       </div>
-      <br />
 
-      <img src={imageSrc} />
-      {processRekognitionLabels(rekognitionResponse as IdentifyLabelsOutput)}
-      <p>{labels.join(", ")}</p>
+      <div className="card-content">
+        <div className="content">
+          <div className="is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
+            {displayUploadButton()}
+          </div>
 
-      <TextToSpeech disabled={isLoading} labels={labels} />
+          {processRekognitionLabels(
+            rekognitionResponse as IdentifyLabelsOutput
+          )}
+          <p>{labels.join(", ")}</p>
+
+          <br />
+
+          <TextToSpeech disabled={isLoading} labels={labels} />
+        </div>
+      </div>
     </div>
   )
   return pageData
