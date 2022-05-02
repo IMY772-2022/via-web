@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/img-redundant-alt */
 import React from "react"
 
 import "./landing.scss"
@@ -9,7 +8,7 @@ interface Props {
   subtitle?: string
 }
 
-const Landing: React.FC<Props> = ({ title, subtitle }) => {
+const Landing: React.FC<Props> = () => {
   const pageData = (
     <div className="card analysis-card has-text-light">
       {/* TODO in future we should be using GatsbyImage for dynamic and StaticImage for any fixed/static images */}
