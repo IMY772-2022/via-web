@@ -25,23 +25,33 @@ const SettingsModal: React.FC<Props> = ({ isActive, toggle }) => {
           </header>
           <section className="modal-card-body">
             <div className="">
-              <div className="field">
+              <div className="field p-0 column">
                 <input
                   id="switchLarge"
                   type="checkbox"
                   name="switchLarge"
-                  className="switch is-outlined is-large is-rtl"
+                  className="switch is-outlined is-large is-rtl is-flex"
                 />
-                <label htmlFor="switchLarge">Colour detect</label>
+                <label
+                  className="column is-full is-size-6"
+                  htmlFor="switchLarge"
+                >
+                  Colour detect
+                </label>
               </div>
-              <div className="field">
+              <div className="field p-0 column">
                 <input
                   id="switchLarge"
                   type="checkbox"
                   name="switchLarge"
                   className="switch is-outlined is-large is-rtl"
                 />
-                <label htmlFor="switchLarge">Cash detect</label>
+                <label
+                  className="column is-full is-size-6"
+                  htmlFor="switchLarge"
+                >
+                  Cash detect
+                </label>
               </div>
               <div className="is-flex is-flex-direction-row is-justify-content-space-between is-align-items-center">
                 <p>Font size</p>

@@ -1,4 +1,3 @@
-import { label } from "aws-amplify"
 import React from "react"
 
 interface Props {
