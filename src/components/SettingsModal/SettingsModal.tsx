@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from "react"
 import ReactDOM from "react-dom"
@@ -17,7 +16,12 @@ const SettingsModal: React.FC<Props> = ({ isActive, toggle }) => {
   return ReactDOM.createPortal(
     <React.Fragment>
       <div className="modal is-active">
-        <div className="modal-background" onClick={toggle} />
+        <div
+          role="button"
+          tabIndex={0}
+          className="modal-background"
+          onClick={toggle}
+        />
         <div className="modal-card">
           <header className="modal-card-head">
             <p className="modal-card-title">Accessibility Settings</p>

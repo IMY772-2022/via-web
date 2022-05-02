@@ -6,8 +6,6 @@ const TestPage = () => {
   const [modalActive, setModalActive] = useState<boolean>(false)
 
   const toggleModal = () => {
-    // eslint-disable-next-line no-console
-    console.log("toggle")
     setModalActive(prevState => !prevState)
   }
 
