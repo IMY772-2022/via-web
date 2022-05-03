@@ -121,7 +121,9 @@ const Analysis: React.FC = () => {
 
           <br />
 
-          <TextToSpeech disabled={isLoading} labels={labels} />
+          {labels.length > 0 ? (
+            <TextToSpeech disabled={isLoading} labels={labels} />
+          ) : null}
         </div>
       </div>
     </div>
