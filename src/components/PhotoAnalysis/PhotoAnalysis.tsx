@@ -6,7 +6,6 @@ import {
 } from "@aws-amplify/predictions"
 import { faCamera } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { StaticImage } from "gatsby-plugin-image"
 
 import "./PhotoAnalysis.scss"
 import TextToSpeech from "./TextToSpeech/TextToSpeech"
@@ -105,7 +104,7 @@ const Analysis: React.FC = () => {
     <div>
       {imageSrc !== undefined ? (
         <div className="card-image">
-          <StaticImage src={imageSrc} alt="Uploaded image" />
+          <img src={imageSrc} alt="Uploaded preview" />
         </div>
       ) : null}
 
