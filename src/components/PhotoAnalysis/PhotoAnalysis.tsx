@@ -1,14 +1,15 @@
-/* eslint-disable */
 import React, { useState } from "react"
 import {
-  Predictions,
-  IdentifyLabelsOutput,
   BoundingBox,
+  IdentifyLabelsOutput,
+  Predictions,
 } from "@aws-amplify/predictions"
-import TextToSpeech from "./TextToSpeech/TextToSpeech"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCamera } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { StaticImage } from "gatsby-plugin-image"
+
 import "./PhotoAnalysis.scss"
+import TextToSpeech from "./TextToSpeech/TextToSpeech"
 
 interface Label {
   name: string
@@ -28,7 +29,7 @@ const Analysis: React.FC = () => {
   >("")
   const [imageSrc, setImageSrc] = useState<string>()
   let labels: string[] = [""]
-  let labelData: Label[]
+
   const [isLoading, setIsLoading] = useState(false)
 
   const identifyImageLabels = async (event: any) => {
@@ -78,10 +79,11 @@ const Analysis: React.FC = () => {
       )
     else return null
   }
+
   const processRekognitionLabels = (
     rekognitionResponse: IdentifyLabelsOutput
   ) => {
-    let labelsArray: Label[] = []
+    const labelsArray: Label[] = []
     if (rekognitionResponse != "") {
       rekognitionResponse.labels!.forEach(label => {
         const metadata = label.metadata as Metadata
@@ -92,17 +94,20 @@ const Analysis: React.FC = () => {
         }
       })
     }
-    labelData = labelsArray
+
     const labelValues = labelsArray.map(label => {
       return label.name
     })
     labels = labelValues
   }
+
   const pageData = (
     <div>
-      <div class="card-image">
-        <img src={imageSrc} />
-      </div>
+      {imageSrc !== undefined ? (
+        <div className="card-image">
+          <StaticImage src={imageSrc} alt="Uploaded image" />
+        </div>
+      ) : null}
 
       <div className="card-content">
         <div className="content">
