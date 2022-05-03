@@ -65,7 +65,7 @@ const Analysis: React.FC = () => {
                   className="file-input"
                   type="file"
                   onChange={identifyImageLabels}
-                ></input>
+                />
                 <span className="file-cta">
                   <span className="file-label">
                     <FontAwesomeIcon icon={faCamera} fontSize="25" />
