@@ -4,8 +4,10 @@ p.instructions{
 }
 
 .cameraButton{
-  position: relative;
-  top: 425px;
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  right: 50%;
 }
 
 span.file-cta {
