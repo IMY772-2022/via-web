@@ -4,9 +4,12 @@ import {
   IdentifyLabelsOutput,
   BoundingBox,
 } from "@aws-amplify/predictions"
+import { faCamera } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 import TextToSpeech from "./TextToSpeech/TextToSpeech"
 import { isValidFileType, labelImage } from "./rekognitionUtils"
+
 export interface LabelType {
   name: string
   boundingBoxes: BoundingBox[]
@@ -28,7 +31,7 @@ const Analysis: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [isError, setError] = useState(false)
 
-  const identifyImageResponse = async (event: any) => {
+  const identifyImageLabels = async (event: any) => {
     const files = (event.target as HTMLInputElement).files
     const file = files![0]
     if (isValidFileType(file)) {
@@ -73,6 +76,32 @@ const Analysis: React.FC = () => {
     labels = labelValues
   }
 
+  const displayUploadButton = () => {
+    if (!isLoading && rekognitionResponse === "")
+      return (
+        <div>
+          <p className="instructions">Take or upload photo</p>
+          <div className="cameraButton">
+            <div className="is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
+              <label className="file-label">
+                <input
+                  className="file-input"
+                  type="file"
+                  onChange={identifyImageLabels}
+                />
+                <span className="file-cta">
+                  <span className="file-label">
+                    <FontAwesomeIcon icon={faCamera} fontSize="25" />
+                  </span>
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+      )
+    else return null
+  }
+
   const displayError = (error: string) => {
     const dismissError = () => {
       setError(false)
@@ -87,34 +116,33 @@ const Analysis: React.FC = () => {
 
   const pageData = (
     <div>
-      <div className="file is-flex-direction-column is-justify-content-center is-align-items-center">
-        <label className="file-label">
-          <input
-            className="file-input"
-            type="file"
-            onChange={identifyImageResponse}
-          ></input>
-          <span className="file-cta">
-            <span className="file-label">Choose a file…</span>
-          </span>
-        </label>
-      </div>
-      {isError ? displayError("Please upload a jpeg or png file") : null}
-      <br />
-      <div className="rekognitionImage">
-        {/* eslint-disable-next-line */}
-        <img src={imageSrc} />
-        {processRekognitionLabels(rekognitionResponse as IdentifyLabelsOutput)}
-        <div className="tags are-medium">
-          {isLoading ? (
-            <span className="loader"></span>
-          ) : (
-            labelImage(labelData, imageSrc as string)
+      {imageSrc !== undefined ? (
+        <div className="card-image">
+          <img src={imageSrc} alt="Uploaded preview" />
+        </div>
+      ) : null}
+      <div className="card-content">
+        <div className="content">
+          <div className="is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
+            {displayUploadButton()}
+            {isError ? displayError("Please upload a jpeg or png file") : null}
+          </div>
+
+          {processRekognitionLabels(
+            rekognitionResponse as IdentifyLabelsOutput
           )}
+          <div className="tags are-medium">
+            {isLoading ? (
+              <span className="loader"></span>
+            ) : (
+              labelImage(labelData, imageSrc as string)
+            )}
+          </div>
+          {labels.length > 0 ? (
+            <TextToSpeech disabled={isLoading} labels={labels} />
+          ) : null}
         </div>
       </div>
-      <br />
-      <TextToSpeech disabled={isLoading} labels={labels} />
     </div>
   )
   return pageData

@@ -1,15 +1,14 @@
-/* eslint-disable jsx-a11y/img-redundant-alt */
 import React from "react"
-import PhotoAnalysis from "../PhotoAnalysis/PhotoAnalysis"
 
 import "./landing.scss"
+import PhotoAnalysis from "../PhotoAnalysis/PhotoAnalysis"
 
 interface Props {
   title: string
   subtitle?: string
 }
 
-const Landing: React.FC<Props> = ({ title, subtitle }) => {
+const Landing: React.FC<Props> = () => {
   const pageData = (
     <div className="card analysis-card has-text-light">
       {/* TODO in future we should be using GatsbyImage for dynamic and StaticImage for any fixed/static images */}
@@ -21,19 +20,16 @@ const Landing: React.FC<Props> = ({ title, subtitle }) => {
           />
         </figure>
        </div> */}
+
       <div className="media-content">
-        <div className="card-header">
-          <h1 className="card-header-title is-size-5 has-text-light">
-            Audio for labels
-          </h1>
-        </div>
-        <div className="media"></div>
-        {/* TODO add slider for volume */}
-        {/* <div className="media">
-          <input step="1" min="0" max="100" value="50" type="range" />
-        </div> */}
-        <div className="content">
-          <PhotoAnalysis />
+        <div className="is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
+          <div className="media">
+            <div className="block">
+              <div className="content">
+                <PhotoAnalysis />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
