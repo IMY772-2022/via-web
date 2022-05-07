@@ -50,13 +50,13 @@
     "lint": "eslint \"**/*.{js,jsx,ts,tsx,json,md,scss,css}\""
   },
   "dependencies": {
-    "@aws-amplify/ui-react": "^2.15.1",
+    "@aws-amplify/ui-react": "^2.15.8",
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@fortawesome/react-fontawesome": "^0.1.18",
     "@mdx-js/mdx": "v1",
     "@mdx-js/react": "v1",
-    "aws-amplify": "^4.3.19",
+    "aws-amplify": "^4.3.20",
     "bulma": "^0.9.3",
     "gatsby": "^4.10.3",
     "gatsby-plugin-fontawesome-css": "^1.2.0",
