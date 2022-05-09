@@ -16,17 +16,12 @@ export const Navigation = () => {
       <Link className="navbar-item" to="/photo-analysis">
         Photo Analysis
       </Link>
-      {/* <Link
-        role="button"
-        className="navbar-burger"
-        aria-label="menu"
-        aria-expanded="false"
-        to=""
-      >
-        <span aria-hidden="true" />
-        <span aria-hidden="true" />
-        <span aria-hidden="true" />
-      </Link> */}
+      <Link className="navbar-item" to="/signin">
+        Sign in
+      </Link>
+      <Link className="navbar-item" to="/register">
+        Register
+      </Link>
     </nav>
   )
 }
