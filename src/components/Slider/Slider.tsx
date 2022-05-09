@@ -1,4 +1,5 @@
 import React from "react"
+import "./SliderStyle.scss"
 
 interface Props {
   label?: string
@@ -14,18 +15,20 @@ const Slider: React.FC<Props> = ({
   minvalue = 1,
 }) => {
   return (
-    <div className="slidecontainer">
-      <label>{label}</label>
-      {
-        <input
-          type="range"
-          min={minvalue}
-          max={maxvalue}
-          value="50"
-          className="slider"
-          id={id}
-        />
-      }
+    <div className="background">
+      <div className="slidecontainer">
+        <label>{label}</label>
+        {
+          <input
+            type="range"
+            min={minvalue}
+            max={maxvalue}
+            value="50"
+            className="slider"
+            id={id}
+          />
+        }
+      </div>
     </div>
   )
 }

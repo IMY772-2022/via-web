@@ -23,14 +23,10 @@ const SettingsModal: React.FC<Props> = ({ isActive, toggle }) => {
           onClick={toggle}
         />
         <div className="modal-card">
-          <header className="modal-card-head">
-            <p className="modal-card-title">Accessibility Settings</p>
-            <button className="delete" onClick={toggle} />
-          </header>
           <section className="modal-card-body">
             <div className="">
               <div className="field p-0 column">
-                <input
+                {/* <input 
                   id="switchLarge"
                   type="checkbox"
                   name="switchLarge"
@@ -56,27 +52,28 @@ const SettingsModal: React.FC<Props> = ({ isActive, toggle }) => {
                 >
                   Cash detect
                 </label>
+                 */}
               </div>
               <div className="is-flex is-flex-direction-row is-justify-content-space-between is-align-items-center">
-                <p>Font size</p>
+                <p>Font size </p>
                 <input
-                  className="slider is-Large"
-                  min={0}
-                  max={100}
-                  value={50}
-                  step={1}
-                  type={"range"}
+                  className="slider is-fullwidth is-large is-danger is-circle"
+                  step="1"
+                  min="0"
+                  max="100"
+                  value="50"
+                  type="range"
                 />
               </div>
               <div className="is-flex is-flex-direction-row is-justify-content-space-between is-align-items-center">
-                <p>contrast</p>
+                <p>Contrast </p>
                 <input
-                  className="slider is-Large"
-                  min={0}
-                  max={100}
-                  value={50}
-                  step={1}
-                  type={"range"}
+                  className="slider is-fullwidth is-large is-danger is-circle"
+                  step="1"
+                  min="0"
+                  max="100"
+                  value="50"
+                  type="range"
                 />
               </div>
               <div className="select">
@@ -87,9 +84,6 @@ const SettingsModal: React.FC<Props> = ({ isActive, toggle }) => {
               </div>
             </div>
           </section>
-          <footer className="modal-card-foot is-flex is-justify-content-center">
-            <button className="button is-success">Apply</button>
-          </footer>
         </div>
       </div>
     </React.Fragment>,
