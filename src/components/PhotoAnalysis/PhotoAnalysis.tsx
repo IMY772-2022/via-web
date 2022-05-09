@@ -7,7 +7,7 @@ import {
 import { faCamera } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
-import "./PhotoAnalysis.scss"
+import "./photoAnalysis.scss"
 import TextToSpeech from "./TextToSpeech/TextToSpeech"
 import { isValidFileType, labelImage } from "./rekognitionUtils"
 
