@@ -1,17 +1,20 @@
-/* eslint-disable  */
 import React, { useState } from "react"
 import {
   Predictions,
   IdentifyLabelsOutput,
   BoundingBox,
 } from "@aws-amplify/predictions"
-import TextToSpeech from "./TextToSpeech/TextToSpeech"
+import { faCamera } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
-interface Label {
+import "./PhotoAnalysis.scss"
+import TextToSpeech from "./TextToSpeech/TextToSpeech"
+import { isValidFileType, labelImage } from "./rekognitionUtils"
+
+export interface LabelType {
   name: string
   boundingBoxes: BoundingBox[]
 }
-
 interface ParentLabel {
   name: string
 }
@@ -25,44 +28,47 @@ const Analysis: React.FC = () => {
   >("")
   const [imageSrc, setImageSrc] = useState<string>()
   let labels: string[] = [""]
-  let labelData: Label[]
+  let labelData: LabelType[] = []
   const [isLoading, setIsLoading] = useState(false)
+  const [isError, setError] = useState(false)
 
   const identifyImageLabels = async (event: any) => {
-    setIsLoading(true)
-
     const files = (event.target as HTMLInputElement).files
     const file = files![0]
-    setImageSrc(URL.createObjectURL(file))
-
-    await Predictions.identify({
-      labels: {
-        source: {
-          file,
+    if (isValidFileType(file)) {
+      setIsLoading(true)
+      setImageSrc(URL.createObjectURL(file))
+      await Predictions.identify({
+        labels: {
+          source: {
+            file,
+          },
+          type: "ALL",
         },
-        type: "ALL",
-      },
-    })
-      .then(response => {
-        setRekognitionResponse(response)
-        setIsLoading(false)
       })
-      .catch(err => setRekognitionResponse(JSON.stringify(err, null, 2)))
+        .then(response => {
+          setRekognitionResponse(response)
+          setIsLoading(false)
+        })
+        .catch(err => setRekognitionResponse(JSON.stringify(err, null, 2)))
+    } else setError(true)
   }
 
   const processRekognitionLabels = (
     rekognitionResponse: IdentifyLabelsOutput
   ) => {
-    let labelsArray: Label[] = []
+    const labelsArray: LabelType[] = []
     if (rekognitionResponse != "") {
-      rekognitionResponse.labels!.forEach(label => {
-        const metadata = label.metadata as Metadata
+      if (rekognitionResponse.labels) {
+        rekognitionResponse.labels!.forEach(label => {
+          const metadata = label.metadata as Metadata
 
-        const { confidence, parents } = metadata
-        if (confidence > 85 && parents.length >= 1) {
-          labelsArray.push(label)
-        }
-      })
+          const { confidence, parents } = metadata
+          if (confidence > 85 && parents.length >= 1) {
+            labelsArray.push(label)
+          }
+        })
+      }
     }
     labelData = labelsArray
     const labelValues = labelsArray.map(label => {
@@ -70,26 +76,74 @@ const Analysis: React.FC = () => {
     })
     labels = labelValues
   }
+
+  const displayUploadButton = () => {
+    if (!isLoading && rekognitionResponse === "")
+      return (
+        <div>
+          <p className="instructions">Take or upload photo</p>
+          <div className="cameraButton">
+            <div className="is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
+              <label className="file-label">
+                <input
+                  className="file-input"
+                  type="file"
+                  onChange={identifyImageLabels}
+                />
+                <span className="file-cta">
+                  <span className="file-label">
+                    <FontAwesomeIcon icon={faCamera} fontSize="25" />
+                  </span>
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+      )
+    else return null
+  }
+
+  const displayError = (error: string) => {
+    const dismissError = () => {
+      setError(false)
+    }
+    return (
+      <div className="notification is-danger is-light">
+        <button className="delete" onClick={dismissError}></button>
+        {error}
+      </div>
+    )
+  }
+
   const pageData = (
     <div>
-      <div className="file is-flex-direction-column is-justify-content-center is-align-items-center">
-        <label className="file-label">
-          <input
-            className="file-input"
-            type="file"
-            onChange={identifyImageLabels}
-          ></input>
-          <span className="file-cta">
-            <span className="file-label">Choose a file…</span>
-          </span>
-        </label>
-      </div>
-      <br />
-      <img src={imageSrc} alt="user's uploaded file" />
-      {processRekognitionLabels(rekognitionResponse as IdentifyLabelsOutput)}
-      <p>{labels.join(", ")}</p>
+      {imageSrc !== undefined ? (
+        <div className="card-image">
+          <img src={imageSrc} alt="Uploaded preview" />
+        </div>
+      ) : null}
+      <div className="card-content">
+        <div className="content">
+          <div className="is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
+            {displayUploadButton()}
+            {isError ? displayError("Please upload a jpeg or png file") : null}
+          </div>
 
-      <TextToSpeech disabled={isLoading} labels={labels} />
+          {processRekognitionLabels(
+            rekognitionResponse as IdentifyLabelsOutput
+          )}
+          <div className="tags are-medium">
+            {isLoading ? (
+              <span className="loader"></span>
+            ) : (
+              labelImage(labelData, imageSrc as string)
+            )}
+          </div>
+          {labels.length > 0 ? (
+            <TextToSpeech disabled={isLoading} labels={labels} />
+          ) : null}
+        </div>
+      </div>
     </div>
   )
   return pageData
