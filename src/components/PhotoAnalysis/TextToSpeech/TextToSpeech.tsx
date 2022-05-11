@@ -1,9 +1,7 @@
-import React from "react"
-import { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Predictions } from "@aws-amplify/predictions"
-import { useEffect } from "react"
+import { faPause, faPlay } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faPlay } from "@fortawesome/free-solid-svg-icons"
 
 import Button from "../../Button/Button"
 
@@ -14,8 +12,11 @@ interface TextToSpeechProps {
 
 const TextToSpeech: React.FC<TextToSpeechProps> = props => {
   const { labels, disabled = false } = props
-  const [pollyResponse, setPollyResponse] = useState("...")
-  const [audioStream, setAudioStream] = useState("Default")
+  const [pollyResponse, setPollyResponse] = useState<string | undefined>(
+    undefined
+  )
+  const [audioStream, setAudioStream] = useState<string | undefined>(undefined)
+  const [isPlaying, setIsPlaying] = useState(false)
 
   const [isLoading, setIsLoading] = useState(false)
   const [classList, setClassList] = useState(["button", "is-light"])
@@ -48,24 +49,44 @@ const TextToSpeech: React.FC<TextToSpeechProps> = props => {
   }, [isLoading])
 
   const play = () => {
-    const audio = new Audio()
-    audio.src = audioStream
-    audio.play()
+    if (audioStream) {
+      const audio = new Audio()
+      audio.src = audioStream
+      audio.play()
+      setIsPlaying(true)
+      audio.onended = () => {
+        pause()
+      }
+    }
+  }
+
+  const pause = () => {
+    setIsPlaying(false)
   }
 
   return (
     <div className="is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
-      <button
-        className={classList.flatMap(className => className).join(" ")}
-        disabled={disabled}
-        onClick={generateTextToSpeech}
-      >
-        Text to speech
-      </button>
-      <div className="mt-3"> {pollyResponse} </div>
+      {!audioStream && (
+        <>
+          <button
+            className={classList.flatMap(className => className).join(" ")}
+            disabled={disabled}
+            onClick={generateTextToSpeech}
+          >
+            Text to speech
+          </button>
+          <div className="mt-3"> {pollyResponse} </div>
+        </>
+      )}
+
       {!isLoading && (
         <Button
-          icon={<FontAwesomeIcon icon={faPlay} fontSize="20" />}
+          icon={
+            <FontAwesomeIcon
+              icon={isPlaying ? faPause : faPlay}
+              fontSize="20"
+            />
+          }
           onClick={play}
         />
       )}
