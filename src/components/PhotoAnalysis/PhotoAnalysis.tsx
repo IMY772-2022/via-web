@@ -7,7 +7,7 @@ import {
 import { faCamera } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
-import "./PhotoAnalysis.scss"
+import "./photoAnalysis.scss"
 import TextToSpeech from "./TextToSpeech/TextToSpeech"
 import { isValidFileType, labelImage } from "./rekognitionUtils"
 
@@ -22,11 +22,18 @@ interface Metadata {
   confidence: number
   parents: ParentLabel[]
 }
+
+export interface ImageData {
+  imageSrc: string
+  height: number
+  width: number
+}
+
 const Analysis: React.FC = () => {
   const [rekognitionResponse, setRekognitionResponse] = useState<
     IdentifyLabelsOutput | string
   >("")
-  const [imageSrc, setImageSrc] = useState<string>()
+  const [imageData, setImageData] = useState<ImageData | undefined>(undefined)
   let labels: string[] = [""]
   let labelData: LabelType[] = []
   const [isLoading, setIsLoading] = useState(false)
@@ -37,7 +44,18 @@ const Analysis: React.FC = () => {
     const file = files![0]
     if (isValidFileType(file)) {
       setIsLoading(true)
-      setImageSrc(URL.createObjectURL(file))
+
+      const img = new Image()
+      img.src = URL.createObjectURL(file)
+
+      const imageData: ImageData = {
+        imageSrc: img.src,
+        height: img.height,
+        width: img.width,
+      }
+
+      setImageData(imageData)
+
       await Predictions.identify({
         labels: {
           source: {
@@ -115,11 +133,17 @@ const Analysis: React.FC = () => {
     )
   }
 
+  const renderImageLabels = () => {
+    if (isLoading) return <span className="loader"></span>
+    else if (imageData) return labelImage(labelData, imageData)
+    else return null
+  }
+
   const pageData = (
     <div>
-      {imageSrc !== undefined ? (
+      {imageData !== undefined ? (
         <div className="card-image">
-          <img src={imageSrc} alt="Uploaded preview" />
+          <img src={imageData.imageSrc} alt="Uploaded preview" />
         </div>
       ) : null}
       <div className="card-content">
@@ -132,13 +156,7 @@ const Analysis: React.FC = () => {
           {processRekognitionLabels(
             rekognitionResponse as IdentifyLabelsOutput
           )}
-          <div className="tags are-medium">
-            {isLoading ? (
-              <span className="loader"></span>
-            ) : (
-              labelImage(labelData, imageSrc as string)
-            )}
-          </div>
+          <div className="tags are-medium">{renderImageLabels()}</div>
           {labels.length > 0 ? (
             <TextToSpeech disabled={isLoading} labels={labels} />
           ) : null}
