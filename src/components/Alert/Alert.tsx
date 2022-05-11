@@ -2,10 +2,11 @@ import React, { useState } from "react"
 
 export enum NotificationType {
   isPrimary = "is-primary",
-  isDanger = "is-danfe",
+  isDanger = "is-danger",
 }
 interface ErrorProps {
   error: string
+  notificationType?: NotificationType
 }
 
 const Alert: React.FC<ErrorProps> = ({ error }) => {

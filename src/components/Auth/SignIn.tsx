@@ -63,8 +63,8 @@ const SignIn: React.FC = () => {
                   className="input"
                   type="email"
                   placeholder="Email"
-                  name="email"
-                  id="email"
+                  name="username"
+                  id="username"
                   onChange={e => updateForm(e)}
                 />
                 <span className="icon is-small is-left">

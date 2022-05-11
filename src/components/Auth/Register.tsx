@@ -38,24 +38,9 @@ const Register: React.FC = () => {
           <input
             className="input"
             type="text"
-            placeholder="email"
+            placeholder="Email"
             name="username"
             id="email"
-            onChange={e => updateForm(e)}
-          />
-        </div>
-      </div>
-      <div className="field">
-        <label className="label" htmlFor="confirmEmail">
-          Confirm Email
-        </label>
-        <div className="control">
-          <input
-            className="input"
-            type="text"
-            placeholder="Confirm email"
-            name="confirmEmail"
-            id="confirmEmail"
             onChange={e => updateForm(e)}
           />
         </div>
@@ -72,6 +57,20 @@ const Register: React.FC = () => {
             name="password"
             id="password"
             onChange={e => updateForm(e)}
+          />
+        </div>
+      </div>
+      <div className="field">
+        <label className="label" htmlFor="confirmPassword">
+          Confirm password
+        </label>
+        <div className="control">
+          <input
+            className="input"
+            type="text"
+            placeholder="Confirm password"
+            name="confirmPassword"
+            id="confirmPassword"
           />
         </div>
       </div>
