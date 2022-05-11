@@ -1,3 +1,5 @@
+/*eslint camelcase: ["error", {properties: "never"}]*/
+
 import type { GatsbyConfig } from "gatsby"
 
 const config: GatsbyConfig = {
@@ -29,6 +31,13 @@ const config: GatsbyConfig = {
         path: "./src/pages/",
       },
       __key: "pages",
+    },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "fonts",
+        path: `${__dirname}/static/fonts/`,
+      },
     },
     "gatsby-plugin-sass",
     "gatsby-plugin-use-query-params",
