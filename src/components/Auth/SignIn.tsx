@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import Alert from "../Alert/Alert"
 
 import { signIn } from "./utils"
 
@@ -13,6 +14,10 @@ const SignIn: React.FC = () => {
     password: "",
   })
 
+  const [displayError, setDisplayError] = useState({
+    isError: false,
+    message: "",
+  })
   const updateForm = (event: any) => {
     setFormValues({
       ...formValues,
@@ -21,14 +26,24 @@ const SignIn: React.FC = () => {
   }
 
   const signin = () => {
+    setDisplayError({
+      ...displayError,
+      isError: false,
+    })
     const user = {
       username: formValues.username,
       password: formValues.password,
     }
-    signIn(user)
+    signIn(user).then(message => {
+      setDisplayError({
+        isError: true,
+        message: message as string,
+      })
+    })
   }
   return (
     <div className="form">
+      {displayError.isError ? <Alert error={displayError.message} /> : null}
       <div className="field">
         <label className="label" htmlFor="username">
           Username
