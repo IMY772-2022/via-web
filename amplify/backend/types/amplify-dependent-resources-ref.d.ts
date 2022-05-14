@@ -26,4 +26,11 @@ export type AmplifyDependentResourcesAttributes = {
       type: "string"
     }
   }
+  api: {
+    viaweb: {
+      GraphQLAPIKeyOutput: "string"
+      GraphQLAPIIdOutput: "string"
+      GraphQLAPIEndpointOutput: "string"
+    }
+  }
 }

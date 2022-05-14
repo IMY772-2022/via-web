@@ -37,5 +37,31 @@
       "dependsOn": [],
       "identifyType": "identifyLabels"
     }
+  },
+  "api": {
+    "viaweb": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+            "userPoolConfig": {
+              "userPoolId": "authviaweb22e998c1"
+            }
+          },
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "API_KEY",
+              "apiKeyConfig": {
+                "apiKeyExpirationDays": 200,
+                "apiKeyExpirationDate": "2022-11-24T07:33:32.354Z",
+                "description": "Testing API key for GQL operations"
+              }
+            }
+          ]
+        }
+      }
+    }
   }
 }
