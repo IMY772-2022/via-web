@@ -15,6 +15,12 @@
       "auth": {
         "viaweb22e998c1": {},
         "true": {}
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d2ux2cwqlfzdy9",
+          "type": "cicd"
+        }
       }
     }
   }
