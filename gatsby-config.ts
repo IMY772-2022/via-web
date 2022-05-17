@@ -32,13 +32,6 @@ const config: GatsbyConfig = {
       },
       __key: "pages",
     },
-    {
-      resolve: "gatsby-source-filesystem",
-      options: {
-        name: "fonts",
-        path: `${__dirname}/static/fonts/`,
-      },
-    },
     "gatsby-plugin-sass",
     "gatsby-plugin-use-query-params",
     {
