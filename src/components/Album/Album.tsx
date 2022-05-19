@@ -21,6 +21,7 @@ const Album: React.FC = () => {
       const imageData = (await API.graphql(
         graphqlOperation(listImageRecords)
       )) as { data: ListImageRecordsQuery }
+
       const imageList = imageData.data.listImageRecords?.items as ImageRecord[]
       setImages(imageList)
     } catch (error) {

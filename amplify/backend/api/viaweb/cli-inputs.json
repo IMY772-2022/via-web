@@ -12,9 +12,10 @@
       {
         "mode": "API_KEY",
         "expirationTime": 200,
-        "apiKeyExpirationDate": "2022-11-24T07:33:32.354Z",
+        "apiKeyExpirationDate": "2022-12-05T07:07:49.765Z",
         "keyDescription": "Testing API key for GQL operations"
       }
-    ]
+    ],
+    "conflictResolution": {}
   }
 }

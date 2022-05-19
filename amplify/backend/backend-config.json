@@ -47,7 +47,7 @@
           "defaultAuthentication": {
             "authenticationType": "AMAZON_COGNITO_USER_POOLS",
             "userPoolConfig": {
-              "userPoolId": "authviaweb22e998c1"
+              "userPoolId": "eu-west-1_6EmHIyP8F"
             }
           },
           "additionalAuthenticationProviders": [
@@ -55,13 +55,20 @@
               "authenticationType": "API_KEY",
               "apiKeyConfig": {
                 "apiKeyExpirationDays": 200,
-                "apiKeyExpirationDate": "2022-11-24T07:33:32.354Z",
+                "apiKeyExpirationDate": "2022-12-05T07:07:49.765Z",
                 "description": "Testing API key for GQL operations"
               }
             }
           ]
         }
-      }
+      },
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "viaweb22e998c1",
+          "attributes": ["UserPoolId"]
+        }
+      ]
     }
   },
   "hosting": {
