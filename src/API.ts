@@ -4,13 +4,11 @@
 
 export type CreateImageRecordInput = {
   id?: string | null
-  userId: string
   filepath?: string | null
   labels: string
 }
 
 export type ModelImageRecordConditionInput = {
-  userId?: ModelIDInput | null
   filepath?: ModelStringInput | null
   labels?: ModelStringInput | null
   and?: Array<ModelImageRecordConditionInput | null> | null
@@ -18,7 +16,7 @@ export type ModelImageRecordConditionInput = {
   not?: ModelImageRecordConditionInput | null
 }
 
-export type ModelIDInput = {
+export type ModelStringInput = {
   ne?: string | null
   eq?: string | null
   le?: string | null
@@ -57,7 +55,36 @@ export type ModelSizeInput = {
   between?: Array<number | null> | null
 }
 
-export type ModelStringInput = {
+export type ImageRecord = {
+  __typename: "ImageRecord"
+  id: string
+  filepath?: string | null
+  labels: string
+  createdAt: string
+  updatedAt: string
+  owner?: string | null
+}
+
+export type UpdateImageRecordInput = {
+  id: string
+  filepath?: string | null
+  labels?: string | null
+}
+
+export type DeleteImageRecordInput = {
+  id: string
+}
+
+export type ModelImageRecordFilterInput = {
+  id?: ModelIDInput | null
+  filepath?: ModelStringInput | null
+  labels?: ModelStringInput | null
+  and?: Array<ModelImageRecordFilterInput | null> | null
+  or?: Array<ModelImageRecordFilterInput | null> | null
+  not?: ModelImageRecordFilterInput | null
+}
+
+export type ModelIDInput = {
   ne?: string | null
   eq?: string | null
   le?: string | null
@@ -71,37 +98,6 @@ export type ModelStringInput = {
   attributeExists?: boolean | null
   attributeType?: ModelAttributeTypes | null
   size?: ModelSizeInput | null
-}
-
-export type ImageRecord = {
-  __typename: "ImageRecord"
-  id: string
-  userId: string
-  filepath?: string | null
-  labels: string
-  createdAt: string
-  updatedAt: string
-}
-
-export type UpdateImageRecordInput = {
-  id: string
-  userId?: string | null
-  filepath?: string | null
-  labels?: string | null
-}
-
-export type DeleteImageRecordInput = {
-  id: string
-}
-
-export type ModelImageRecordFilterInput = {
-  id?: ModelIDInput | null
-  userId?: ModelIDInput | null
-  filepath?: ModelStringInput | null
-  labels?: ModelStringInput | null
-  and?: Array<ModelImageRecordFilterInput | null> | null
-  or?: Array<ModelImageRecordFilterInput | null> | null
-  not?: ModelImageRecordFilterInput | null
 }
 
 export type ModelImageRecordConnection = {
@@ -119,11 +115,11 @@ export type CreateImageRecordMutation = {
   createImageRecord?: {
     __typename: "ImageRecord"
     id: string
-    userId: string
     filepath?: string | null
     labels: string
     createdAt: string
     updatedAt: string
+    owner?: string | null
   } | null
 }
 
@@ -136,11 +132,11 @@ export type UpdateImageRecordMutation = {
   updateImageRecord?: {
     __typename: "ImageRecord"
     id: string
-    userId: string
     filepath?: string | null
     labels: string
     createdAt: string
     updatedAt: string
+    owner?: string | null
   } | null
 }
 
@@ -153,11 +149,11 @@ export type DeleteImageRecordMutation = {
   deleteImageRecord?: {
     __typename: "ImageRecord"
     id: string
-    userId: string
     filepath?: string | null
     labels: string
     createdAt: string
     updatedAt: string
+    owner?: string | null
   } | null
 }
 
@@ -169,11 +165,11 @@ export type GetImageRecordQuery = {
   getImageRecord?: {
     __typename: "ImageRecord"
     id: string
-    userId: string
     filepath?: string | null
     labels: string
     createdAt: string
     updatedAt: string
+    owner?: string | null
   } | null
 }
 
@@ -189,48 +185,60 @@ export type ListImageRecordsQuery = {
     items: Array<{
       __typename: "ImageRecord"
       id: string
-      userId: string
       filepath?: string | null
       labels: string
       createdAt: string
       updatedAt: string
+      owner?: string | null
     } | null>
     nextToken?: string | null
   } | null
+}
+
+export type OnCreateImageRecordSubscriptionVariables = {
+  owner?: string | null
 }
 
 export type OnCreateImageRecordSubscription = {
   onCreateImageRecord?: {
     __typename: "ImageRecord"
     id: string
-    userId: string
     filepath?: string | null
     labels: string
     createdAt: string
     updatedAt: string
+    owner?: string | null
   } | null
+}
+
+export type OnUpdateImageRecordSubscriptionVariables = {
+  owner?: string | null
 }
 
 export type OnUpdateImageRecordSubscription = {
   onUpdateImageRecord?: {
     __typename: "ImageRecord"
     id: string
-    userId: string
     filepath?: string | null
     labels: string
     createdAt: string
     updatedAt: string
+    owner?: string | null
   } | null
+}
+
+export type OnDeleteImageRecordSubscriptionVariables = {
+  owner?: string | null
 }
 
 export type OnDeleteImageRecordSubscription = {
   onDeleteImageRecord?: {
     __typename: "ImageRecord"
     id: string
-    userId: string
     filepath?: string | null
     labels: string
     createdAt: string
     updatedAt: string
+    owner?: string | null
   } | null
 }
