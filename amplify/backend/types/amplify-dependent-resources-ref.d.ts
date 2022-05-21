@@ -33,4 +33,10 @@ export type AmplifyDependentResourcesAttributes = {
       GraphQLAPIEndpointOutput: "string"
     }
   }
+  storage: {
+    viawebimages: {
+      BucketName: "string"
+      Region: "string"
+    }
+  }
 }

@@ -5,10 +5,9 @@ input AMPLIFY {
 }
 type ImageRecord
   @model
-  @auth(rules: [{ allow: public }])
+  @auth(rules: [{ allow: owner }])
   @aws_cognito_user_pools {
   id: ID!
-  userId: ID!
   filepath: String
   labels: String!
 }

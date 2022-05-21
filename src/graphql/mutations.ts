@@ -9,11 +9,11 @@ export const createImageRecord = /* GraphQL */ `
   ) {
     createImageRecord(input: $input, condition: $condition) {
       id
-      userId
       filepath
       labels
       createdAt
       updatedAt
+      owner
     }
   }
 `
@@ -24,11 +24,11 @@ export const updateImageRecord = /* GraphQL */ `
   ) {
     updateImageRecord(input: $input, condition: $condition) {
       id
-      userId
       filepath
       labels
       createdAt
       updatedAt
+      owner
     }
   }
 `
@@ -39,11 +39,11 @@ export const deleteImageRecord = /* GraphQL */ `
   ) {
     deleteImageRecord(input: $input, condition: $condition) {
       id
-      userId
       filepath
       labels
       createdAt
       updatedAt
+      owner
     }
   }
 `

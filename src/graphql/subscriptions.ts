@@ -3,38 +3,38 @@
 // this is an auto generated file. This will be overwritten
 
 export const onCreateImageRecord = /* GraphQL */ `
-  subscription OnCreateImageRecord {
-    onCreateImageRecord {
+  subscription OnCreateImageRecord($owner: String) {
+    onCreateImageRecord(owner: $owner) {
       id
-      userId
       filepath
       labels
       createdAt
       updatedAt
+      owner
     }
   }
 `
 export const onUpdateImageRecord = /* GraphQL */ `
-  subscription OnUpdateImageRecord {
-    onUpdateImageRecord {
+  subscription OnUpdateImageRecord($owner: String) {
+    onUpdateImageRecord(owner: $owner) {
       id
-      userId
       filepath
       labels
       createdAt
       updatedAt
+      owner
     }
   }
 `
 export const onDeleteImageRecord = /* GraphQL */ `
-  subscription OnDeleteImageRecord {
-    onDeleteImageRecord {
+  subscription OnDeleteImageRecord($owner: String) {
+    onDeleteImageRecord(owner: $owner) {
       id
-      userId
       filepath
       labels
       createdAt
       updatedAt
+      owner
     }
   }
 `
