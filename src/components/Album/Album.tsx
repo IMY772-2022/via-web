@@ -6,31 +6,32 @@ import { ListImageRecordsQuery } from "../../API"
 
 interface ImageRecord {
   id: string
-  userId: string
   filepath: string
   labels: string
 }
 
 const Album: React.FC = () => {
-  const [images, setImages] = useState([] as ImageRecord[])
+  const [dynamodDBitems, setDynamoDBItems] = useState([] as ImageRecord[])
   useEffect(() => {
     fetchImages()
   }, [])
   const fetchImages = async () => {
     try {
-      const imageData = (await API.graphql(
-        graphqlOperation(listImageRecords)
-      )) as { data: ListImageRecordsQuery }
-
-      const imageList = imageData.data.listImageRecords?.items as ImageRecord[]
-      setImages(imageList)
+      const items = (await API.graphql(graphqlOperation(listImageRecords))) as {
+        data: ListImageRecordsQuery
+      }
+      const itemData = items.data.listImageRecords?.items as ImageRecord[]
+      setDynamoDBItems(itemData)
     } catch (error) {
-      ;<p> {error} </p>
+      return error
     }
   }
   return (
     <div>
-      <p>{images}</p>
+      database data:
+      {dynamodDBitems.map(item => {
+        return <p key={item.id}>{JSON.stringify(item)}</p>
+      })}
     </div>
   )
 }
