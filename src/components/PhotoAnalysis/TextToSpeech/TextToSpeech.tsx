@@ -11,15 +11,18 @@ interface TextToSpeechProps {
 }
 
 const TextToSpeech: React.FC<TextToSpeechProps> = props => {
-  const { labels, disabled = false } = props
+  const { labels } = props
   const [pollyResponse, setPollyResponse] = useState<string | undefined>(
+    undefined
+  )
+
+  const [audioFile, setAudioFile] = useState<HTMLAudioElement | undefined>(
     undefined
   )
   const [audioStream, setAudioStream] = useState<string | undefined>(undefined)
   const [isPlaying, setIsPlaying] = useState(false)
 
   const [isLoading, setIsLoading] = useState(false)
-  const [classList, setClassList] = useState(["button", "is-light"])
 
   const generateTextToSpeech = () => {
     setIsLoading(true)
@@ -34,6 +37,7 @@ const TextToSpeech: React.FC<TextToSpeechProps> = props => {
     })
       .then(response => {
         setAudioStream(response.speech.url)
+        setAudioFile(new Audio(response.speech.url))
         setPollyResponse("Audio generation complete, press play")
         setIsLoading(false)
       })
@@ -41,44 +45,34 @@ const TextToSpeech: React.FC<TextToSpeechProps> = props => {
   }
 
   useEffect(() => {
-    if (isLoading) {
-      setClassList(["button", "is-loading", "is-light"])
-    } else {
-      setClassList(["button", "is-light"])
-    }
-  }, [isLoading])
+    generateTextToSpeech()
+  }, [])
 
-  const play = () => {
-    if (audioStream) {
-      const audio = new Audio()
-      audio.src = audioStream
-      audio.play()
-      setIsPlaying(true)
-      audio.onended = () => {
-        pause()
+  const togglePlay = () => {
+    if (audioFile) {
+      if (isPlaying) {
+        audioFile.pause()
+        setIsPlaying(false)
+      } else {
+        audioFile.play()
+        setIsPlaying(true)
       }
     }
   }
 
-  const pause = () => {
-    setIsPlaying(false)
+  if (audioFile) {
+    audioFile.onended = () => {
+      setIsPlaying(false)
+    }
   }
 
   return (
     <div className="is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
       {!audioStream && (
         <>
-          <button
-            className={classList.flatMap(className => className).join(" ")}
-            disabled={disabled}
-            onClick={generateTextToSpeech}
-          >
-            Text to speech
-          </button>
           <div className="mt-3"> {pollyResponse} </div>
         </>
       )}
-
       {!isLoading && (
         <Button
           icon={
@@ -87,7 +81,7 @@ const TextToSpeech: React.FC<TextToSpeechProps> = props => {
               fontSize="20"
             />
           }
-          onClick={play}
+          onClick={togglePlay}
         />
       )}
     </div>
