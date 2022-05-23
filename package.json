@@ -52,10 +52,12 @@
   "dependencies": {
     "@aws-amplify/ui-react": "^2.15.8",
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
+    "@fortawesome/free-regular-svg-icons": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@fortawesome/react-fontawesome": "^0.1.18",
     "@mdx-js/mdx": "v1",
     "@mdx-js/react": "v1",
+    "ansi-html-community": "^0.0.8",
     "aws-amplify": "^4.3.20",
     "bulma": "^0.9.3",
     "gatsby": "^4.10.3",

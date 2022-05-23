@@ -1,0 +1,10 @@
+{
+  "resourceName": "viawebimages",
+  "policyUUID": "1a578ec6",
+  "bucketName": "viaweba3e7179aa111445aace0066c7bc6d2ce",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": ["CREATE_AND_UPDATE", "READ", "DELETE"],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}
