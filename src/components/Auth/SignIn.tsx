@@ -79,7 +79,7 @@ const SignIn: React.FC = () => {
               <div className="control has-icons-right">
                 <input
                   className="input"
-                  type="text"
+                  type="password"
                   placeholder="Password"
                   name="password"
                   id="password"
