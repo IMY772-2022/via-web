@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 import "./photoAnalysis.scss"
 import TextToSpeech from "./TextToSpeech/TextToSpeech"
-import { isValidFileType, labelImage } from "./rekognitionUtils"
+import { isValidFileType, labelImage } from "./utils"
 
 export interface LabelType {
   name: string

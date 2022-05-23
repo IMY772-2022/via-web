@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "apiName": "viaweb",
+    "serviceName": "AppSync",
+    "gqlSchemaPath": "/Users/camsamso/Documents/Personal/UP/IMY 772/temp/via-web/amplify/backend/api/viaweb/schema.graphql",
+    "defaultAuthType": {
+      "mode": "AMAZON_COGNITO_USER_POOLS",
+      "cognitoUserPoolId": "authviaweb22e998c1"
+    },
+    "additionalAuthTypes": [
+      {
+        "mode": "API_KEY",
+        "expirationTime": 200,
+        "apiKeyExpirationDate": "2022-12-05T07:07:49.765Z",
+        "keyDescription": "Testing API key for GQL operations"
+      }
+    ],
+    "conflictResolution": {}
+  }
+}

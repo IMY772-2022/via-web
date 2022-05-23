@@ -1,19 +1,10 @@
 import * as React from "react"
-import { Amplify, Auth } from "aws-amplify"
-import {
-  Predictions,
-  AmazonAIPredictionsProvider,
-} from "@aws-amplify/predictions"
 
-import awsconfig from "../aws-exports"
 import Landing from "../components/Landing/Landing"
 import { Layout } from "../components/Layout/Layout"
-import "../styles.scss"
 import Seo from "../components/Seo/Seo"
 
-Amplify.configure(awsconfig)
-Auth.configure(awsconfig)
-Predictions.addPluggable(new AmazonAIPredictionsProvider())
+import "../styles.scss"
 
 const IndexPage = (): JSX.Element => (
   <main className="section">

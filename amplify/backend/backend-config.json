@@ -37,5 +37,52 @@
       "dependsOn": [],
       "identifyType": "identifyLabels"
     }
+  },
+  "api": {
+    "viaweb": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+            "userPoolConfig": {
+              "userPoolId": "eu-west-1_6EmHIyP8F"
+            }
+          },
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "API_KEY",
+              "apiKeyConfig": {
+                "apiKeyExpirationDays": 200,
+                "apiKeyExpirationDate": "2022-12-05T07:07:49.765Z",
+                "description": "Testing API key for GQL operations"
+              }
+            }
+          ]
+        }
+      },
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "viaweb22e998c1",
+          "attributes": ["UserPoolId"]
+        }
+      ]
+    }
+  },
+  "hosting": {
+    "amplifyhosting": {
+      "service": "amplifyhosting",
+      "type": "cicd",
+      "lastPushTimeStamp": "2022-05-14T06:36:49.933Z"
+    }
+  },
+  "storage": {
+    "viawebimages": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": []
+    }
   }
 }

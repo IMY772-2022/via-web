@@ -1,9 +1,11 @@
 import React from "react"
 import { BoundingBox } from "@aws-amplify/predictions"
+import { API, Storage } from "aws-amplify"
 import CSS from "csstype"
 
 import { ImageData, LabelType } from "./PhotoAnalysis"
 import { Label } from "../Label/Label"
+import { createImageRecord } from "../../graphql/mutations"
 
 export const labelImage = (labelData: LabelType[], imageData: ImageData) => {
   const { height, width } = imageData
@@ -46,4 +48,39 @@ export const isValidFileType = (image: File) => {
   )
     return true
   else return false
+}
+
+export const uploadToS3 = async (image: File) => {
+  try {
+    await Storage.put(image.name, image, {
+      contentType: image.type,
+    })
+  } catch (error) {
+    return error
+  }
+}
+
+export const getFilePathFromS3 = async (image: File) => {
+  try {
+    return await Storage.get(image.name)
+  } catch (error) {
+    return error
+  }
+}
+
+export const writeToDynamo = async (filepath: string, labels: LabelType[]) => {
+  try {
+    await API.graphql({
+      query: createImageRecord,
+      variables: {
+        input: {
+          filepath: filepath,
+          labels: labels,
+        },
+      },
+      authMode: "AMAZON_COGNITO_USER_POOLS",
+    })
+  } catch (error) {
+    return error
+  }
 }

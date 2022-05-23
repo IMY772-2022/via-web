@@ -1,0 +1,8 @@
+{
+  "AppSyncApiName": "viaweb",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": ["authviaweb22e998c1", "Outputs.UserPoolId"]
+  }
+}
