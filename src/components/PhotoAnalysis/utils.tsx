@@ -3,15 +3,13 @@ import { BoundingBox } from "@aws-amplify/predictions"
 import { API, Storage } from "aws-amplify"
 import CSS from "csstype"
 
-import { LabelType } from "./PhotoAnalysis"
+import { ImageData, LabelType } from "./PhotoAnalysis"
 import { Label } from "../Label/Label"
 import { createImageRecord } from "../../graphql/mutations"
 
-export const labelImage = (labelData: LabelType[], imageSrc: string) => {
-  const img = new Image()
-  img.src = imageSrc
-  const height = img.height
-  const width = img.width
+export const labelImage = (labelData: LabelType[], imageData: ImageData) => {
+  const { height, width } = imageData
+
   return labelData.map(label => {
     if (label.boundingBoxes.length > 0) {
       let style

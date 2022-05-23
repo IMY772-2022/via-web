@@ -1,0 +1,40 @@
+.card {
+  width: 500px !important;
+}
+
+.field {
+  padding: 8px !important;
+}
+
+input {
+  border-radius: 10px !important;
+}
+
+input:focus {
+  border: 0px solid hsla(248, 21%, 20%, 0.94) !important;
+  box-shadow: 0 0 0 0.125em hsla(248, 21%, 20%, 0.94) !important;
+}
+
+p.forgotPassword {
+  padding-top: 5px;
+}
+
+button.button {
+  border-radius: 12px;
+  background-color: #f55b6c;
+  color: white;
+  width: 100%;
+  max-width: 300px;
+}
+
+button.button:hover {
+  color: white !important;
+}
+
+a {
+  color: #f55b6c;
+}
+
+a:hover {
+  color: #f55b6c;
+}
