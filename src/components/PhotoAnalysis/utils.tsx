@@ -6,6 +6,7 @@ import CSS from "csstype"
 import { ImageData, LabelType } from "./PhotoAnalysis"
 import { Label } from "../Label/Label"
 import { createImageRecord } from "../../graphql/mutations"
+import Alert from "../Alert/Alert"
 
 export const labelImage = (labelData: LabelType[], imageData: ImageData) => {
   const { height, width } = imageData
@@ -56,15 +57,17 @@ export const uploadToS3 = async (image: File) => {
       contentType: image.type,
     })
   } catch (error) {
-    return error
+    ;<Alert error={error as string} />
   }
 }
 
 export const getFilePathFromS3 = async (image: File) => {
   try {
-    return await Storage.get(image.name)
+    await Storage.get(image.name).then(response => {
+      return response
+    })
   } catch (error) {
-    return error
+    ;<Alert error={error as string} />
   }
 }
 
@@ -81,6 +84,6 @@ export const writeToDynamo = async (filepath: string, labels: LabelType[]) => {
       authMode: "AMAZON_COGNITO_USER_POOLS",
     })
   } catch (error) {
-    return error
+    ;<Alert error={error as string} />
   }
 }
