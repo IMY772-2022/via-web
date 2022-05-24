@@ -3,11 +3,13 @@ import { API, graphqlOperation } from "aws-amplify"
 
 import { listImageRecords } from "../../graphql/queries"
 import { ListImageRecordsQuery } from "../../API"
+import Item from "./item"
 
-interface ImageRecord {
+export interface ImageRecord {
   id: string
   filepath: string
   labels: string
+  owner: string
 }
 
 const Album: React.FC = () => {
@@ -28,9 +30,8 @@ const Album: React.FC = () => {
   }
   return (
     <div>
-      database data:
       {dynamodDBitems.map(item => {
-        return <p key={item.id}>{JSON.stringify(item)}</p>
+        return <Item key={item.id} imageRecord={item} />
       })}
     </div>
   )
