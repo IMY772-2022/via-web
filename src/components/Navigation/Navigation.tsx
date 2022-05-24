@@ -22,6 +22,9 @@ export const Navigation = () => {
       <Link className="navbar-item" to="/register">
         Register
       </Link>
+      <Link className="navbar-item" to="/album">
+        Album
+      </Link>
     </nav>
   )
 }

@@ -7,7 +7,7 @@ const SignInPage = () => {
   return (
     <div className="section">
       <div className="container is-fluid">
-        <Layout pageTitle="Photo Analysis">
+        <Layout>
           <Register />
         </Layout>
       </div>

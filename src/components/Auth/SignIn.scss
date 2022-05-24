@@ -1,45 +1,40 @@
-.card{
-    width: 500px !important;
-    font-family: 'Open Sans';
+.card {
+  width: 500px !important;
 }
 
-.field{
-    padding: 8px !important;
+.field {
+  padding: 8px !important;
 }
 
-input{
-    border-radius: 10px !important;
+input {
+  border-radius: 10px !important;
 }
 
 input:focus {
-    border: 0px solid hsla(248, 21%, 20%, 0.94) !important;
-    box-shadow: 0 0 0 0.125em hsla(248, 21%, 20%, 0.94) !important;
+  border: 0px solid hsla(248, 21%, 20%, 0.94) !important;
+  box-shadow: 0 0 0 0.125em hsla(248, 21%, 20%, 0.94) !important;
 }
 
-p.forgotPassword{
-    font-weight: 500;
-    padding-top: 5px;
+p.forgotPassword {
+  padding-top: 5px;
 }
 
-p.notRegistered{
-    font-weight: 500;
+button.button {
+  border-radius: 12px;
+  background-color: #f55b6c;
+  color: white;
+  width: 100%;
+  max-width: 300px;
 }
 
-button.button{
-    border-radius: 12px;
-    background-color: #F55B6C;
-    color: white;
-    width: 300px;
+button.button:hover {
+  color: white !important;
 }
 
-button.button:hover{
-    color: white !important;
+a {
+  color: #f55b6c;
 }
 
-a{
-    color: #F55B6C;
-}
-
-a:hover{
-    color: #F55B6C;
+a:hover {
+  color: #f55b6c;
 }

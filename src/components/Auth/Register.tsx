@@ -1,12 +1,19 @@
 import React, { useState } from "react"
+import Alert from "../Alert/Alert"
 
 import { confirmSignUp, signUp } from "./utils"
 
 const Register: React.FC = () => {
+  const [displaySignUpForm, setDisplaySignUpForm] = useState(true)
+
   const [formValues, setFormValues] = useState({
     username: "",
     password: "",
     code: "",
+  })
+  const [displayError, setDisplayError] = useState({
+    isError: false,
+    message: "",
   })
 
   const updateForm = (event: any) => {
@@ -17,19 +24,39 @@ const Register: React.FC = () => {
   }
 
   const signin = () => {
+    setDisplayError({
+      ...displayError,
+      isError: false,
+    })
     const user = {
       username: formValues.username,
       password: formValues.password,
     }
-    signUp(user)
+    signUp(user).then(message => {
+      setDisplayError({
+        isError: true,
+        message: message as string,
+      })
+    })
+    setDisplaySignUpForm(false)
   }
 
   const submitConfirmation = () => {
-    confirmSignUp(formValues.username, formValues.code)
+    setDisplayError({
+      ...displayError,
+      isError: false,
+    })
+    confirmSignUp(formValues.username, formValues.code).then(message => {
+      setDisplayError({
+        isError: true,
+        message: message as string,
+      })
+    })
   }
 
   const signUpForm = (
     <div className="form">
+      {displayError.isError ? <Alert error={displayError.message} /> : null}
       <div className="field">
         <label className="label" htmlFor="email">
           Email
@@ -38,24 +65,9 @@ const Register: React.FC = () => {
           <input
             className="input"
             type="text"
-            placeholder="email"
+            placeholder="Email"
             name="username"
             id="email"
-            onChange={e => updateForm(e)}
-          />
-        </div>
-      </div>
-      <div className="field">
-        <label className="label" htmlFor="confirmEmail">
-          Confirm Email
-        </label>
-        <div className="control">
-          <input
-            className="input"
-            type="text"
-            placeholder="Confirm email"
-            name="confirmEmail"
-            id="confirmEmail"
             onChange={e => updateForm(e)}
           />
         </div>
@@ -67,11 +79,25 @@ const Register: React.FC = () => {
         <div className="control">
           <input
             className="input"
-            type="text"
+            type="password"
             placeholder="Password"
             name="password"
             id="password"
             onChange={e => updateForm(e)}
+          />
+        </div>
+      </div>
+      <div className="field">
+        <label className="label" htmlFor="confirmPassword">
+          Confirm password
+        </label>
+        <div className="control">
+          <input
+            className="input"
+            type="password"
+            placeholder="Confirm password"
+            name="confirmPassword"
+            id="confirmPassword"
           />
         </div>
       </div>
@@ -86,6 +112,11 @@ const Register: React.FC = () => {
   )
   const confirmSignUpForm = (
     <div className="form">
+      {displayError.isError ? <Alert error={displayError.message} /> : null}
+      <p>
+        {" "}
+        We have sent a confirmation code to your email. Please enter it below:{" "}
+      </p>
       <div className="field">
         <label className="label" htmlFor="signUpCode">
           Confirm signup code
@@ -112,8 +143,8 @@ const Register: React.FC = () => {
   )
   return (
     <div>
-      {signUpForm}
-      {confirmSignUpForm}
+      {displaySignUpForm ? signUpForm : null}{" "}
+      {!displaySignUpForm ? confirmSignUpForm : null}
     </div>
   )
 }
