@@ -25,62 +25,72 @@ const SettingsModal: React.FC<Props> = ({ isActive, toggle }) => {
         <div className="modal-card">
           <section className="modal-card-body">
             <div className="">
-              <div className="field p-0 column">
-                {/* <input 
-                  id="switchLarge"
-                  type="checkbox"
-                  name="switchLarge"
-                  className="switch is-outlined is-large is-rtl is-flex"
-                />
-                <label
-                  className="column is-full is-size-6"
-                  htmlFor="switchLarge"
-                >
-                  Colour detect
-                </label>
-              </div>
-              <div className="field p-0 column">
-                <input
-                  id="switchLarge"
-                  type="checkbox"
-                  name="switchLarge"
-                  className="switch is-outlined is-large is-rtl"
-                />
-                <label
-                  className="column is-full is-size-6"
-                  htmlFor="switchLarge"
-                >
-                  Cash detect
-                </label>
-                 */}
-              </div>
+              <div className="field p-0 column"></div>
               <div className="is-flex is-flex-direction-row is-justify-content-space-between is-align-items-center">
-                <p>Font size </p>
+                <div className="SettingsText">
+                  <i>Customise your settings</i>
+                </div>
+                <div className="SettingsText">Font size </div>
                 <input
                   className="slider is-fullwidth is-large is-danger is-circle"
                   step="1"
                   min="0"
                   max="100"
-                  value="50"
+                  value="20"
                   type="range"
-                />
+                ></input>
               </div>
               <div className="is-flex is-flex-direction-row is-justify-content-space-between is-align-items-center">
-                <p>Contrast </p>
+                <div className="SettingsText">Contrast</div>
                 <input
                   className="slider is-fullwidth is-large is-danger is-circle"
                   step="1"
                   min="0"
                   max="100"
-                  value="50"
+                  value="20"
                   type="range"
-                />
+                ></input>
               </div>
-              <div className="select">
-                <select>
-                  <option>Colour mode</option>
-                  <option>With options</option>
-                </select>
+              <div>
+                <p>Colour Mode</p>
+              </div>
+              <div className="RadioSelect">
+                <div>
+                  Standard
+                  <input
+                    type="radio"
+                    id="Standard"
+                    name="Standard"
+                    value="Standard"
+                  ></input>
+                </div>
+                <div>
+                  Monochromatism
+                  <input
+                    type="radio"
+                    id="Monochromatism"
+                    name="Monochromatism"
+                    value="Monochromatism"
+                  ></input>
+                </div>
+                <div>
+                  Dichromatism
+                  <input
+                    type="radio"
+                    id="Dichromatism"
+                    name="Dichromatism"
+                    value="Dichromatism"
+                  ></input>
+                </div>
+                <div>
+                  Anomalous Trichromacy
+                  <input
+                    type="radio"
+                    id="AnomalousTrichromacy"
+                    name="AnomalousTrichromacy"
+                    value="AnomalousTrichromacy"
+                  ></input>
+                </div>
               </div>
             </div>
           </section>

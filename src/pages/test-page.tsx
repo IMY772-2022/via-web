@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { Layout } from "../components/Layout/Layout"
+import "../AppStyle.scss"
 import SettingsModal from "../components/SettingsModal/SettingsModal"
 
 const TestPage = () => {
