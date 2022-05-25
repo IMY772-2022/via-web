@@ -5,3 +5,35 @@
   min-height: 550px;
 }
 
+.rightControls{
+  display: flex;
+  justify-content: end;
+}
+
+.controls span.file-cta{
+  justify-content: center;
+  border: none;
+  border-radius: 100px;
+  margin: 7px;
+  background-color: #e5e5e5;
+  height: 55px;
+  width: 55px;  
+}
+
+.iconCam{
+  color: #F55B6C;
+}
+
+.controls button{
+  justify-content: center;
+  border: none;
+  border-radius: 100px;
+  margin: 7px;
+  background-color: #e5e5e5;
+  height: 55px;
+  width: 55px;
+}
+
+.controls Button:hover{
+  background-color: hsl(0, 0%, 93%);
+}
