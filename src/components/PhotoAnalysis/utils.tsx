@@ -51,29 +51,29 @@ export const isValidFileType = (image: File) => {
   else return false
 }
 
-export const uploadToS3 = async (image: File) => {
+export const uploadToS3 = (image: File) => {
   try {
-    await Storage.put(image.name, image, {
+    const response = Storage.put(image.name, image, {
       contentType: image.type,
     })
+    return response
   } catch (error) {
     ;<Alert error={error as string} />
   }
 }
 
-export const getFilePathFromS3 = async (image: File) => {
+export const getFilePathFromS3 = (fileName: string) => {
   try {
-    await Storage.get(image.name).then(response => {
-      return response
-    })
+    const response = Storage.get(fileName)
+    return response
   } catch (error) {
     ;<Alert error={error as string} />
   }
 }
 
-export const writeToDynamo = async (filepath: string, labels: LabelType[]) => {
+export const writeToDynamo = (filepath: string, labels: LabelType[]) => {
   try {
-    await API.graphql({
+    API.graphql({
       query: createImageRecord,
       variables: {
         input: {
@@ -83,7 +83,8 @@ export const writeToDynamo = async (filepath: string, labels: LabelType[]) => {
       },
       authMode: "AMAZON_COGNITO_USER_POOLS",
     })
+    return "Successfully saved to your album"
   } catch (error) {
-    ;<Alert error={error as string} />
+    return error as string
   }
 }

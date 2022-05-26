@@ -9,13 +9,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 import "./photoAnalysis.scss"
 import TextToSpeech from "./TextToSpeech/TextToSpeech"
-import {
-  // getFilePathFromS3,
-  isValidFileType,
-  labelImage,
-  // uploadToS3,
-  // writeToDynamo,
-} from "./utils"
+import { isValidFileType, labelImage, uploadToS3, writeToDynamo } from "./utils"
+import Alert from "../Alert/Alert"
 
 export interface LabelType {
   name: string
@@ -141,11 +136,10 @@ const Analysis: React.FC = () => {
     )
   }
 
-  const saveImageRecord = () => {
-    // uploadToS3(imageData!.file)
-    // const filepath = getFilePathFromS3(imageData!.file)
-    // console.log("filepath", filepath)
-    //writeToDynamo(filepath, labels)
+  const saveImageRecord = async () => {
+    const filepath = await uploadToS3(imageData!.file)
+    const response = await writeToDynamo(filepath!.key, labelData)
+    return <Alert error={response} />
   }
 
   const renderImageLabels = () => {
@@ -175,6 +169,7 @@ const Analysis: React.FC = () => {
           {labels.length > 0 ? (
             <TextToSpeech disabled={isLoading} labels={labels} />
           ) : null}
+          <br />
           <button className="button is-danger" onClick={saveImageRecord}>
             Save results
           </button>
