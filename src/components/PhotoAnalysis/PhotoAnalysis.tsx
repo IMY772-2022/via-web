@@ -170,9 +170,12 @@ const Analysis: React.FC = () => {
             <TextToSpeech disabled={isLoading} labels={labels} />
           ) : null}
           <br />
-          <button className="button is-danger" onClick={saveImageRecord}>
-            Save results
-          </button>
+          <div className="columns is-1">
+            <button className="button is-danger" onClick={saveImageRecord}>
+              Save results
+            </button>
+            <button className="button is-info is-outlined">Edit Labels</button>
+          </div>
         </div>
       </div>
     </div>
