@@ -8,7 +8,11 @@ import { Label } from "../Label/Label"
 import { createImageRecord } from "../../graphql/mutations"
 import Alert from "../Alert/Alert"
 
-export const labelImage = (labelData: LabelType[], imageData: ImageData) => {
+export const labelImage = (
+  labelData: LabelType[],
+  imageData: ImageData,
+  editable: boolean
+) => {
   const { height, width } = imageData
 
   return labelData.map(label => {
@@ -17,8 +21,15 @@ export const labelImage = (labelData: LabelType[], imageData: ImageData) => {
       label.boundingBoxes.forEach((boundingBox: BoundingBox) => {
         style = defineBoundingBox(boundingBox, height, width)
       })
-      return <Label value={label.name} style={style} key={label.name} />
-    } else return <Label value={label.name} key={label.name} />
+      return (
+        <Label
+          editable={editable}
+          value={label.name}
+          style={style}
+          key={label.name}
+        />
+      )
+    } else return <Label editable={false} value={label.name} key={label.name} />
   })
 }
 
