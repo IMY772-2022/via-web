@@ -5,7 +5,7 @@ import CSS from "csstype"
 
 import { ImageData, LabelType } from "./PhotoAnalysis"
 import { Label } from "../Label/Label"
-import { createImageRecord } from "../../graphql/mutations"
+import { createImageRecord, deleteImageRecord } from "../../graphql/mutations"
 import Alert from "../Alert/Alert"
 
 export const labelImage = (labelData: LabelType[], imageData: ImageData) => {
@@ -84,6 +84,21 @@ export const writeToDynamo = (filepath: string, labels: LabelType[]) => {
       authMode: "AMAZON_COGNITO_USER_POOLS",
     })
     return "Successfully saved to your album"
+  } catch (error) {
+    return error as string
+  }
+}
+
+export const deleteFromDynamo = async (itemId: string) => {
+  try {
+    await API.graphql({
+      query: deleteImageRecord,
+      variables: {
+        input: {
+          id: itemId,
+        },
+      },
+    })
   } catch (error) {
     return error as string
   }
