@@ -22,7 +22,11 @@ const Album: React.FC = () => {
       const items = (await API.graphql(graphqlOperation(listImageRecords))) as {
         data: ListImageRecordsQuery
       }
+      // eslint-disable-next-line no-console
+      console.log("db records", items)
       const itemData = items.data.listImageRecords?.items as ImageRecord[]
+      // eslint-disable-next-line no-console
+      console.log("sb records 2", itemData)
       setDynamoDBItems(itemData)
     } catch (error) {
       return error

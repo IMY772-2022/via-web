@@ -10,7 +10,7 @@ interface LabelProps {
 }
 const Label = ({ value, style, editable }: LabelProps) => {
   if (editable) {
-    return <input defaultValue={value}></input>
+    return <input className="input" type="text" defaultValue={value}></input>
   } else {
     return (
       <span className="tag is-white" style={style}>

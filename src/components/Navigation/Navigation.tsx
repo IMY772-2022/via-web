@@ -25,9 +25,6 @@ export const Navigation = () => {
       <Link className="navbar-item" to="/album">
         Album
       </Link>
-      <Link className="navbar-item" to="/test">
-        Test Page
-      </Link>
     </nav>
   )
 }

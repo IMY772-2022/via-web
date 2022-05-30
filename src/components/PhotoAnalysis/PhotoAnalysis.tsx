@@ -179,11 +179,9 @@ const Analysis: React.FC = () => {
               className="button is-info is-outlined"
               onClick={() => {
                 setEditMode(currentEditMode => !currentEditMode)
-                // eslint-disable-next-line no-console
-                console.log(editMode)
               }}
             >
-              Edit Labels
+              {editMode ? "Save Labels" : "Edit Labled"}
             </button>
           </div>
         </div>
