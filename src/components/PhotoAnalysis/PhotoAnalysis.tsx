@@ -40,7 +40,6 @@ const Analysis: React.FC = () => {
   let labelData: LabelType[] = []
   const [isLoading, setIsLoading] = useState(false)
   const [isError, setError] = useState(false)
-  const [editMode, setEditMode] = useState(false)
 
   const identifyImageLabels = async (event: any) => {
     const files = (event.target as HTMLInputElement).files
@@ -145,7 +144,7 @@ const Analysis: React.FC = () => {
 
   const renderImageLabels = () => {
     if (isLoading) return <span className="loader"></span>
-    else if (imageData) return labelImage(labelData, imageData, editMode)
+    else if (imageData) return labelImage(labelData, imageData)
     else return null
   }
 
@@ -174,14 +173,6 @@ const Analysis: React.FC = () => {
           <div className="columns is-1">
             <button className="button is-danger" onClick={saveImageRecord}>
               Save results
-            </button>
-            <button
-              className="button is-info is-outlined"
-              onClick={() => {
-                setEditMode(currentEditMode => !currentEditMode)
-              }}
-            >
-              {editMode ? "Save Labels" : "Edit Labled"}
             </button>
           </div>
         </div>

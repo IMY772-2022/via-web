@@ -1,3 +1,4 @@
+import { navigate } from "gatsby"
 import React from "react"
 import { ImageRecord } from "./Album"
 
@@ -15,7 +16,15 @@ const Item: React.FC<ItemProps> = props => {
           <img src={filepath} alt="Stored file from database" />
         </div>
         <div className="card-content">
-          <button className="button is-light"> Edit</button>
+          <button
+            onClick={() => {
+              navigate("/edit", { state: { item } })
+            }}
+            className="button is-light"
+          >
+            {" "}
+            Edit
+          </button>
         </div>
       </div>
     </div>

@@ -8,11 +8,7 @@ import { Label } from "../Label/Label"
 import { createImageRecord } from "../../graphql/mutations"
 import Alert from "../Alert/Alert"
 
-export const labelImage = (
-  labelData: LabelType[],
-  imageData: ImageData,
-  editable: boolean
-) => {
+export const labelImage = (labelData: LabelType[], imageData: ImageData) => {
   const { height, width } = imageData
 
   return labelData.map(label => {
@@ -23,7 +19,7 @@ export const labelImage = (
       })
       return (
         <Label
-          editable={editable}
+          editable={false}
           value={label.name}
           style={style}
           key={label.name}
