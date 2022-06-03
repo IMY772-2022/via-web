@@ -30,10 +30,17 @@ const Album: React.FC = () => {
   }
   return (
     <div>
+      <p> Total items: {dynamodDBitems.length} </p>
       {dynamodDBitems.map(item => {
         return (
           <div key={item.id}>
-            <Item key={item.id} imageRecord={item} /> <br />{" "}
+            <Item
+              key={item.id}
+              imageRecord={item}
+              dynamoDbItems={dynamodDBitems}
+              setDynamoDBItems={setDynamoDBItems}
+            />{" "}
+            <br />{" "}
           </div>
         )
       })}
