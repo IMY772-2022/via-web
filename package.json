@@ -57,6 +57,7 @@
     "@fortawesome/react-fontawesome": "^0.1.18",
     "@mdx-js/mdx": "v1",
     "@mdx-js/react": "v1",
+    "@theme-ui/preset-bulma": "^0.14.5",
     "ansi-html-community": "^0.0.8",
     "aws-amplify": "^4.3.20",
     "bulma": "^0.9.3",
@@ -70,6 +71,7 @@
     "gatsby-plugin-sass": "^5.10.2",
     "gatsby-plugin-sharp": "^4.10.2",
     "gatsby-plugin-sitemap": "^5.10.2",
+    "gatsby-plugin-theme-ui": "^0.14.5",
     "gatsby-plugin-use-query-params": "^1.0.1",
     "gatsby-source-filesystem": "^4.10.1",
     "gatsby-transformer-sharp": "^4.10.0",
@@ -79,6 +81,7 @@
     "react-dom": "^17.0.1",
     "react-helmet": "^6.1.0",
     "sass": "^1.49.9",
+    "theme-ui": "^0.14.5",
     "use-query-params": "^1.2.3"
   },
   "devDependencies": {

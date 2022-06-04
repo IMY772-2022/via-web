@@ -50,6 +50,12 @@ const config: GatsbyConfig = {
       resolve: "gatsby-plugin-offline",
       options: { precachePages: ["/"] },
     },
+    {
+      resolve: "gatsby-plugin-theme-ui",
+      options: {
+        preset: "./src/theme",
+      },
+    },
   ],
 }
 
