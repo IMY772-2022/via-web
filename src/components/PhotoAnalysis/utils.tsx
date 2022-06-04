@@ -62,9 +62,9 @@ export const uploadToS3 = (image: File) => {
   }
 }
 
-export const getFilePathFromS3 = (fileName: string) => {
+export const getFilePathFromS3 = async (fileName: string) => {
   try {
-    const response = Storage.get(fileName)
+    const response = await Storage.get(fileName)
     return response
   } catch (error) {
     ;<Alert error={error as string} />
