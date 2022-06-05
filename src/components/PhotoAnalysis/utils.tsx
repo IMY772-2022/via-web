@@ -78,7 +78,7 @@ export const writeToDynamo = (filepath: string, labels: LabelType[]) => {
       variables: {
         input: {
           filepath: filepath,
-          labels: labels,
+          labels: JSON.stringify(labels),
         },
       },
       authMode: "AMAZON_COGNITO_USER_POOLS",
