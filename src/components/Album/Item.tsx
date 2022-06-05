@@ -32,17 +32,19 @@ const Item: React.FC<ItemProps> = props => {
         <div className="card-content">
           <button
             onClick={() => {
+              // eslint-disable-next-line no-console
+              console.log("BUTTON PUSH")
+              // eslint-disable-next-line no-console
+              console.log("Item", item)
               navigate("/edit", { state: { item } })
             }}
             className="button is-light"
           >
-            {" "}
             Edit
           </button>
         </div>
         <div className="card-content">
           <button className="button is-light" onClick={deleteItem}>
-            {" "}
             Delete
           </button>
         </div>

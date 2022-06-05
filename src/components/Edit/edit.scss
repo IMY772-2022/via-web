@@ -1,0 +1,33 @@
+p.instructions {
+  font-style: italic;
+  font-size: large;
+}
+
+.cameraButton {
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  right: 50%;
+}
+
+Button.button {
+  margin: 10px;
+}
+
+.cameraButton span.file-cta {
+  border-radius: 100px;
+  border: 13px solid #f55b6c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #f3f2f2;
+  height: 89px;
+  width: 89px;
+  cursor: hand;
+}
+
+.card-image > img {
+  border-top-left-radius: 32px !important;
+  border-top-right-radius: 32px !important;
+}
