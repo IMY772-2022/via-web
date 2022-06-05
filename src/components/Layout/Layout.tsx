@@ -12,9 +12,13 @@ export const Layout = (props: LayoutProps) => {
   const heading = <h1>{pageTitle}</h1>
   return (
     <div className="container">
-      <Navigation />
-      {heading}
-      {children}
+      <div className="columns is-7">
+        <div className="column is-offset-2">
+          <Navigation />
+          {heading}
+          {children}
+        </div>
+      </div>
     </div>
   )
 }
