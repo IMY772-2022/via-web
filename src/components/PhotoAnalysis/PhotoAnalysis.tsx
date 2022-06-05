@@ -141,25 +141,62 @@ const Analysis: React.FC = () => {
 
   const pageData = (
     <div>
-      {imageData !== undefined ? (
-        <div className="card-image">
-          <img src={imageData.imageSrc} alt="Uploaded preview" />
+      <div className="rightControls">
+        <div className="controls">
+          <label className="file-label">
+            <input
+              className="file-input"
+              type="file"
+              onChange={identifyImageLabels}
+            />
+            <span className="file-cta">
+              <span className="file-label">
+                <FontAwesomeIcon
+                  className="iconCam"
+                  icon={faCamera}
+                  fontSize="18"
+                />
+              </span>
+            </span>
+          </label>
         </div>
-      ) : null}
-      <div className="card-content">
-        <div className="content">
+      </div>
+      <div className="card analysis-card has-text-light">
+        <div className="media-content">
           <div className="is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
-            {displayUploadButton()}
-            {isError ? displayError("Please upload a jpeg or png file") : null}
-          </div>
+            <div className="media">
+              <div className="block">
+                <div className="content"></div>
+                <div>
+                  {imageData !== undefined ? (
+                    <div className="card-image">
+                      <img src={imageData.imageSrc} alt="Uploaded preview" />
+                    </div>
+                  ) : null}
+                  <div className="card-content">
+                    <div className="content">
+                      <div className="is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
+                        {displayUploadButton()}
+                        {isError
+                          ? displayError("Please upload a jpeg or png file")
+                          : null}
+                      </div>
 
-          {processRekognitionLabels(
-            rekognitionResponse as IdentifyLabelsOutput
-          )}
-          <div className="tags are-medium">{renderImageLabels()}</div>
-          {labels.length > 0 ? (
-            <TextToSpeech disabled={isLoading} labels={labels} />
-          ) : null}
+                      {processRekognitionLabels(
+                        rekognitionResponse as IdentifyLabelsOutput
+                      )}
+                      <div className="tags are-medium">
+                        {renderImageLabels()}
+                      </div>
+                      {labels.length > 0 ? (
+                        <TextToSpeech disabled={isLoading} labels={labels} />
+                      ) : null}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
