@@ -1,9 +1,8 @@
 import React from "react"
-import { useQuery } from "react-query"
-import Alert from "../Alert/Alert"
 
-import { deleteFromDynamo, getFilePathFromS3 } from "../PhotoAnalysis/utils"
+import { deleteFromDynamo } from "../PhotoAnalysis/utils"
 import { ImageRecord } from "./Album"
+import { useGetFilePath } from "./useGetFilePath"
 
 interface ItemProps {
   imageRecord: ImageRecord
@@ -13,23 +12,9 @@ interface ItemProps {
 
 const Item: React.FC<ItemProps> = props => {
   const item = props.imageRecord
-  const { setDynamoDBItems, dynamoDbItems } = props
-  const { filepath } = item
+  const { dynamoDbItems, setDynamoDBItems } = props
 
-  // return await getFilePathFromS3(filepath)?.then(response => {
-  //   return response
-  // })
-  let url
-  const { isLoading, data } = useQuery("presignedURL", async () => {
-    try {
-      await getFilePathFromS3(filepath)
-    } catch (error) {
-      ;<Alert error={error as string} />
-    }
-  })
-  if (!isLoading) {
-    url = data ?? ""
-  }
+  const { filepath } = item
 
   const deleteItem = () => {
     deleteFromDynamo(item.id)
@@ -42,7 +27,7 @@ const Item: React.FC<ItemProps> = props => {
     <div>
       <div className="card">
         <div className="card-image">
-          <img src={url} alt="Stored file from database" />
+          <img src={useGetFilePath(filepath)} alt="Stored file from database" />
         </div>
         <div className="card-content">
           <button className="button is-light"> Edit</button>
