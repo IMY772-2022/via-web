@@ -62,9 +62,9 @@ export const uploadToS3 = (image: File) => {
   }
 }
 
-export const getFilePathFromS3 = async (fileName: string) => {
+export const getFilePathFromS3 = (fileName: string) => {
   try {
-    const response = await Storage.get(fileName)
+    const response = Storage.get(fileName)
     return response
   } catch (error) {
     ;<Alert error={error as string} />
@@ -78,7 +78,7 @@ export const writeToDynamo = (filepath: string, labels: LabelType[]) => {
       variables: {
         input: {
           filepath: filepath,
-          labels: labels,
+          labels: JSON.stringify(labels),
         },
       },
       authMode: "AMAZON_COGNITO_USER_POOLS",

@@ -1,4 +1,6 @@
 import React from "react"
+import { useQuery } from "react-query"
+import Alert from "../Alert/Alert"
 
 import { deleteFromDynamo, getFilePathFromS3 } from "../PhotoAnalysis/utils"
 import { ImageRecord } from "./Album"
@@ -14,9 +16,19 @@ const Item: React.FC<ItemProps> = props => {
   const { setDynamoDBItems, dynamoDbItems } = props
   const { filepath } = item
 
-  const getPresignedURL = () => {
-    const presignedURL = getFilePathFromS3(filepath)
-    return presignedURL
+  // return await getFilePathFromS3(filepath)?.then(response => {
+  //   return response
+  // })
+  let url
+  const { isLoading, data } = useQuery("presignedURL", async () => {
+    try {
+      await getFilePathFromS3(filepath)
+    } catch (error) {
+      ;<Alert error={error as string} />
+    }
+  })
+  if (!isLoading) {
+    url = data ?? ""
   }
 
   const deleteItem = () => {
@@ -26,15 +38,11 @@ const Item: React.FC<ItemProps> = props => {
     })
     setDynamoDBItems(updatedItemArray)
   }
-
-  {
-    getPresignedURL()
-  }
   return (
     <div>
       <div className="card">
         <div className="card-image">
-          <img src={getPresignedURL} alt="Stored file from database" />
+          <img src={url} alt="Stored file from database" />
         </div>
         <div className="card-content">
           <button className="button is-light"> Edit</button>
