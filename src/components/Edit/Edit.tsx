@@ -1,20 +1,11 @@
 import React from "react"
-//import type { PageProps } from "gatsby"
-//import { ImageRecordType } from "../../../types/album-record"
+import { updateDynamo } from "../PhotoAnalysis/utils"
 
 const Edit = (data: PageProps["location"]) => {
-  // eslint-disable-next-line no-console
-  //console.log(data)
-  //const cleanData = data.location.labels.replaceAll("=", ":")
-  // eslint-disable-next-line no-console
-  console.log("parsed data", JSON.parse(data.location.labels))
   const labelsArray = JSON.parse(data.location.labels)
-  // try {
-  //   JSON.parse("parsed data", data)
-  // } catch (e) {
-  //   // eslint-disable-next-line no-console
-  //   console.log(e)
-  // }
+  const updateItem = () => {
+    updateDynamo(data.location.id)
+  }
   const editData = (
     <>
       {location == undefined ? (
@@ -26,13 +17,11 @@ const Edit = (data: PageProps["location"]) => {
           </div>
           <div className="card-content">
             <div className="content">
-              {/* eslint-disable-next-line no-console */}
-              {labelsArray.map((item: any) => console.log(item.name))}
               {labelsArray.map((item: any) => {
                 return <input key={item.id} value={item.name}></input>
               })}
             </div>
-            <button>Update</button>
+            <button onClick={updateItem}>Update</button>
             <button>cancel</button>
           </div>
         </>
