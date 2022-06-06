@@ -5,7 +5,8 @@ import CSS from "csstype"
 
 import { ImageData, LabelType } from "./PhotoAnalysis"
 import { Label } from "../Label/Label"
-import { createImageRecord } from "../../graphql/mutations"
+import { createImageRecord, deleteImageRecord } from "../../graphql/mutations"
+import Alert from "../Alert/Alert"
 
 export const labelImage = (labelData: LabelType[], imageData: ImageData) => {
   const { height, width } = imageData
@@ -50,37 +51,55 @@ export const isValidFileType = (image: File) => {
   else return false
 }
 
-export const uploadToS3 = async (image: File) => {
+export const uploadToS3 = (image: File) => {
   try {
-    await Storage.put(image.name, image, {
+    const response = Storage.put(image.name, image, {
       contentType: image.type,
     })
+    return response
   } catch (error) {
-    return error
+    ;<Alert error={error as string} />
   }
 }
 
-export const getFilePathFromS3 = async (image: File) => {
+export const getFilePathFromS3 = (fileName: string) => {
   try {
-    return await Storage.get(image.name)
+    const response = Storage.get(fileName)
+    return response
   } catch (error) {
-    return error
+    ;<Alert error={error as string} />
   }
 }
 
-export const writeToDynamo = async (filepath: string, labels: LabelType[]) => {
+export const writeToDynamo = (filepath: string, labels: LabelType[]) => {
   try {
-    await API.graphql({
+    API.graphql({
       query: createImageRecord,
       variables: {
         input: {
           filepath: filepath,
-          labels: labels,
+          labels: JSON.stringify(labels),
         },
       },
       authMode: "AMAZON_COGNITO_USER_POOLS",
     })
+    return "Successfully saved to your album"
   } catch (error) {
-    return error
+    return error as string
+  }
+}
+
+export const deleteFromDynamo = async (itemId: string) => {
+  try {
+    await API.graphql({
+      query: deleteImageRecord,
+      variables: {
+        input: {
+          id: itemId,
+        },
+      },
+    })
+  } catch (error) {
+    return error as string
   }
 }
