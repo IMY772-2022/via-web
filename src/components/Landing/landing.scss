@@ -4,13 +4,13 @@
   height: 100%;
   min-height: 550px;
 }
-
 .rightControls{
   display: flex;
   justify-content: end;
 }
 
 .controls span.file-cta{
+
   justify-content: center;
   border: none;
   border-radius: 100px;
@@ -34,6 +34,6 @@
   width: 55px;
 }
 
-.controls Button:hover{
+.controls Button:hover {
   background-color: hsl(0, 0%, 93%);
 }
