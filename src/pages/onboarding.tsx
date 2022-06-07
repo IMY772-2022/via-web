@@ -1,17 +1,18 @@
 import React from "react"
-import { Layout } from "../components/Layout/Layout"
-import Analysis from "../components/PhotoAnalysis/PhotoAnalysis"
 
-const PhotoAnalysis = () => {
+import Onboarding from "../components/Onboarding/Onboarding"
+import { Layout } from "../components/Layout/Layout"
+
+const OnboardingPage = () => {
   return (
     <div className="section">
       <div className="container is-fluid">
-        <Layout pageTitle="Photo Analysis">
-          <Analysis />
+        <Layout>
+          <Onboarding />
         </Layout>
       </div>
     </div>
   )
 }
 
-export default PhotoAnalysis
+export default OnboardingPage

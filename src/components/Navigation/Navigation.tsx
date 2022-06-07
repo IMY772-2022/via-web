@@ -13,17 +13,14 @@ export const Navigation = () => {
       <Link className="navbar-item" to="/">
         Home
       </Link>
-      <Link className="navbar-item" to="/photo-analysis">
-        Photo Analysis
-      </Link>
       <Link className="navbar-item" to="/signin">
         Sign in
       </Link>
-      <Link className="navbar-item" to="/register">
-        Register
-      </Link>
       <Link className="navbar-item" to="/album">
         Album
+      </Link>
+      <Link className="navbar-item" to="/onboarding">
+        Onboarding
       </Link>
     </nav>
   )
