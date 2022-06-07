@@ -33,7 +33,7 @@ const Label = ({ label, style, editable }: LabelProps) => {
         className="input"
         type="text"
         defaultValue={label.name}
-      ></input>
+      />
     )
   } else {
     return (

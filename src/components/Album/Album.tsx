@@ -23,8 +23,6 @@ const Album: React.FC = () => {
         data: ListImageRecordsQuery
       }
       const itemData = items.data.listImageRecords?.items as ImageRecord[]
-      // eslint-disable-next-line no-console
-      console.log("ITEM DATA", itemData)
       setDynamoDBItems(itemData)
     } catch (error) {
       return error
