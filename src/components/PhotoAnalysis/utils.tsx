@@ -115,13 +115,14 @@ export const deleteFromDynamo = async (itemId: string) => {
   }
 }
 
-export const updateDynamo = async (itemId: string) => {
+export const updateDynamo = async (itemId: string, labels: LabelType[]) => {
   try {
     await API.graphql({
       query: updateImageRecord,
       variables: {
         input: {
           id: itemId,
+          labels: JSON.stringify(labels),
         },
       },
     })

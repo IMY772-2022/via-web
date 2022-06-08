@@ -1,34 +1,50 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { updateDynamo } from "../PhotoAnalysis/utils"
+import { LabelType } from "../../../types/label"
 
-const Edit = (data: PageProps["location"]) => {
-  const labelsArray = JSON.parse(data.location.labels)
-  const updateItem = () => {
-    updateDynamo(data.location.id)
+type Props = {
+  recordData: any
+}
+
+const Edit: React.FC<Props> = ({ recordData }) => {
+  const [labelsArray, setLabelsArray] = useState<LabelType[]>([])
+  // TODO store labels in a state
+  useEffect(() => {
+    setLabelsArray(JSON.parse(recordData.state.item.labels))
+  }, [])
+
+  const updateLabel =
+    (index: number) => (e: React.FormEvent<HTMLInputElement>) => {
+      const newArr = [...labelsArray]
+      newArr[index].name = e.currentTarget.value
+      setLabelsArray(newArr)
+    }
+
+  const commitChanges = () => {
+    updateDynamo(recordData.state.item.id, labelsArray)
   }
-  const editData = (
+
+  return (
     <>
-      {location == undefined ? (
-        <h2>no display</h2>
-      ) : (
-        <>
-          <div className="card-image">
-            <img src={data.location.filepath} alt="not found" />
+      {labelsArray.map((label: LabelType, index: number) => {
+        return (
+          <div key={index} className="flex is-flex-direction-row">
+            {/* TODO add onchange to update label array */}
+            <input
+              className="input"
+              key={index}
+              value={label.name}
+              onChange={updateLabel(index)}
+            />
           </div>
-          <div className="card-content">
-            <div className="content">
-              {labelsArray.map((item: any) => {
-                return <input key={item.id} value={item.name}></input>
-              })}
-            </div>
-            <button onClick={updateItem}>Update</button>
-            <button>cancel</button>
-          </div>
-        </>
-      )}
+        )
+      })}
+
+      <button className="button" onClick={commitChanges}>
+        Save
+      </button>
     </>
   )
-  return editData
 }
 
 export default Edit

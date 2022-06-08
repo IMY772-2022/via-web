@@ -7,7 +7,7 @@ export default function EditPage({ location }: any) {
     <div className="section">
       <div className="container is-fluid">
         <Layout pageTitle="Photo Edit Page">
-          <Edit location={location.state.item} />
+          <Edit recordData={location} />
         </Layout>
       </div>
     </div>
