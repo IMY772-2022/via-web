@@ -30,7 +30,9 @@ export async function signIn(userInput: User) {
   const { username, password } = userInput
   try {
     const user = await Auth.signIn(username, password)
-    if (user) return "Success! Successfully logged in"
+    if (user) {
+      return "Success! Successfully logged in"
+    }
   } catch (error) {
     return JSON.stringify(error)
   }
