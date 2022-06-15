@@ -26,26 +26,25 @@ const Edit: React.FC<Props> = ({ recordData }) => {
   }
 
   return (
-    <>
-      <div className="card analysis-card">
+    <div className="card analysis-card">
+      <div className="tags">
         {labelsArray.map((label: LabelType, index: number) => {
           return (
-            <div key={index} className="flex is-flex-direction-row">
+            <span key={index} className="tag">
               <input
                 className="input"
                 key={index}
                 value={label.name}
                 onChange={updateLabel(index)}
               />
-            </div>
+            </span>
           )
         })}
-
-        <button className="button" onClick={commitChanges}>
-          Save
-        </button>
       </div>
-    </>
+      <button className="button" onClick={commitChanges}>
+        Save
+      </button>
+    </div>
   )
 }
 
