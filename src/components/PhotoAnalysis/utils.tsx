@@ -21,15 +21,8 @@ export const labelImage = (labelData: LabelType[], imageData: ImageData) => {
       label.boundingBoxes.forEach((boundingBox: BoundingBox) => {
         style = defineBoundingBox(boundingBox, height, width)
       })
-      return (
-        <Label
-          editable={false}
-          value={label.name}
-          style={style}
-          key={label.name}
-        />
-      )
-    } else return <Label editable={false} value={label.name} key={label.name} />
+      return <Label value={label.name} style={style} key={label.name} />
+    } else return <Label value={label.name} key={label.name} />
   })
 }
 
