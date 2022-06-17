@@ -2,8 +2,6 @@ import React from "react"
 
 import "./landing.scss"
 import PhotoAnalysis from "../PhotoAnalysis/PhotoAnalysis"
-import { faCamera } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 interface Props {
   title: string
