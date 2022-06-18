@@ -1,3 +1,30 @@
 input {
   width: auto !important;
 }
+
+.analysis-card {
+  background-color: green !important;
+  border-radius: 34px !important;
+  height: 100%;
+  min-height: 550px;
+  padding: 0 !important;
+}
+
+.card-image > img {
+  border-top-left-radius: 32px !important;
+  border-top-right-radius: 32px !important;
+}
+
+.labels {
+  padding: 20px;
+  position: relative;
+}
+span {
+  padding: 10px !important;
+  width: 150px;
+  display: inline-block;
+}
+
+.save-button {
+  margin: auto 0;
+}

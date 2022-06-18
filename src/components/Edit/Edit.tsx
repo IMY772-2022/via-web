@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import { updateDynamo } from "../PhotoAnalysis/utils"
 import { LabelType } from "../../../types/label"
 import "./edit.scss"
+import { useGetFilePath } from "../Album/useGetFilePath"
 
 type Props = {
   recordData: any
@@ -9,9 +10,10 @@ type Props = {
 
 const Edit: React.FC<Props> = ({ recordData }) => {
   const [labelsArray, setLabelsArray] = useState<LabelType[]>([])
+  const item = recordData.state.item
 
   useEffect(() => {
-    setLabelsArray(JSON.parse(recordData.state.item.labels))
+    setLabelsArray(JSON.parse(item.labels))
   }, [])
 
   const updateLabel =
@@ -21,29 +23,48 @@ const Edit: React.FC<Props> = ({ recordData }) => {
       setLabelsArray(newArr)
     }
 
-  const commitChanges = () => {
+  const UpdateDynamoRecord = () => {
     updateDynamo(recordData.state.item.id, labelsArray)
   }
 
   return (
     <div className="card analysis-card">
-      <div className="tags">
-        {labelsArray.map((label: LabelType, index: number) => {
-          return (
-            <span key={index} className="tag">
-              <input
-                className="input"
-                key={index}
-                value={label.name}
-                onChange={updateLabel(index)}
-              />
-            </span>
-          )
-        })}
+      <div className="media-content">
+        <div className="is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
+          <div className="media">
+            <div className="block">
+              <div className="content">
+                <div className="card-image">
+                  <img
+                    src={useGetFilePath(item.filepath)}
+                    alt="Uploaded preview"
+                  />
+                </div>
+                <div className="labels">
+                  {labelsArray.map((label: LabelType, index: number) => {
+                    return (
+                      <span key={index}>
+                        <input
+                          className="input"
+                          key={index}
+                          value={label.name}
+                          onChange={updateLabel(index)}
+                        />
+                      </span>
+                    )
+                  })}
+                </div>
+                <button
+                  className="button is-danger save-button"
+                  onClick={UpdateDynamoRecord}
+                >
+                  Save
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <button className="button" onClick={commitChanges}>
-        Save
-      </button>
     </div>
   )
 }
