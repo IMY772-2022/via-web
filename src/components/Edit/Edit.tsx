@@ -41,12 +41,14 @@ const Edit: React.FC<Props> = ({ recordData }) => {
                   />
                 </div>
                 <div className="labels">
+                  <p>Click in the boxes below to edit the labels</p>
                   {labelsArray.map((label: LabelType, index: number) => {
                     return (
                       <span key={index}>
                         <input
                           className="input"
                           key={index}
+                          type="text"
                           value={label.name}
                           onChange={updateLabel(index)}
                         />
