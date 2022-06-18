@@ -3,6 +3,7 @@ import React from "react"
 
 import { deleteFromDynamo } from "../PhotoAnalysis/utils"
 import { ImageRecord } from "./Album"
+import { useGetFilePath } from "./useGetFilePath"
 
 interface ItemProps {
   imageRecord: ImageRecord
@@ -12,7 +13,8 @@ interface ItemProps {
 
 const Item: React.FC<ItemProps> = props => {
   const item = props.imageRecord
-  const { setDynamoDBItems, dynamoDbItems } = props
+  const { dynamoDbItems, setDynamoDBItems } = props
+
   const { filepath } = item
 
   const deleteItem = () => {
@@ -22,12 +24,11 @@ const Item: React.FC<ItemProps> = props => {
     })
     setDynamoDBItems(updatedItemArray)
   }
-
   return (
     <div>
       <div className="card">
         <div className="card-image">
-          <img src={filepath} alt="Stored file from database" />
+          <img src={useGetFilePath(filepath)} alt="Stored file from database" />
         </div>
         <div className="card-content">
           <button
