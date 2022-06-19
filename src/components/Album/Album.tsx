@@ -11,6 +11,7 @@ export interface ImageRecord {
   filepath: string
   labels: string
   owner: string
+  createdAt: string
 }
 
 const Album: React.FC = () => {
@@ -29,70 +30,26 @@ const Album: React.FC = () => {
       return error
     }
   }
+  const sortedDynamoDBItems = dynamodDBitems.sort((item1, item2) => {
+    return Date.parse(item2.createdAt) - Date.parse(item1.createdAt)
+  })
+
   return (
     <>
       <h5 className="is-size-5">My Album</h5>
       <div className="">
         <h6 className="is-size-6">Total items: {dynamodDBitems.length}</h6>
         <div className="grid">
-          {dynamodDBitems.map(item => {
+          {sortedDynamoDBItems.map(item => {
             return (
               <div key={item.id} className="column">
-                <Item
-                  imageRecord={item}
-                  dynamoDbItems={dynamodDBitems}
-                  setDynamoDBItems={setDynamoDBItems}
-                />
+                <Item imageRecord={item} dynamoDbItems={dynamodDBitems} />
               </div>
             )
           })}
         </div>
       </div>
     </>
-    // <div>
-    //   <p className="maintitle">My Album</p>
-    //   <br />
-    //   <div className="card big-card">
-    //     <br />
-    //     <p className="secondarytitle"> Total items: {dynamodDBitems.length} </p>
-    //     {dynamodDBitems.map(item => {
-    //       return (
-    //         <div className="bigcarditem" key={item.id}>
-    //           <Item
-    //             key={item.id}
-    //             imageRecord={item}
-    //             dynamoDbItems={dynamodDBitems}
-    //             setDynamoDBItems={setDynamoDBItems}
-    //           />
-    //         </div>
-    //       )
-    //     })}
-    //     {dynamodDBitems.map(item => {
-    //       return (
-    //         <div className="bigcarditem" key={item.id}>
-    //           <Item
-    //             key={item.id}
-    //             imageRecord={item}
-    //             dynamoDbItems={dynamodDBitems}
-    //             setDynamoDBItems={setDynamoDBItems}
-    //           />
-    //         </div>
-    //       )
-    //     })}
-    //     {dynamodDBitems.map(item => {
-    //       return (
-    //         <div className="bigcarditem" key={item.id}>
-    //           <Item
-    //             key={item.id}
-    //             imageRecord={item}
-    //             dynamoDbItems={dynamodDBitems}
-    //             setDynamoDBItems={setDynamoDBItems}
-    //           />
-    //         </div>
-    //       )
-    //     })}
-    //   </div>
-    // </div>
   )
 }
 
