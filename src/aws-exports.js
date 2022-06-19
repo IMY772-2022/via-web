@@ -24,6 +24,8 @@ const awsmobile = {
   aws_appsync_region: "eu-west-1",
   aws_appsync_authenticationType: "AMAZON_COGNITO_USER_POOLS",
   aws_appsync_apiKey: "da2-fdwiyj3bwvba5eehnh6azzcbsa",
+  aws_user_files_s3_bucket: "viaweba3e7179aa111445aace0066c7bc6d2ce194052-dev",
+  aws_user_files_s3_bucket_region: "eu-west-1",
   predictions: {
     identify: {
       identifyEntities: {
