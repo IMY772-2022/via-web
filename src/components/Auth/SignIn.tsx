@@ -3,10 +3,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons"
 import { faEyeSlash } from "@fortawesome/free-regular-svg-icons"
 import { Link } from "gatsby"
-import Alert from "../Alert/Alert"
+// import Alert from "../Alert/Alert"
 
-import { signIn } from "./utils"
+// import { signIn } from "./utils"
 import "./SignIn.scss"
+import { useSignIn } from "./hooks"
 
 export interface User {
   username: string
@@ -14,15 +15,17 @@ export interface User {
 }
 
 const SignIn: React.FC = () => {
+  const signIn = useSignIn()
   const [formValues, setFormValues] = useState({
     username: "",
     password: "",
   })
 
-  const [displayError, setDisplayError] = useState({
-    isError: false,
-    message: "",
-  })
+  // const [displayError, setDisplayError] = useState({
+  //   isError: false,
+  //   message: "",
+  // })
+
   const updateForm = (event: any) => {
     setFormValues({
       ...formValues,
@@ -30,30 +33,27 @@ const SignIn: React.FC = () => {
     })
   }
 
-  const signin = () => {
-    setDisplayError({
-      ...displayError,
-      isError: false,
-    })
+  const submitForm = () => {
     const user = {
       username: formValues.username,
       password: formValues.password,
     }
-    signIn(user).then(message => {
-      setDisplayError({
-        isError: true,
-        message: message as string,
-      })
-    })
+
+    try {
+      signIn(user)
+    } catch (error) {
+      console.warn(error)
+    }
   }
+
   return (
     <div className="card">
       <div className="card-content">
         <div className="content">
           <div className="form">
-            {displayError.isError ? (
+            {/* {displayError.isError ? (
               <Alert error={displayError.message} />
-            ) : null}
+            ) : null} */}
             <div className="field">
               <label className="label" htmlFor="email">
                 Email
@@ -93,7 +93,7 @@ const SignIn: React.FC = () => {
             </div>
             <div className="field is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
               <p className="control">
-                <button className="button" onClick={signin}>
+                <button className="button" onClick={submitForm}>
                   Sign in
                 </button>
               </p>
