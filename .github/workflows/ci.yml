@@ -20,6 +20,8 @@ jobs:
       - name: Install packages
         # run: npm install
         run: yarn
+      - name: Install Amplify CLI
+        run: yarn add @aws-amplify/cli
       - name: Pull Amplify Backend
         run: amplify pull --appId d2ux2cwqlfzdy9 --envName dev
       - name: Build Gatsby site
