@@ -1,6 +1,6 @@
 import React from "react"
+import { AuthProvider } from "./components/Auth/store"
 import { Layout } from "./components/Layout/Layout"
-import { AuthProvider } from "./context/AuthContext/store"
 
 interface PageElementProps {
   element: React.ReactElement[] | React.ReactElement
