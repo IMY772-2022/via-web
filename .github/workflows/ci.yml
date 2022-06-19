@@ -18,7 +18,7 @@ jobs:
         with:
           node-version: 16.x
       - name: Install packages
-        run: npm install
+        run: npm install --legacy-peer-deps
       - name: Build Gatsby site
         run: npm run build
       - name: Run Lighthouse CI
