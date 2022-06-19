@@ -1,0 +1,15 @@
+.small-card{
+    max-width: 200px !important;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px !important;
+    border-radius: 34px !important;
+}
+
+.small-card .card-image img{
+    height: 135px !important;
+    width: 200px !important;
+}
+
+.small-card button.button{
+    width: 100%;
+    max-width: 100px !important;
+}
