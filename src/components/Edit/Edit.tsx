@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react"
 import { updateDynamo } from "../PhotoAnalysis/utils"
-import { LabelType } from "../../../types/label"
-import "./edit.scss"
 import { useGetFilePath } from "../Album/useGetFilePath"
+import { LabelType } from "../PhotoAnalysis/PhotoAnalysis"
+
+import "./edit.scss"
 
 type Props = {
   recordData: any
@@ -10,11 +11,11 @@ type Props = {
 
 const Edit: React.FC<Props> = ({ recordData }) => {
   const [labelsArray, setLabelsArray] = useState<LabelType[]>([])
-  const item = recordData.state.item
-
+  const dynamoRecord = recordData.state
+  const stateData = dynamoRecord ? dynamoRecord.item.labels : JSON.stringify("")
   useEffect(() => {
-    setLabelsArray(JSON.parse(item.labels))
-  }, [])
+    setLabelsArray(JSON.parse(stateData))
+  }, [stateData])
 
   const updateLabel =
     (index: number) => (e: React.FormEvent<HTMLInputElement>) => {
@@ -26,7 +27,7 @@ const Edit: React.FC<Props> = ({ recordData }) => {
   const UpdateDynamoRecord = () => {
     updateDynamo(recordData.state.item.id, labelsArray)
   }
-
+  const filepath = dynamoRecord ? recordData.state.item.filepath : ""
   return (
     <div className="card analysis-card">
       <div className="media-content">
@@ -35,10 +36,7 @@ const Edit: React.FC<Props> = ({ recordData }) => {
             <div className="block">
               <div className="content">
                 <div className="card-image">
-                  <img
-                    src={useGetFilePath(item.filepath)}
-                    alt="Uploaded preview"
-                  />
+                  <img src={useGetFilePath(filepath)} alt="Uploaded preview" />
                 </div>
                 <div className="labels">
                   <p>Click in the boxes below to edit the labels</p>
