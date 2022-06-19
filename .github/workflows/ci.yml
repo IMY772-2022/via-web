@@ -20,6 +20,8 @@ jobs:
       - name: Install packages
         # run: npm install
         run: yarn
+      - name: Pull Amplify Backend
+        run: amplify pull --appId d2ux2cwqlfzdy9 --envName dev
       - name: Build Gatsby site
         # run: npm run build
         run: yarn build
