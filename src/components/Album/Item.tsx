@@ -3,8 +3,8 @@ import React from "react"
 
 import { deleteFromDynamo } from "../PhotoAnalysis/utils"
 import { ImageRecord } from "./Album"
-import { useGetFilePath } from "./useGetFilePath"
 import "./Item.scss"
+import { useGetFilePath } from "./useGetFilePath"
 
 interface ItemProps {
   imageRecord: ImageRecord
@@ -26,21 +26,23 @@ const Item: React.FC<ItemProps> = props => {
     setDynamoDBItems(updatedItemArray)
   }
   return (
-    <div>
-      <div className="card small-card">
+    <>
+      <div className="card rounded-lg">
         <div className="card-image">
-          <img src={useGetFilePath(filepath)} alt="Stored file from database" />
+          <img
+            className="rounded-md"
+            src={useGetFilePath(filepath)}
+            alt="Stored file from the database"
+          />
         </div>
-
         <div className="field is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
-          <button className="button is-danger"> Edit</button>
-          <button className="button is-danger" onClick={deleteItem}>
-            {" "}
+          <button className="button button-sm is-danger">Edit</button>
+          <button className="button button-sm is-danger" onClick={deleteItem}>
             Delete
           </button>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 

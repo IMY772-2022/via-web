@@ -1,15 +1,24 @@
-.small-card{
-    max-width: 200px !important;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px !important;
-    border-radius: 34px !important;
-}
+// .small-card {
+//   max-width: 200px !important;
+//   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px !important;
+//   border-radius: 34px !important;
+// }
 
-.small-card .card-image img{
-    height: 135px !important;
-    width: 200px !important;
-}
+// .small-card .card-image img {
+//   height: 135px !important;
+//   width: 200px !important;
+// }
 
-.small-card button.button{
-    width: 100%;
-    max-width: 100px !important;
+// .small-card button.button {
+//   width: 100%;
+//   max-width: 100px !important;
+// }
+
+.card-image img {
+  height: 100%;
+  min-height: 270px;
+  max-height: 270px;
+  width: 100%;
+  object-fit: cover;
+  object-position: center center;
 }
