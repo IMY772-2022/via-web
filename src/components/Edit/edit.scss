@@ -1,0 +1,36 @@
+input {
+  width: auto !important;
+}
+input[type="text"]:focus {
+  border: 2px solid #f14668 !important;
+}
+.analysis-card {
+  background-color: green !important;
+  border-radius: 34px !important;
+  height: 100%;
+  min-height: 550px;
+  padding: 0 !important;
+}
+
+.card-image > img {
+  border-top-left-radius: 32px !important;
+  border-top-right-radius: 32px !important;
+}
+
+.labels {
+  padding: 20px;
+  position: relative;
+}
+.labels > p {
+  padding-left: 10px;
+  color: #fff;
+}
+span {
+  padding: 10px !important;
+  max-width: 150px;
+  display: inline-block;
+}
+
+button.save-button {
+  margin-left: 120px !important;
+}

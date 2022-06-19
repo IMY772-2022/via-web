@@ -7,6 +7,7 @@ interface LabelProps {
   value: string
   style?: CSS.Properties
 }
+
 const Label = ({ value, style }: LabelProps) => {
   return (
     <span className="tag is-white" style={style}>

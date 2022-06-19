@@ -5,7 +5,11 @@ import CSS from "csstype"
 
 import { ImageData, LabelType } from "./PhotoAnalysis"
 import { Label } from "../Label/Label"
-import { createImageRecord, deleteImageRecord } from "../../graphql/mutations"
+import {
+  createImageRecord,
+  deleteImageRecord,
+  updateImageRecord,
+} from "../../graphql/mutations"
 import Alert from "../Alert/Alert"
 
 export const labelImage = (labelData: LabelType[], imageData: ImageData) => {
@@ -96,6 +100,22 @@ export const deleteFromDynamo = async (itemId: string) => {
       variables: {
         input: {
           id: itemId,
+        },
+      },
+    })
+  } catch (error) {
+    return error as string
+  }
+}
+
+export const updateDynamo = async (itemId: string, labels: LabelType[]) => {
+  try {
+    await API.graphql({
+      query: updateImageRecord,
+      variables: {
+        input: {
+          id: itemId,
+          labels: JSON.stringify(labels),
         },
       },
     })

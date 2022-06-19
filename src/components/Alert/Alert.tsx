@@ -9,7 +9,10 @@ interface ErrorProps {
   notificationType?: NotificationType
 }
 
-const Alert: React.FC<ErrorProps> = ({ error }) => {
+const Alert: React.FC<ErrorProps> = ({
+  error,
+  notificationType = "is-light",
+}) => {
   const [isError, setError] = useState(true)
   const dismissError = () => {
     setError(false)
@@ -17,7 +20,7 @@ const Alert: React.FC<ErrorProps> = ({ error }) => {
   return (
     <>
       {isError ? (
-        <div className={`notification is-info is-light`}>
+        <div className={`notification is-info ${notificationType}`}>
           <button className="delete" onClick={dismissError}></button>
           {error}
         </div>

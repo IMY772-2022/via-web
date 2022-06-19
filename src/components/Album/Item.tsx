@@ -1,3 +1,4 @@
+import { navigate } from "gatsby"
 import React from "react"
 
 import { deleteFromDynamo } from "../PhotoAnalysis/utils"
@@ -30,11 +31,17 @@ const Item: React.FC<ItemProps> = props => {
           <img src={useGetFilePath(filepath)} alt="Stored file from database" />
         </div>
         <div className="card-content">
-          <button className="button is-light"> Edit</button>
+          <button
+            onClick={() => {
+              navigate("/edit", { state: { item } })
+            }}
+            className="button is-light"
+          >
+            Edit
+          </button>
         </div>
         <div className="card-content">
           <button className="button is-light" onClick={deleteItem}>
-            {" "}
             Delete
           </button>
         </div>
