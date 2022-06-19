@@ -18,12 +18,14 @@ jobs:
         with:
           node-version: 16.x
       - name: Install packages
-        run: npm install
+        # run: npm install
+        run: yarn
       - name: Build Gatsby site
-        run: npm run build
+        # run: npm run build
+        run: yarn build
       - name: Run Lighthouse CI
         run: |
-          npm install -g @lhci/cli@0.9.0
+          yarn global add @lhci/cli@0.9.0
           lhci autorun
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
