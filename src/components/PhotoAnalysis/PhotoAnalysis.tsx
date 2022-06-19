@@ -206,10 +206,11 @@ const Analysis: React.FC = () => {
               </div>
             </div>
           </div>
-
-          <button className="button is-danger" onClick={saveImageRecord}>
-            Save results
-          </button>
+          {!isLoading && imageData ? (
+            <button className="button is-danger" onClick={saveImageRecord}>
+              Save results
+            </button>
+          ) : null}
         </div>
       </div>
     </div>
