@@ -1,17 +1,14 @@
 import React from "react"
 
-import { Layout } from "../components/Layout/Layout"
 import SignIn from "../components/Auth/SignIn"
+import Seo from "../components/Seo/Seo"
 
 const SignInPage = () => {
   return (
-    <div className="section">
-      <div className="container is-fluid">
-        <Layout>
-          <SignIn />
-        </Layout>
-      </div>
-    </div>
+    <>
+      <Seo title="Sign In" />
+      <SignIn />
+    </>
   )
 }
 
