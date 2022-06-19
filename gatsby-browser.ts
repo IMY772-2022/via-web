@@ -5,6 +5,8 @@ import {
 } from "@aws-amplify/predictions"
 
 import awsconfig from "./src/aws-exports"
+import wrapPageElement from "./src/wrapPageElement"
+import wrapRootElement from "./src/wrapRootElement"
 
 Auth.configure(awsconfig)
 Amplify.configure(awsconfig)
@@ -17,3 +19,5 @@ Amplify.configure({
   },
 })
 Predictions.addPluggable(new AmazonAIPredictionsProvider())
+
+export { wrapRootElement, wrapPageElement }
