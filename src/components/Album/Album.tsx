@@ -4,6 +4,7 @@ import { API, graphqlOperation } from "aws-amplify"
 import { listImageRecords } from "../../graphql/queries"
 import { ListImageRecordsQuery } from "../../API"
 import Item from "./Item"
+import "./Album.scss"
 
 export interface ImageRecord {
   id: string
@@ -30,20 +31,24 @@ const Album: React.FC = () => {
   }
   return (
     <div>
-      <p> Total items: {dynamodDBitems.length} </p>
-      {dynamodDBitems.map(item => {
-        return (
-          <div key={item.id}>
-            <Item
-              key={item.id}
-              imageRecord={item}
-              dynamoDbItems={dynamodDBitems}
-              setDynamoDBItems={setDynamoDBItems}
-            />{" "}
-            <br />{" "}
-          </div>
-        )
-      })}
+      <p className="maintitle">My Album</p>
+      <br />
+      <div className="card big-card">
+        <br />
+        <p className="secondarytitle"> Total items: {dynamodDBitems.length} </p>
+        {dynamodDBitems.map(item => {
+          return (
+            <div className="bigcarditem" key={item.id}>
+              <Item
+                key={item.id}
+                imageRecord={item}
+                dynamoDbItems={dynamodDBitems}
+                setDynamoDBItems={setDynamoDBItems}
+              />
+            </div>
+          )
+        })}
+      </div>
     </div>
   )
 }

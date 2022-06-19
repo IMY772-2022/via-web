@@ -4,6 +4,7 @@ import React from "react"
 import { deleteFromDynamo } from "../PhotoAnalysis/utils"
 import { ImageRecord } from "./Album"
 import { useGetFilePath } from "./useGetFilePath"
+import "./Item.scss"
 
 interface ItemProps {
   imageRecord: ImageRecord
@@ -26,22 +27,15 @@ const Item: React.FC<ItemProps> = props => {
   }
   return (
     <div>
-      <div className="card">
+      <div className="card small-card">
         <div className="card-image">
           <img src={useGetFilePath(filepath)} alt="Stored file from database" />
         </div>
-        <div className="card-content">
-          <button
-            onClick={() => {
-              navigate("/edit", { state: { item } })
-            }}
-            className="button is-light"
-          >
-            Edit
-          </button>
-        </div>
-        <div className="card-content">
-          <button className="button is-light" onClick={deleteItem}>
+
+        <div className="field is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
+          <button className="button is-danger"> Edit</button>
+          <button className="button is-danger" onClick={deleteItem}>
+            {" "}
             Delete
           </button>
         </div>
