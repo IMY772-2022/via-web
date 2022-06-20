@@ -1,12 +1,10 @@
 import { Link } from "gatsby"
-import React from "react"
-import { useSignOut } from "../Auth/hooks"
-import { AuthContext } from "../Auth/store"
+import React, { useContext } from "react"
+import { AuthContext } from "../../context/store"
 import BrandIcon from "../icons/BrandIcon"
 
-export const Navigation = () => {
-  const authContext = React.useContext(AuthContext)
-  const signOut = useSignOut()
+export const Navigation: React.FC = () => {
+  const authContext = useContext(AuthContext)
 
   return (
     <nav className="navbar mb-5" role="navigation" aria-label="main navigation">
@@ -29,11 +27,12 @@ export const Navigation = () => {
           <Link className="navbar-item" to="/album">
             Album
           </Link>
-          <Link className="navbar-item" to="/signout" onClick={signOut}>
+          <Link className="navbar-item" to="/signout">
             Sign Out
           </Link>
         </>
       )}
+
       <Link className="navbar-item" to="/onboarding">
         Onboarding
       </Link>
