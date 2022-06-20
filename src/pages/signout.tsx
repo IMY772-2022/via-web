@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import { useSignOut } from "../components/Auth/hooks"
 
 const SignOutPage = () => {
-  const signOut = useSignOut()
+  const { signOut } = useSignOut()
 
   useEffect(() => {
     signOut()
