@@ -1,8 +1,9 @@
 import { faEnvelope, faEyeSlash } from "@fortawesome/free-regular-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Link } from "gatsby"
-import React, { useState } from "react"
-// import Alert from "../Alert/Alert"
+import React, { useEffect, useState } from "react"
+import Alert from "../Alert/Alert"
+import { useSignIn } from "./hooks"
 
 // import { signIn } from "./utils"
 // import { useSignIn } from "./hooks"
@@ -14,7 +15,7 @@ export interface User {
 }
 
 const SignIn: React.FC = () => {
-  // const [userId, loading] = useSignIn()
+  const { signIn, error, loading } = useSignIn()
 
   const [formValues, setFormValues] = useState({
     username: "",
@@ -33,27 +34,29 @@ const SignIn: React.FC = () => {
     })
   }
 
-  const submitForm = () => {
+  const submitForm = async () => {
     const user = {
       username: formValues.username,
       password: formValues.password,
     }
 
     try {
-      console.warn("user", user)
+      await signIn(user)
     } catch (error) {
       console.warn(error)
     }
   }
+
+  useEffect(() => {
+    console.warn(error)
+  }, [error])
 
   return (
     <div className="card">
       <div className="card-content">
         <div className="content">
           <div className="form">
-            {/* {displayError.isError ? (
-              <Alert error={displayError.message} />
-            ) : null} */}
+            {error ? <Alert error={error} /> : null}
             <div className="field">
               <label className="label" htmlFor="email">
                 Email
@@ -93,7 +96,10 @@ const SignIn: React.FC = () => {
             </div>
             <div className="field is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
               <p className="control">
-                <button className="button" onClick={submitForm}>
+                <button
+                  className={`button ${loading ? " is-loading " : ""}`}
+                  onClick={submitForm}
+                >
                   Sign in
                 </button>
               </p>

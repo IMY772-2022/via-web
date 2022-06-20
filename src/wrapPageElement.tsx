@@ -1,6 +1,7 @@
 import React from "react"
-import { AuthProvider } from "./components/Auth/store"
+
 import { Layout } from "./components/Layout/Layout"
+import { AuthProviderTest } from "./context/store"
 
 interface PageElementProps {
   element: React.ReactElement[] | React.ReactElement
@@ -12,9 +13,9 @@ const WrapPageElement: React.FC<PageElementProps> = ({
 }: PageElementProps) => {
   return (
     <>
-      <AuthProvider>
+      <AuthProviderTest>
         <Layout {...props}>{element}</Layout>
-      </AuthProvider>
+      </AuthProviderTest>
     </>
   )
 }
