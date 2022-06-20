@@ -7,7 +7,7 @@ const UserAlbum = () => {
   return (
     <div className="section">
       <div className="container is-fluid">
-        <Layout pageTitle="Album">
+        <Layout pageTitle="">
           <Album />
         </Layout>
       </div>

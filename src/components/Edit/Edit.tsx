@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react"
-import { updateDynamo } from "../PhotoAnalysis/utils"
+import { deleteFromDynamo, updateDynamo } from "../PhotoAnalysis/utils"
 import { useGetFilePath } from "../Album/useGetFilePath"
 import { LabelType } from "../PhotoAnalysis/PhotoAnalysis"
 
 import "./edit.scss"
+import { navigate } from "gatsby"
 
 type Props = {
   recordData: any
@@ -27,6 +28,12 @@ const Edit: React.FC<Props> = ({ recordData }) => {
   const UpdateDynamoRecord = () => {
     updateDynamo(recordData.state.item.id, labelsArray)
   }
+
+  const deleteItem = () => {
+    deleteFromDynamo(recordData.state.item.id)
+    navigate("/album")
+  }
+
   const filepath = dynamoRecord ? recordData.state.item.filepath : ""
   return (
     <div className="card analysis-card">
@@ -54,12 +61,21 @@ const Edit: React.FC<Props> = ({ recordData }) => {
                     )
                   })}
                 </div>
-                <button
-                  className="button is-danger save-button"
-                  onClick={UpdateDynamoRecord}
-                >
-                  Save
-                </button>
+                <div className="is-flex is-align-self-auto">
+                  <button
+                    className="button is-danger save-button is-align-items-center"
+                    onClick={UpdateDynamoRecord}
+                  >
+                    Save
+                  </button>
+                  <br />
+                  <button
+                    className="button is-danger is-align-items-center"
+                    onClick={deleteItem}
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
             </div>
           </div>
