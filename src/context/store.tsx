@@ -1,4 +1,5 @@
-import React, { createContext, useMemo } from "react"
+import React, { createContext, useEffect, useMemo } from "react"
+import { fetchUser } from "../components/Auth/utils"
 
 import { AuthReducer, INITIAL_VALUES } from "./reducer"
 
@@ -10,6 +11,10 @@ type AuthProviderProps = {
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const { auth, ...authActions } = AuthReducer()
+
+  useEffect(() => {
+    authActions.signIn(fetchUser())
+  }, [])
 
   const values = useMemo(
     () => ({

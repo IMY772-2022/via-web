@@ -12,7 +12,7 @@ const reducer = (state: AuthState, action: AuthActions) => {
     case "SIGN_IN":
       return {
         ...state,
-        userId: payload.username,
+        userId: payload,
       }
     case "SIGN_OUT":
       return {
@@ -29,13 +29,13 @@ const emptyFn = (): void | Promise<void> => {
 }
 
 type AuthState = {
-  userId: string
+  userId: string | null
   signIn: (id: string) => void
   signOut: () => void
 }
 
 export const INITIAL_VALUES: AuthState = {
-  userId: "",
+  userId: null,
   signIn: () => emptyFn,
   signOut: () => emptyFn,
 }
