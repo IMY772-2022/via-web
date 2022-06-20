@@ -14,6 +14,7 @@ export interface ImageRecord {
 
 const Album: React.FC = () => {
   const [dynamodDBitems, setDynamoDBItems] = useState([] as ImageRecord[])
+
   useEffect(() => {
     fetchImages()
   }, [])
@@ -33,15 +34,12 @@ const Album: React.FC = () => {
       <p> Total items: {dynamodDBitems.length} </p>
       {dynamodDBitems.map(item => {
         return (
-          <div key={item.id}>
-            <Item
-              key={item.id}
-              imageRecord={item}
-              dynamoDbItems={dynamodDBitems}
-              setDynamoDBItems={setDynamoDBItems}
-            />{" "}
-            <br />{" "}
-          </div>
+          <Item
+            key={item.id}
+            imageRecord={item}
+            dynamoDbItems={dynamodDBitems}
+            setDynamoDBItems={setDynamoDBItems}
+          />
         )
       })}
     </div>

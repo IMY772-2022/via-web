@@ -1,0 +1,38 @@
+.confirmation-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 50px;
+  z-index: 99;
+  border-radius: 32px;
+}
+
+.overlay {
+  box-sizing: content-box;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 99;
+  border-radius: 32px;
+}
+
+button.is-normal {
+  background-color: white !important;
+  color: black !important;
+  :hover {
+    color: black !important;
+  }
+}
+
+button.is-normal :hover {
+  color: black !important;
+}
+
+button.button {
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+  margin-top: 10px;
+}
