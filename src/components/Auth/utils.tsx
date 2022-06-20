@@ -53,13 +53,19 @@ const isBrowser = typeof window !== "undefined"
 
 export const fetchUser = () => {
   if (isBrowser) {
-    return localStorage.getItem("user")
+    return localStorage.getItem("username")
   }
   return null
 }
 
 export const storeUser = (id: string) => {
   if (isBrowser) {
-    localStorage.setItem("user", id)
+    localStorage.setItem("username", id)
+  }
+}
+
+export const clearUser = () => {
+  if (isBrowser) {
+    localStorage.removeItem("username")
   }
 }

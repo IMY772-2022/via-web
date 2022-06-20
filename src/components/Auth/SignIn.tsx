@@ -5,8 +5,6 @@ import React, { useEffect, useState } from "react"
 import Alert from "../Alert/Alert"
 import { useSignIn } from "./hooks"
 
-// import { signIn } from "./utils"
-// import { useSignIn } from "./hooks"
 import "./SignIn.scss"
 
 export interface User {
@@ -21,11 +19,6 @@ const SignIn: React.FC = () => {
     username: "",
     password: "",
   })
-
-  // const [displayError, setDisplayError] = useState({
-  //   isError: false,
-  //   message: "",
-  // })
 
   const updateForm = (event: any) => {
     setFormValues({

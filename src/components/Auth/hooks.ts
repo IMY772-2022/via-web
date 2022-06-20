@@ -4,6 +4,7 @@ import { useCallback, useContext, useState } from "react"
 
 import { AuthContext } from "../../context/store"
 import { User } from "./SignIn"
+import { clearUser, storeUser } from "./utils"
 
 export const useSignUp = (): ((payload: User) => Promise<void>) => {
   const { signIn } = useSignIn()
@@ -40,7 +41,9 @@ export const useSignIn = () => {
         const user = await Auth.signIn(username, password)
         if (user) {
           setData(user)
-          authContext.signIn(user)
+          storeUser(user.username)
+          authContext.signIn(user.username)
+          navigate("/")
         }
       } catch (error: any) {
         setError(error?.message as string)
@@ -54,24 +57,27 @@ export const useSignIn = () => {
   return { signIn, error, data, loading }
 }
 
-export const useUser = (): string | null => {
-  return localStorage.getItem("username")
-}
-
-export const useSignOut = (): (() => Promise<void>) => {
+export const useSignOut = () => {
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
   const authContext = useContext(AuthContext)
-  const signOut = async () => {
-    try {
-      await Auth.signOut().then(() => {
-        authContext.signOut()
-        navigate("/")
-      })
-    } catch (error) {
-      {
-        error
-      }
-    }
-  }
 
-  return signOut
+  const signOut = useCallback(async () => {
+    try {
+      setLoading(true)
+      const user = await Auth.signOut()
+      if (user === undefined) {
+        authContext.signOut()
+        clearUser()
+        setLoading(false)
+        navigate("/")
+      }
+    } catch (error: any) {
+      setError(error?.message as string)
+    } finally {
+      setLoading(false)
+    }
+  }, [authContext])
+
+  return { signOut, error, loading }
 }
