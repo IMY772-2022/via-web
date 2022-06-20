@@ -2,13 +2,13 @@ import React, { createContext, useMemo } from "react"
 
 import { AuthReducer, INITIAL_VALUES } from "./reducer"
 
-export const AuthContextTest = createContext(INITIAL_VALUES)
+export const AuthContext = createContext(INITIAL_VALUES)
 
 type AuthProviderProps = {
   children: React.ReactNode | React.ReactNode[]
 }
 
-export const AuthProviderTest = ({ children }: AuthProviderProps) => {
+export const AuthProvider = ({ children }: AuthProviderProps) => {
   const { auth, ...authActions } = AuthReducer()
 
   const values = useMemo(
@@ -19,9 +19,5 @@ export const AuthProviderTest = ({ children }: AuthProviderProps) => {
     [auth, authActions]
   )
 
-  return (
-    <AuthContextTest.Provider value={values}>
-      {children}
-    </AuthContextTest.Provider>
-  )
+  return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>
 }

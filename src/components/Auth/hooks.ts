@@ -1,10 +1,9 @@
 import { Auth } from "aws-amplify"
 import { navigate } from "gatsby"
 import { useCallback, useContext, useState } from "react"
-import { AuthContextTest } from "../../context/store"
 
+import { AuthContext } from "../../context/store"
 import { User } from "./SignIn"
-import { AuthContext } from "./store"
 
 export const useSignUp = (): ((payload: User) => Promise<void>) => {
   const { signIn } = useSignIn()
@@ -31,7 +30,7 @@ export const useSignIn = () => {
   const [loading, setLoading] = useState(false)
   const [data, setData] = useState<any>({})
   const [error, setError] = useState<string | null>(null)
-  const authContextTest = useContext(AuthContextTest)
+  const authContext = useContext(AuthContext)
 
   const signIn = useCallback(
     async (payload: User) => {
@@ -41,7 +40,7 @@ export const useSignIn = () => {
         const user = await Auth.signIn(username, password)
         if (user) {
           setData(user)
-          authContextTest.signIn(user)
+          authContext.signIn(user)
         }
       } catch (error: any) {
         setError(error?.message as string)
@@ -49,64 +48,11 @@ export const useSignIn = () => {
         setLoading(false)
       }
     },
-    [authContextTest]
+    [authContext]
   )
-
-  // useEffect(() => {
-  //   async function signIn(payload: User) {
-  //     const { username, password } = payload
-
-  //     try {
-  //       setLoading(true)
-  //       const { user } = await Auth.signIn(username, password)
-  //       console.log(authContextTest)
-  //       if (user) {
-  //         authContext.setUserId(user.username)
-  //       }
-  //     } catch (error) {
-  //       {
-  //         error
-  //       }
-  //     } finally {
-  //       setLoading(false)
-  //     }
-  //   }
-  //   signIn({
-  //     username: "",
-  //     password: "",
-  //   })
-  // }, [])
 
   return { signIn, error, data, loading }
 }
-
-// export const useSignIn = (): ((payload: User) => Promise<void>) => {
-//   const [loading, setLoading] = useState(false)
-//   const authContext = useContext(AuthContext)
-//   const authContextTest = useContext(AuthContextTest)
-
-//   const signIn = async (payload: User) => {
-//     const { username, password } = payload
-
-//     try {
-//       setLoading(true)
-//       const user = await Auth.signIn({ username, password })
-//       console.log(authContextTest)
-//       if (user) {
-//         authContext.setUserId("user")
-//         navigate("/")
-//       }
-//     } catch (error) {
-//       {
-//         error
-//       }
-//     } finally {
-//       setLoading(false)
-//     }
-//   }
-
-//   return { signIn }
-// }
 
 export const useUser = (): string | null => {
   return localStorage.getItem("username")
@@ -117,7 +63,7 @@ export const useSignOut = (): (() => Promise<void>) => {
   const signOut = async () => {
     try {
       await Auth.signOut().then(() => {
-        authContext.setUserId(null)
+        authContext.signOut()
         navigate("/")
       })
     } catch (error) {
