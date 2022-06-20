@@ -1,13 +1,12 @@
-import React, { useState } from "react"
+import { faEnvelope, faEyeSlash } from "@fortawesome/free-regular-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faEnvelope } from "@fortawesome/free-regular-svg-icons"
-import { faEyeSlash } from "@fortawesome/free-regular-svg-icons"
 import { Link } from "gatsby"
+import React, { useState } from "react"
 // import Alert from "../Alert/Alert"
 
 // import { signIn } from "./utils"
+// import { useSignIn } from "./hooks"
 import "./SignIn.scss"
-import { useSignIn } from "./hooks"
 
 export interface User {
   username: string
@@ -15,7 +14,8 @@ export interface User {
 }
 
 const SignIn: React.FC = () => {
-  const signIn = useSignIn()
+  // const [userId, loading] = useSignIn()
+
   const [formValues, setFormValues] = useState({
     username: "",
     password: "",
@@ -40,7 +40,7 @@ const SignIn: React.FC = () => {
     }
 
     try {
-      signIn(user)
+      console.warn("user", user)
     } catch (error) {
       console.warn(error)
     }
