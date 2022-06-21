@@ -46,13 +46,13 @@ const Onboarding: React.FC = () => {
 
                   <div className="buttonGroup">
                     <button
-                      className="button is-danger"
+                      className="button button-lg is-danger"
                       onClick={redirectToSettings}
                     >
                       Yes
                     </button>
                     <button
-                      className="button is-danger"
+                      className="button button-lg is-danger"
                       onClick={redirectToHome}
                     >
                       No

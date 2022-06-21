@@ -1,17 +1,14 @@
 import React from "react"
 
 import Onboarding from "../components/Onboarding/Onboarding"
-import { Layout } from "../components/Layout/Layout"
+import Seo from "../components/Seo/Seo"
 
 const OnboardingPage = () => {
   return (
-    <div className="section">
-      <div className="container is-fluid">
-        <Layout>
-          <Onboarding />
-        </Layout>
-      </div>
-    </div>
+    <>
+      <Seo title="Welcome" />
+      <Onboarding />
+    </>
   )
 }
 

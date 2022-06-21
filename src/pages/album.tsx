@@ -1,17 +1,14 @@
 import React from "react"
 
 import Album from "../components/Album/Album"
-import { Layout } from "../components/Layout/Layout"
+import Seo from "../components/Seo/Seo"
 
 const UserAlbum = () => {
   return (
-    <div className="section">
-      <div className="container is-fluid">
-        <Layout pageTitle="Album">
-          <Album />
-        </Layout>
-      </div>
-    </div>
+    <>
+      <Seo title="Album" />
+      <Album />
+    </>
   )
 }
 

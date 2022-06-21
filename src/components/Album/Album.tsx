@@ -3,6 +3,7 @@ import { API, graphqlOperation } from "aws-amplify"
 
 import { listImageRecords } from "../../graphql/queries"
 import { ListImageRecordsQuery } from "../../API"
+import "./Album.scss"
 import Item from "./Item"
 
 export interface ImageRecord {
@@ -10,6 +11,7 @@ export interface ImageRecord {
   filepath: string
   labels: string
   owner: string
+  createdAt: string
 }
 
 const Album: React.FC = () => {
@@ -29,20 +31,26 @@ const Album: React.FC = () => {
       return error
     }
   }
+  const sortedDynamoDBItems = dynamodDBitems.sort((item1, item2) => {
+    return Date.parse(item2.createdAt) - Date.parse(item1.createdAt)
+  })
+
   return (
-    <div>
-      <p> Total items: {dynamodDBitems.length} </p>
-      {dynamodDBitems.map(item => {
-        return (
-          <Item
-            key={item.id}
-            imageRecord={item}
-            dynamoDbItems={dynamodDBitems}
-            setDynamoDBItems={setDynamoDBItems}
-          />
-        )
-      })}
-    </div>
+    <>
+      <h5 className="is-size-5">My Album</h5>
+      <div className="">
+        <h6 className="is-size-6">Total items: {dynamodDBitems.length}</h6>
+        <div className="grid">
+          {sortedDynamoDBItems.map(item => {
+            return (
+              <div key={item.id} className="column">
+                <Item imageRecord={item} dynamoDbItems={dynamodDBitems} />
+              </div>
+            )
+          })}
+        </div>
+      </div>
+    </>
   )
 }
 

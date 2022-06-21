@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import "./photoAnalysis.scss"
 import TextToSpeech from "./TextToSpeech/TextToSpeech"
 import { isValidFileType, labelImage, uploadToS3, writeToDynamo } from "./utils"
-import Alert from "../Alert/Alert"
+import Alert, { NotificationType } from "../Alert/Alert"
 
 export interface LabelType {
   name: string
@@ -38,14 +38,19 @@ const Analysis: React.FC = () => {
   const [imageData, setImageData] = useState<ImageData | undefined>(undefined)
   let labels: string[] = [""]
   let labelData: LabelType[] = []
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState({
+    image: false,
+    saveButton: false,
+  })
   const [isError, setError] = useState(false)
+  const [dynamoDBResponse, setDynamoDBReponse] = useState("")
 
   const identifyImageLabels = async (event: any) => {
+    setDynamoDBReponse("")
     const files = (event.target as HTMLInputElement).files
     const file = files![0]
     if (isValidFileType(file)) {
-      setIsLoading(true)
+      setIsLoading({ ...isLoading, image: true })
 
       const img = new Image()
       img.src = URL.createObjectURL(file)
@@ -69,7 +74,7 @@ const Analysis: React.FC = () => {
       })
         .then(response => {
           setRekognitionResponse(response)
-          setIsLoading(false)
+          setIsLoading({ ...isLoading, image: false })
         })
         .catch(err => setRekognitionResponse(JSON.stringify(err, null, 2)))
     } else setError(true)
@@ -99,7 +104,7 @@ const Analysis: React.FC = () => {
   }
 
   const displayUploadButton = () => {
-    if (!isLoading && rekognitionResponse === "")
+    if (!isLoading.image && rekognitionResponse === "")
       return (
         <div>
           <p className="instructions">Take or upload photo</p>
@@ -124,32 +129,35 @@ const Analysis: React.FC = () => {
     else return null
   }
 
-  const displayError = (error: string) => {
-    const dismissError = () => {
-      setError(false)
-    }
-    return (
-      <div className="notification is-danger is-light">
-        <button className="delete" onClick={dismissError}></button>
-        {error}
-      </div>
-    )
-  }
-
   const saveImageRecord = async () => {
+    setIsLoading({ ...isLoading, saveButton: true })
     const filepath = await uploadToS3(imageData!.file)
     const response = await writeToDynamo(filepath!.key, labelData)
-    return <Alert error={response} />
+    setDynamoDBReponse(response)
+    setIsLoading({ ...isLoading, saveButton: false })
   }
 
   const renderImageLabels = () => {
-    if (isLoading) return <span className="loader"></span>
+    if (isLoading.image) return <span className="loader"></span>
     else if (imageData) return labelImage(labelData, imageData)
     else return null
   }
 
   const pageData = (
     <div>
+      {dynamoDBResponse != "" ? (
+        dynamoDBResponse.includes("album") ? (
+          <Alert
+            message={dynamoDBResponse}
+            notificationType={NotificationType.isSuccess}
+          />
+        ) : (
+          <Alert
+            message={dynamoDBResponse}
+            notificationType={NotificationType.isError}
+          />
+        )
+      ) : null}
       <div className="rightControls">
         <div className="controls">
           <label className="file-label">
@@ -175,31 +183,39 @@ const Analysis: React.FC = () => {
           <div className="is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
             <div className="media">
               <div className="block">
-                <div className="content"></div>
-                <div>
-                  {imageData !== undefined ? (
-                    <div className="card-image">
-                      <img src={imageData.imageSrc} alt="Uploaded preview" />
-                    </div>
-                  ) : null}
-                  <div className="card-content">
-                    <div className="content">
-                      <div className="is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
-                        {displayUploadButton()}
-                        {isError
-                          ? displayError("Please upload a jpeg or png file")
-                          : null}
+                <div className="content">
+                  <div>
+                    {imageData !== undefined ? (
+                      <div className="card-image">
+                        <img src={imageData.imageSrc} alt="Uploaded preview" />
                       </div>
+                    ) : null}
+                    <div className="card-content">
+                      <div className="content">
+                        <div className="is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
+                          {displayUploadButton()}
 
-                      {processRekognitionLabels(
-                        rekognitionResponse as IdentifyLabelsOutput
-                      )}
-                      <div className="tags are-medium">
-                        {renderImageLabels()}
+                          {isError ? (
+                            <Alert
+                              message={"Please upload a jpeg or png file"}
+                              notificationType={NotificationType.isError}
+                            />
+                          ) : null}
+                        </div>
+
+                        {processRekognitionLabels(
+                          rekognitionResponse as IdentifyLabelsOutput
+                        )}
+                        <div className="tags are-medium">
+                          {renderImageLabels()}
+                        </div>
+                        {labels.length > 0 ? (
+                          <TextToSpeech
+                            disabled={isLoading.image}
+                            labels={labels}
+                          />
+                        ) : null}
                       </div>
-                      {labels.length > 0 ? (
-                        <TextToSpeech disabled={isLoading} labels={labels} />
-                      ) : null}
                     </div>
                   </div>
                 </div>
@@ -207,9 +223,15 @@ const Analysis: React.FC = () => {
             </div>
           </div>
 
-          <button className="button is-danger" onClick={saveImageRecord}>
-            Save results
-          </button>
+          {!isLoading.image && imageData ? (
+            <button className="button is-danger" onClick={saveImageRecord}>
+              {isLoading.saveButton ? (
+                <span className="loader"></span>
+              ) : (
+                "Save results"
+              )}
+            </button>
+          ) : null}
         </div>
       </div>
     </div>

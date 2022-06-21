@@ -1,8 +1,11 @@
-import React from "react"
 import { Link } from "gatsby"
+import React, { useContext } from "react"
+import { AuthContext } from "../../context/store"
 import BrandIcon from "../icons/BrandIcon"
 
-export const Navigation = () => {
+export const Navigation: React.FC = () => {
+  const authContext = useContext(AuthContext)
+
   return (
     <nav className="navbar mb-5" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
@@ -13,12 +16,23 @@ export const Navigation = () => {
       <Link className="navbar-item" to="/">
         Home
       </Link>
-      <Link className="navbar-item" to="/signin">
-        Sign in
-      </Link>
-      <Link className="navbar-item" to="/album">
-        Album
-      </Link>
+      {authContext.userId === null ? (
+        <>
+          <Link className="navbar-item" to="/signin">
+            Sign In
+          </Link>
+        </>
+      ) : (
+        <>
+          <Link className="navbar-item" to="/album">
+            Album
+          </Link>
+          <Link className="navbar-item" to="/signout">
+            Sign Out
+          </Link>
+        </>
+      )}
+
       <Link className="navbar-item" to="/onboarding">
         Onboarding
       </Link>
