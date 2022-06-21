@@ -1,6 +1,5 @@
 import { navigate } from "gatsby"
 import React from "react"
-import "./item.scss"
 
 import { ImageRecord } from "./Album"
 import "./Item.scss"
