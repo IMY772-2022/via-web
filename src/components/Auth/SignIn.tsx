@@ -2,7 +2,7 @@ import { faEnvelope, faEyeSlash } from "@fortawesome/free-regular-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Link } from "gatsby"
 import React, { useEffect, useState } from "react"
-import Alert from "../Alert/Alert"
+import Alert, { NotificationType } from "../Alert/Alert"
 import { useSignIn } from "./hooks"
 
 import "./SignIn.scss"
@@ -49,7 +49,12 @@ const SignIn: React.FC = () => {
       <div className="card-content">
         <div className="content">
           <div className="form">
-            {error ? <Alert error={error} /> : null}
+            {error ? (
+              <Alert
+                message={error}
+                notificationType={NotificationType.isError}
+              />
+            ) : null}
             <div className="field">
               <label className="label" htmlFor="email">
                 Email
