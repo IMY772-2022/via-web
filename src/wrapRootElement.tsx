@@ -1,4 +1,9 @@
 import React from "react"
+import { QueryClient, QueryClientProvider } from "react-query"
+
+import { AuthProvider } from "./context/store"
+
+const queryClient = new QueryClient()
 
 interface RootElementProps {
   element: React.ReactElement[] | React.ReactElement
@@ -7,7 +12,15 @@ interface RootElementProps {
 const WrapRootElement: React.FC<RootElementProps> = ({
   element,
 }: RootElementProps) => {
-  return <>{element}</>
+  return (
+    <>
+      <AuthProvider>
+        <QueryClientProvider client={queryClient}>
+          {element}
+        </QueryClientProvider>
+      </AuthProvider>
+    </>
+  )
 }
 
 export default WrapRootElement
