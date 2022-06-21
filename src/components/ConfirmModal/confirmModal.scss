@@ -7,24 +7,23 @@
   padding: 50px;
   z-index: 99;
   border-radius: 32px;
+  width: 80%;
 }
 
 .overlay {
-  box-sizing: content-box;
   position: absolute;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.7);
   z-index: 99;
   border-radius: 32px;
+  transform: translate(0, -100%);
 }
 
-button.is-normal {
-  background-color: white !important;
-  color: black !important;
-  :hover {
-    color: black !important;
-  }
+.modal-content {
+  font-size: 1.5em;
+  max-width: 100%;
+  margin-bottom: 16px !important;
 }
 
 button.is-normal :hover {

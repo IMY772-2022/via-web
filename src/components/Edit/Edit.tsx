@@ -5,6 +5,7 @@ import { LabelType } from "../PhotoAnalysis/PhotoAnalysis"
 
 import "./edit.scss"
 import { navigate } from "gatsby"
+import ConfirmModal from "../ConfirmModal/ConfirmModal"
 
 type Props = {
   recordData: any
@@ -14,6 +15,7 @@ const Edit: React.FC<Props> = ({ recordData }) => {
   const [labelsArray, setLabelsArray] = useState<LabelType[]>([])
   const dynamoRecord = recordData.state
   const stateData = dynamoRecord ? dynamoRecord.item.labels : JSON.stringify("")
+  const [modalOpen, setModalOpen] = useState<boolean>(false)
   useEffect(() => {
     setLabelsArray(JSON.parse(stateData))
   }, [stateData])
@@ -30,6 +32,9 @@ const Edit: React.FC<Props> = ({ recordData }) => {
   }
 
   const deleteItem = () => {
+    // eslint-disable-next-line no-console
+    console.log("delete the image")
+    setModalOpen(true)
     deleteFromDynamo(recordData.state.item.id)
     navigate("/album")
   }
@@ -81,6 +86,12 @@ const Edit: React.FC<Props> = ({ recordData }) => {
           </div>
         </div>
       </div>
+      <ConfirmModal
+        open={modalOpen}
+        setOpen={setModalOpen}
+        action={deleteItem}
+        confirmationMessage={"Are you sure you want to delete this image?"}
+      />
     </div>
   )
 }

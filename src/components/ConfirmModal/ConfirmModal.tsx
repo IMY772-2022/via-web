@@ -14,7 +14,7 @@ const ConfirmModal: React.FC<ModalProps> = modalProps => {
       <>
         <div className="overlay"></div>
         <div className="confirmation-modal">
-          <div className="model-content">{modalProps.confirmationMessage}</div>
+          <div className="modal-content">{modalProps.confirmationMessage}</div>
           <button
             className={"button is-large is-normal"}
             onClick={() => modalProps.setOpen(false)}
