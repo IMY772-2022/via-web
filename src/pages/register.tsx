@@ -1,17 +1,14 @@
 import React from "react"
 
-import { Layout } from "../components/Layout/Layout"
 import Register from "../components/Auth/Register"
+import Seo from "../components/Seo/Seo"
 
 const SignInPage = () => {
   return (
-    <div className="section">
-      <div className="container is-fluid">
-        <Layout>
-          <Register />
-        </Layout>
-      </div>
-    </div>
+    <>
+      <Seo title="Register" />
+      <Register />
+    </>
   )
 }
 

@@ -1,52 +1,44 @@
 import { navigate } from "gatsby"
 import React from "react"
 
-import { deleteFromDynamo } from "../PhotoAnalysis/utils"
 import { ImageRecord } from "./Album"
+import "./Item.scss"
 import { useGetFilePath } from "./useGetFilePath"
 
 interface ItemProps {
   imageRecord: ImageRecord
   dynamoDbItems: ImageRecord[]
-  setDynamoDBItems: React.Dispatch<React.SetStateAction<ImageRecord[]>>
 }
 
 const Item: React.FC<ItemProps> = props => {
   const item = props.imageRecord
-  const { dynamoDbItems, setDynamoDBItems } = props
 
-  const { filepath } = item
-
-  const deleteItem = () => {
-    deleteFromDynamo(item.id)
-    const updatedItemArray = dynamoDbItems.filter(dynamoDbItem => {
-      return dynamoDbItem.id != item.id
-    })
-    setDynamoDBItems(updatedItemArray)
+  const accessibleOnClick = (e: any) => {
+    if (e.keyCode === 13) {
+      navigate("/edit", { state: { item } })
+    }
   }
+  const { filepath } = item
   return (
-    <div>
-      <div className="card">
-        <div className="card-image">
-          <img src={useGetFilePath(filepath)} alt="Stored file from database" />
-        </div>
-        <div className="card-content">
-          <button
-            onClick={() => {
-              navigate("/edit", { state: { item } })
-            }}
-            className="button is-light"
-          >
-            Edit
-          </button>
-        </div>
-        <div className="card-content">
-          <button className="button is-light" onClick={deleteItem}>
-            Delete
-          </button>
+    <>
+      <div className="card rounded-lg">
+        <div
+          className="card-image item"
+          onKeyDown={accessibleOnClick}
+          role="button"
+          tabIndex={0}
+          onClick={() => {
+            navigate("/edit", { state: { item } })
+          }}
+        >
+          <img
+            className="rounded-md"
+            src={useGetFilePath(filepath)}
+            alt="Stored file from the database"
+          />
         </div>
       </div>
-    </div>
+    </>
   )
 }
 

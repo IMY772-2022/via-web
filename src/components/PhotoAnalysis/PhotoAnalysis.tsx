@@ -194,12 +194,14 @@ const Analysis: React.FC = () => {
                       <div className="content">
                         <div className="is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
                           {displayUploadButton()}
+
                           {isError ? (
                             <Alert
                               message={"Please upload a jpeg or png file"}
                               notificationType={NotificationType.isError}
                             />
                           ) : null}
+
                         </div>
 
                         {processRekognitionLabels(
@@ -209,10 +211,12 @@ const Analysis: React.FC = () => {
                           {renderImageLabels()}
                         </div>
                         {labels.length > 0 ? (
+
                           <TextToSpeech
                             disabled={isLoading.image}
                             labels={labels}
                           />
+
                         ) : null}
                       </div>
                     </div>
@@ -221,6 +225,7 @@ const Analysis: React.FC = () => {
               </div>
             </div>
           </div>
+
           {!isLoading.image && imageData ? (
             <button className="button is-danger" onClick={saveImageRecord}>
               {isLoading.saveButton ? (
@@ -229,6 +234,7 @@ const Analysis: React.FC = () => {
                 "Save results"
               )}
             </button>
+
           ) : null}
         </div>
       </div>
