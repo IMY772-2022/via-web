@@ -43,7 +43,7 @@ export const useSignIn = () => {
           setData(user)
           storeUser(user.username)
           authContext.signIn(user.username)
-          navigate("/")
+          navigate("/photo-analysis")
         }
       } catch (error: any) {
         setError(error?.message as string)
@@ -70,7 +70,7 @@ export const useSignOut = () => {
         authContext.signOut()
         clearUser()
         setLoading(false)
-        navigate("/")
+        navigate("/photo-analysis")
       }
     } catch (error: any) {
       setError(error?.message as string)
