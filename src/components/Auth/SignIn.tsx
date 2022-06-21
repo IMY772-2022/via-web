@@ -95,7 +95,7 @@ const SignIn: React.FC = () => {
             <div className="field is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
               <p className="control">
                 <button
-                  className={`button ${loading ? " is-loading " : ""}`}
+                  className={`button signin ${loading ? " is-loading " : ""}`}
                   onClick={submitForm}
                 >
                   Sign in
