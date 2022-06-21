@@ -15,13 +15,15 @@ export const Layout = (props: LayoutProps) => {
   const heading = <h1>{pageTitle}</h1>
   return (
     <div className="container">
-      <QueryClientProvider client={queryClient}>
+      <div>
         <Navigation />
-        {/* <div className="is-flex is-justify-content-center"> */}
-        {heading}
-        {children}
-        {/* </div> */}
-      </QueryClientProvider>
+      </div>
+      <main>
+        <QueryClientProvider client={queryClient}>
+          {heading}
+          {children}
+        </QueryClientProvider>
+      </main>
     </div>
   )
 }
