@@ -119,6 +119,7 @@ export const updateDynamo = async (itemId: string, labels: LabelType[]) => {
         },
       },
     })
+    return "Successfully updated labels"
   } catch (error) {
     return error as string
   }
