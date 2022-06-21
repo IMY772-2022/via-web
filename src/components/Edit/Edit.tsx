@@ -32,9 +32,10 @@ const Edit: React.FC<Props> = ({ recordData }) => {
   }
 
   const deleteItem = () => {
-    // eslint-disable-next-line no-console
-    console.log("delete the image")
     setModalOpen(true)
+  }
+
+  const confirmDelete = () => {
     deleteFromDynamo(recordData.state.item.id)
     navigate("/album")
   }
@@ -89,7 +90,7 @@ const Edit: React.FC<Props> = ({ recordData }) => {
       <ConfirmModal
         open={modalOpen}
         setOpen={setModalOpen}
-        action={deleteItem}
+        action={confirmDelete}
         confirmationMessage={"Are you sure you want to delete this image?"}
       />
     </div>
