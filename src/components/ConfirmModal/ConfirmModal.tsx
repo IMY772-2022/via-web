@@ -1,5 +1,5 @@
 import React from "react"
-import "./confirmModal.scss"
+import "./ConfirmModal.scss"
 
 interface ModalProps {
   open: boolean
