@@ -8,7 +8,7 @@ input[type="text"]:focus {
   background-color: green !important;
   border-radius: 34px !important;
   height: 100%;
-  min-height: 550px;
+  min-height: 500px;
   padding: 0 !important;
 }
 
@@ -29,8 +29,4 @@ span {
   padding: 10px !important;
   max-width: 150px;
   display: inline-block;
-}
-
-button.save-button {
-  margin-left: 120px !important;
 }

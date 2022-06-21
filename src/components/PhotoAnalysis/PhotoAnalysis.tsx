@@ -175,41 +175,45 @@ const Analysis: React.FC = () => {
           <div className="is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
             <div className="media">
               <div className="block">
-                <div className="content"></div>
-                <div>
-                  {imageData !== undefined ? (
-                    <div className="card-image">
-                      <img src={imageData.imageSrc} alt="Uploaded preview" />
-                    </div>
-                  ) : null}
-                  <div className="card-content">
-                    <div className="content">
-                      <div className="is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
-                        {displayUploadButton()}
-                        {isError
-                          ? displayError("Please upload a jpeg or png file")
-                          : null}
+                <div className="content">
+                  <div>
+                    {imageData !== undefined ? (
+                      <div className="card-image">
+                        <img src={imageData.imageSrc} alt="Uploaded preview" />
                       </div>
+                    ) : null}
+                    <div className="card-content">
+                      <div className="content">
+                        <div className="is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
+                          {displayUploadButton()}
+                          {isError
+                            ? displayError("Please upload a jpeg or png file")
+                            : null}
+                        </div>
 
-                      {processRekognitionLabels(
-                        rekognitionResponse as IdentifyLabelsOutput
-                      )}
-                      <div className="tags are-medium">
-                        {renderImageLabels()}
+                        {processRekognitionLabels(
+                          rekognitionResponse as IdentifyLabelsOutput
+                        )}
+                        <div className="tags are-medium">
+                          {renderImageLabels()}
+                        </div>
+                        {labels.length > 0 ? (
+                          <TextToSpeech disabled={isLoading} labels={labels} />
+                        ) : null}
                       </div>
-                      {labels.length > 0 ? (
-                        <TextToSpeech disabled={isLoading} labels={labels} />
-                      ) : null}
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
-          <button className="button is-danger" onClick={saveImageRecord}>
-            Save results
-          </button>
+          {!isLoading && imageData ? (
+            <div className="is-flex is-justify-content-center">
+              <button className="button is-danger" onClick={saveImageRecord}>
+                Save results
+              </button>
+            </div>
+          ) : null}
         </div>
       </div>
     </div>
