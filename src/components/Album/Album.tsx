@@ -3,8 +3,8 @@ import { API, graphqlOperation } from "aws-amplify"
 
 import { listImageRecords } from "../../graphql/queries"
 import { ListImageRecordsQuery } from "../../API"
-import Item from "./Item"
 import "./Album.scss"
+import Item from "./Item"
 
 export interface ImageRecord {
   id: string
@@ -16,6 +16,7 @@ export interface ImageRecord {
 
 const Album: React.FC = () => {
   const [dynamodDBitems, setDynamoDBItems] = useState([] as ImageRecord[])
+
   useEffect(() => {
     fetchImages()
   }, [])

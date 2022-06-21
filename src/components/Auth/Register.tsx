@@ -6,6 +6,7 @@ import Alert, { NotificationType } from "../Alert/Alert"
 
 import { confirmSignUp, signUp } from "./utils"
 import "./Register.scss"
+import { Link } from "gatsby"
 
 const Register: React.FC = () => {
   const [displaySignUpForm, setDisplaySignUpForm] = useState(true)
@@ -177,6 +178,11 @@ const Register: React.FC = () => {
                   </button>
                 </p>
               </div>
+            </div>
+            <div className="field is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
+              <p className="signinPage">
+                Continue to <Link to="/signin">Sign in</Link> page
+              </p>
             </div>
           </div>
         </div>
