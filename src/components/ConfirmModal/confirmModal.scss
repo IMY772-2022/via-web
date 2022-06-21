@@ -21,17 +21,15 @@
 }
 
 .modal-content {
-  font-size: 1.5em;
+  font-size: 1em;
   max-width: 100%;
   margin-bottom: 16px !important;
 }
 
-button.is-normal :hover {
-  color: black !important;
+.button.confirm {
+  max-width: 40%;
 }
 
-button.button {
-  margin-left: 0px !important;
-  margin-right: 0px !important;
-  margin-top: 10px;
+button.is-normal :hover {
+  color: black !important;
 }

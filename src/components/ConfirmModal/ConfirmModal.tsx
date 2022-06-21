@@ -14,19 +14,23 @@ const ConfirmModal: React.FC<ModalProps> = modalProps => {
       <>
         <div className="overlay"></div>
         <div className="confirmation-modal">
-          <div className="modal-content">{modalProps.confirmationMessage}</div>
-          <button
-            className={"button is-large is-normal"}
-            onClick={() => modalProps.setOpen(false)}
-          >
-            Cancel
-          </button>
-          <button
-            className={"button is-danger is-large"}
-            onClick={modalProps.action}
-          >
-            Yes
-          </button>
+          <div className="is-align-self-auto">
+            <div className="modal-content">
+              {modalProps.confirmationMessage}
+            </div>
+            <button
+              className={"button confirm is-normal is-align-items-center"}
+              onClick={() => modalProps.setOpen(false)}
+            >
+              Cancel
+            </button>
+            <button
+              className={"button confirm is-danger is-align-items-center "}
+              onClick={modalProps.action}
+            >
+              Yes
+            </button>
+          </div>
         </div>
       </>
     )
