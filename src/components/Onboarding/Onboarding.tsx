@@ -4,7 +4,7 @@ import "./onboarding.scss"
 
 const Onboarding: React.FC = () => {
   const redirectToHome = () => {
-    navigate("/")
+    navigate("/photo-analysis")
   }
 
   const redirectToSettings = () => {
@@ -36,12 +36,20 @@ const Onboarding: React.FC = () => {
                       />
                     </svg>
                   </div>
-                  <p className="mainTitle">Welcome to VIA!</p>
+                  <p className="mainTitle is-size-4">Welcome to VIA!</p>
 
                   <p className="mainBody">
                     VIA is a help to aid users with visual impairment. <br />
                     <br />
-                    Are you new here?
+                    In the photo analysis page, you can take a photo or upload
+                    one from your camera roll and the items detected in the
+                    image will be returned to you. You can also save these
+                    searches and edit the values found in the images.
+                    <br />
+                    <br />
+                    <span className="redirectText is-size-5">
+                      Are you new here?
+                    </span>
                   </p>
 
                   <div className="buttonGroup">

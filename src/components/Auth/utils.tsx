@@ -12,7 +12,7 @@ export async function signUp(userInput: User) {
       attributes: {},
     })
     if (user) {
-      return "Success! Successfully signed up"
+      return "Successfully sent code to your email"
     }
   } catch (error) {
     return JSON.stringify(error)

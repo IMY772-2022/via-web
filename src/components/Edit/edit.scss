@@ -5,7 +5,6 @@ input[type="text"]:focus {
   border: 2px solid #f14668 !important;
 }
 .analysis-card {
-  background-color: green !important;
   border-radius: 34px !important;
   height: 100%;
   min-height: 500px;
@@ -28,6 +27,6 @@ input[type="text"]:focus {
 }
 span {
   padding: 10px !important;
-  max-width: 150px;
+  max-width: 200px;
   display: inline-block;
 }
