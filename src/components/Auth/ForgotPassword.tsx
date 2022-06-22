@@ -4,7 +4,7 @@ import { faEnvelope } from "@fortawesome/free-regular-svg-icons"
 import { faEye } from "@fortawesome/free-regular-svg-icons"
 import Alert, { NotificationType } from "../Alert/Alert"
 
-import { confirmSignUp } from "./utils"
+import { forgotPasswordSubmit } from "./utils"
 import "./Register.scss"
 
 const ForgotPassword: React.FC = () => {
@@ -25,12 +25,16 @@ const ForgotPassword: React.FC = () => {
     })
   }
 
-  const submitConfirmation = () => {
+  const submitNewPassword = () => {
     setDisplayError({
       ...displayError,
       isError: false,
     })
-    confirmSignUp(formValues.username, formValues.code).then(message => {
+    forgotPasswordSubmit(
+      formValues.username,
+      formValues.code,
+      formValues.password
+    ).then(message => {
       setDisplayError({
         isError: true,
         message: message as string,
@@ -43,6 +47,10 @@ const ForgotPassword: React.FC = () => {
       <div className="card-content">
         <div className="content">
           <div className="form">
+            <Alert
+              message={"We're sent you a confirmation code, check your email"}
+              notificationType={NotificationType.isSuccess}
+            />
             {displayError.isError ? (
               <Alert
                 message={displayError.message}
@@ -86,16 +94,17 @@ const ForgotPassword: React.FC = () => {
               </div>
             </div>
             <div className="field">
-              <label className="label" htmlFor="confirmPassword">
-                Confirm password
+              <label className="label" htmlFor="code">
+                Confirmation Code
               </label>
               <div className="control has-icons-right">
                 <input
                   className="input"
                   type="password"
-                  placeholder="Confirm password"
-                  name="confirmPassword"
-                  id="confirmPassword"
+                  placeholder=""
+                  name="code"
+                  id="code"
+                  onChange={e => updateForm(e)}
                 />
                 <span className="icon is-small is-right">
                   <FontAwesomeIcon icon={faEye} fontSize="15" />
@@ -105,7 +114,7 @@ const ForgotPassword: React.FC = () => {
             <div className="field">
               <div className="field is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
                 <p className="control">
-                  <button className="button" onClick={submitConfirmation}>
+                  <button className="button" onClick={submitNewPassword}>
                     Reset password
                   </button>
                 </p>

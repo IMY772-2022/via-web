@@ -6,6 +6,7 @@ import Alert, { NotificationType } from "../Alert/Alert"
 import { useSignIn } from "./hooks"
 
 import "./SignIn.scss"
+import { forgotPassword } from "./utils"
 
 export interface User {
   username: string
@@ -43,6 +44,23 @@ const SignIn: React.FC = () => {
   useEffect(() => {
     console.warn(error)
   }, [error])
+
+  const requestConfirmationCode = () => {
+    if (formValues.username.length === 0) {
+      // eslint-disable-next-line no-console
+      console.log("user name missing")
+    } else {
+      forgotPassword(formValues.username)
+        .then(
+          // eslint-disable-next-line no-console
+          data => console.log(data)
+        )
+        .catch(err => {
+          // eslint-disable-next-line no-console
+          console.log(err)
+        })
+    }
+  }
 
   return (
     <div className="card">
@@ -89,7 +107,11 @@ const SignIn: React.FC = () => {
                 <span className="icon is-small is-right">
                   <FontAwesomeIcon icon={faEyeSlash} fontSize="15" />
                 </span>
-                <p className="forgotPassword">Forgot your password?</p>
+                <p className="forgotPassword">
+                  <Link to="/forgot-password" onClick={requestConfirmationCode}>
+                    Forgot your password?
+                  </Link>
+                </p>
               </div>
             </div>
             <div className="field is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
