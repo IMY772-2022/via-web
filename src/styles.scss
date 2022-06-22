@@ -79,6 +79,9 @@
 html,
 body {
   font-family: "open-sans-semibold", sans-serif;
+  font-size: var(--color-size);
+  font-weight: var(--color-weight);
+  transition: all ease-in-out 0.3s;
 }
 
 .grid {
