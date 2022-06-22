@@ -201,7 +201,6 @@ const Analysis: React.FC = () => {
                               notificationType={NotificationType.isError}
                             />
                           ) : null}
-
                         </div>
 
                         {processRekognitionLabels(
@@ -211,12 +210,10 @@ const Analysis: React.FC = () => {
                           {renderImageLabels()}
                         </div>
                         {labels.length > 0 ? (
-
                           <TextToSpeech
                             disabled={isLoading.image}
                             labels={labels}
                           />
-
                         ) : null}
                       </div>
                     </div>
@@ -234,7 +231,6 @@ const Analysis: React.FC = () => {
                 "Save results"
               )}
             </button>
-
           ) : null}
         </div>
       </div>

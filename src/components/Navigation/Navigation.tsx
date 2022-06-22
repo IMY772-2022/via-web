@@ -16,6 +16,9 @@ export const Navigation: React.FC = () => {
       <Link className="navbar-item" to="/">
         Home
       </Link>
+      <Link className="navbar-item" to="/photo-analysis">
+        Photo Analysis
+      </Link>
       {authContext.userId === null ? (
         <>
           <Link className="navbar-item" to="/signin">
@@ -32,10 +35,6 @@ export const Navigation: React.FC = () => {
           </Link>
         </>
       )}
-
-      <Link className="navbar-item" to="/onboarding">
-        Onboarding
-      </Link>
     </nav>
   )
 }
