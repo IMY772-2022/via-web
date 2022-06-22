@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useMemo } from "react"
-import { fetchUser } from "../components/Auth/utils"
+import { fetchUser } from "../../components/Auth/utils"
 
 import { AuthReducer, INITIAL_VALUES } from "./reducer"
 
