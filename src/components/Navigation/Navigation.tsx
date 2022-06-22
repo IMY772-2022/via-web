@@ -1,6 +1,6 @@
 import { Link } from "gatsby"
 import React, { useContext } from "react"
-import { AuthContext } from "../../context/store"
+import { AuthContext } from "../../context/AuthContext/store"
 import BrandIcon from "../icons/BrandIcon"
 
 export const Navigation: React.FC = () => {
@@ -35,6 +35,9 @@ export const Navigation: React.FC = () => {
           </Link>
         </>
       )}
+      <Link className="navbar-item" to="/settings">
+        Settings
+      </Link>
     </nav>
   )
 }
