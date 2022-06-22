@@ -1,6 +1,3 @@
-input {
-  width: auto !important;
-}
 input[type="text"]:focus {
   border: 2px solid #f14668 !important;
 }
@@ -17,16 +14,3 @@ input[type="text"]:focus {
   border-top-right-radius: 32px !important;
 }
 
-.labels {
-  padding: 20px;
-  position: relative;
-}
-.labels > p {
-  padding-left: 10px;
-  color: #fff;
-}
-span {
-  padding: 10px !important;
-  max-width: 150px;
-  display: inline-block;
-}
