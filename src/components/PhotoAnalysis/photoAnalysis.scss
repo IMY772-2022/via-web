@@ -38,6 +38,8 @@ p.instructions {
 .rightControls {
   display: flex;
   justify-content: end;
+  max-width: 500px;
+  width: 100%;
 }
 
 .controls span.file-cta {
