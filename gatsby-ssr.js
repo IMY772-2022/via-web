@@ -3,10 +3,16 @@ import React from "react"
 import {
   COLORS,
   COLOR_MODE_KEY,
+  FONT_SIZES,
+  FONT_SIZE_MODE_KEY,
+  FONT_WEIGHTS,
+  FONT_WEIGHT_MODE_KEY,
   INITIAL_COLOR_MODE_CSS_PROP,
+  INITIAL_FONT_SIZE_MODE_CSS_PROP,
+  INITIAL_FONT_WEIGHT_MODE_CSS_PROP,
 } from "./src/theme"
 
-function setColorsByTheme() {
+const setColorsByTheme = () => {
   const colors = "🌈"
   const colorModeKey = "🔑"
   const colorModeCssProp = "⚡️"
@@ -36,18 +42,102 @@ function setColorsByTheme() {
   })
 }
 
-const MagicScriptTag = () => {
-  const boundFn = String(setColorsByTheme)
-    .replace("'🌈'", JSON.stringify(COLORS))
+const setFontWeightModeByTheme = () => {
+  const fontWeights = "🌈"
+  const fontWeightModeKey = "🔑"
+  const fontWeightModeCssProp = "⚡️"
+
+  const persistedPreference = localStorage.getItem(fontWeightModeKey)
+
+  const hasUsedToggle = typeof persistedPreference === "string"
+
+  const fontWeightMode = hasUsedToggle ? persistedPreference : "normal"
+
+  let root = document.documentElement
+
+  root.style.setProperty(fontWeightModeCssProp, fontWeightMode)
+
+  Object.entries(fontWeights).forEach(([name, weightByTheme]) => {
+    const cssVarName = `--weight-${name}`
+
+    root.style.setProperty(cssVarName, weightByTheme[fontWeightMode])
+  })
+}
+
+const setFontSizeModeByTheme = () => {
+  const fontSizes = "🌈"
+  const fontSizeModeKey = "🔑"
+  const fontSizeModeCssProp = "⚡️"
+
+  const persistedPreference = localStorage.getItem(fontSizeModeKey)
+
+  const hasUsedToggle = typeof persistedPreference === "string"
+
+  const fontWeightMode = hasUsedToggle ? persistedPreference : "normal"
+
+  let root = document.documentElement
+
+  root.style.setProperty(fontSizeModeCssProp, fontWeightMode)
+
+  Object.entries(fontSizes).forEach(([name, weightByTheme]) => {
+    const cssVarName = `--size-${name}`
+
+    root.style.setProperty(cssVarName, weightByTheme[fontWeightMode])
+  })
+}
+
+const ColorsScript = () => {
+  const colorsBoundFn = String(setColorsByTheme)
+    .replace("🌈", JSON.stringify(COLORS))
     .replace("🔑", COLOR_MODE_KEY)
     .replace("⚡️", INITIAL_COLOR_MODE_CSS_PROP)
 
-  let calledFunction = `(${boundFn})()`
-
-  // calledFunction = Terser.minify(calledFunction).code
+  const calledColorsFunction = `(${colorsBoundFn})()`
 
   // eslint-disable-next-line react/no-danger
-  return <script dangerouslySetInnerHTML={{ __html: calledFunction }} />
+  return (
+    <script
+      dangerouslySetInnerHTML={{
+        __html: calledColorsFunction,
+      }}
+    />
+  )
+}
+
+const FontWeightsScript = () => {
+  const weightsBoundFn = String(setFontWeightModeByTheme)
+    .replace("'🌈'", JSON.stringify(FONT_WEIGHTS))
+    .replace("🔑", FONT_WEIGHT_MODE_KEY)
+    .replace("⚡️", INITIAL_FONT_WEIGHT_MODE_CSS_PROP)
+
+  const calledWeightsFunction = `(${weightsBoundFn})()`
+
+  // eslint-disable-next-line react/no-danger
+  return (
+    <script
+      dangerouslySetInnerHTML={{
+        __html: calledWeightsFunction,
+      }}
+    />
+  )
+}
+
+const FontSizesScript = () => {
+  const sizesBoundFn = String(setFontSizeModeByTheme)
+    .replace("'🌈'", JSON.stringify(FONT_SIZES))
+    .replace("🔑", FONT_SIZE_MODE_KEY)
+    .replace("⚡️", INITIAL_FONT_SIZE_MODE_CSS_PROP)
+
+  const calledSizesFunction = `(${sizesBoundFn})()`
+
+  // eslint-disable-next-line react/no-danger
+  return (
+    <script
+      dangerouslySetInnerHTML={{
+        __html: calledSizesFunction,
+      }}
+    />
+  )
 }
 
 /**
@@ -65,9 +155,23 @@ const FallbackStyles = () => {
     --color-background: white;`
   */
 
-  const cssVariableString = Object.entries(COLORS).reduce(
+  const colorsCssVariableString = Object.entries(COLORS).reduce(
     (acc, [name, colorByTheme]) => {
       return `${acc}\n--color-${name}: ${colorByTheme.light};`
+    },
+    ""
+  )
+
+  const weightsCssVariableString = Object.entries(FONT_WEIGHTS).reduce(
+    (acc, [name, weightByTheme]) => {
+      return `${acc}\n--color-${name}: ${weightByTheme.normal};`
+    },
+    ""
+  )
+
+  const sizesCssVariableString = Object.entries(FONT_SIZES).reduce(
+    (acc, [name, sizeByTheme]) => {
+      return `${acc}\n--color-${name}: ${sizeByTheme.normal};`
     },
     ""
   )
@@ -85,12 +189,16 @@ const FallbackStyles = () => {
   //   }
   // )
 
-  const wrappedInSelector = `html { ${cssVariableString} }`
+  const wrappedInSelector = `html { ${colorsCssVariableString} ${weightsCssVariableString} ${sizesCssVariableString} }`
 
   return <style>{wrappedInSelector}</style>
 }
 
 export const onRenderBody = ({ setPreBodyComponents, setHeadComponents }) => {
   setHeadComponents(<FallbackStyles />)
-  setPreBodyComponents(<MagicScriptTag />)
+  setPreBodyComponents(
+    <ColorsScript />,
+    <FontWeightsScript />,
+    <FontSizesScript />
+  )
 }
