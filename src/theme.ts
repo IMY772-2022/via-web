@@ -15,14 +15,10 @@ export const COLORS = {
     light: "hsl(250deg, 100%, 50%)", // Purplish-blue
     dark: "hsl(190deg, 100%, 40%)", // Cyan
   },
-  size: {
-    light: "16px",
-    dark: "20px",
-  },
-  weight: {
-    light: "bold",
-    dark: "600",
-  },
+  // weight: {
+  //   light: "bold",
+  //   dark: "600",
+  // },
 }
 
 export const COLOR_MODE_KEY = "color-mode"
@@ -30,27 +26,20 @@ export const INITIAL_COLOR_MODE_CSS_PROP = "--initial-color-mode"
 
 export const FONT_WEIGHTS = {
   text: {
-    light: 400,
-    dark: 600,
-  },
-  primary: {
-    light: 400,
-    dark: 600,
+    light: "lighter",
+    normal: "normal",
+    bold: "bold",
   },
 }
 
-export const FONT_WEIGHT_KEY = "font-weight"
+export const FONT_WEIGHT_MODE_KEY = "font-weight"
 export const INITIAL_FONT_WEIGHT_MODE_CSS_PROP = "--initial-font-weight"
 
 export const FONT_SIZES = {
   size: {
-    light: "16px",
-    dark: "20px",
-    red: "20px",
-  },
-  primary: {
-    light: 400,
-    dark: 600,
+    smaller: "14px",
+    normal: "16px",
+    larger: "20px",
   },
 }
 
