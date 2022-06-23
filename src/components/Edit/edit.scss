@@ -1,6 +1,3 @@
-input {
-  width: auto !important;
-}
 input[type="text"]:focus {
   border: 2px solid #f14668 !important;
 }
@@ -15,18 +12,4 @@ input[type="text"]:focus {
 .card-image > img {
   border-top-left-radius: 32px !important;
   border-top-right-radius: 32px !important;
-}
-
-.labels {
-  padding: 20px;
-  position: relative;
-}
-.labels > p {
-  padding-left: 10px;
-  color: #fff;
-}
-span {
-  padding: 10px !important;
-  max-width: 200px;
-  display: inline-block;
 }

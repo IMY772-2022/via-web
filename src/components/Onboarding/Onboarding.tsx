@@ -18,7 +18,7 @@ const Onboarding: React.FC = () => {
           <div className="is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
             <div className="media">
               <div className="block">
-                <div className="content">
+                <div className="content px-5">
                   <div className="logo">
                     <svg
                       height="130"
@@ -52,7 +52,7 @@ const Onboarding: React.FC = () => {
                     </span>
                   </p>
 
-                  <div className="buttonGroup">
+                  <div className="is-flex my-4 gap-4">
                     <button
                       className="button button-lg is-danger"
                       onClick={redirectToSettings}

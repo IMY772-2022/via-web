@@ -21,22 +21,20 @@ const Item: React.FC<ItemProps> = props => {
   const { filepath } = item
   return (
     <>
-      <div className="card rounded-lg">
-        <div
-          className="card-image item"
-          onKeyDown={accessibleOnClick}
-          role="button"
-          tabIndex={0}
-          onClick={() => {
-            navigate("/edit", { state: { item } })
-          }}
-        >
-          <img
-            className="rounded-md"
-            src={useGetFilePath(filepath)}
-            alt="Stored file from the database"
-          />
-        </div>
+      <div
+        className="card-image item rounded-lg"
+        onKeyDown={accessibleOnClick}
+        role="button"
+        tabIndex={0}
+        onClick={() => {
+          navigate("/edit", { state: { item } })
+        }}
+      >
+        <img
+          className="rounded-md"
+          src={useGetFilePath(filepath)}
+          alt="Stored file from the database"
+        />
       </div>
     </>
   )
