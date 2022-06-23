@@ -1,4 +1,5 @@
 @import "~bulma/bulma.sass";
+@import "bulma-checkradio/dist/css/bulma-checkradio.sass";
 
 @font-face {
   font-family: "open-sans-bold";
@@ -79,10 +80,10 @@
 html,
 body {
   font-family: "open-sans-semibold", sans-serif;
-  font-size: var(--color-size) !important;
+  font-size: var(--size-text) !important;
   font-weight: var(--weight-text) !important;
-  background-color: var(--color-background) !important;
-  color: var(--color-text) !important;
+  // background-color: var(--color-background) !important;
+  // color: var(--color-text) !important;
   transition: all ease-in-out 0.3s;
 }
 
@@ -92,6 +93,11 @@ h3,
 h4,
 h5,
 h6 {
+  font-weight: var(--weight-text) !important;
+}
+
+input,
+button {
   font-weight: var(--weight-text) !important;
 }
 
@@ -171,4 +177,14 @@ h6 {
 
 .gap-8 {
   gap: 2rem;
+}
+.color-primary {
+  color: #f55b6c !important;
+}
+
+// Override weird padding causing radio button text to be misaligned
+.is-checkradio[type="radio"] + label,
+.is-checkradio[type="checkbox"] + label {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
 }
