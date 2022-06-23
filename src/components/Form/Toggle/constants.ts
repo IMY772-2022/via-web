@@ -11,7 +11,7 @@ export enum FontWeight {
 }
 
 export enum FontSize {
-  smaller = "14px",
-  normal = "16px",
-  larger = "20px",
+  smaller = "smaller",
+  normal = "normal",
+  larger = "larger",
 }
