@@ -79,11 +79,20 @@
 html,
 body {
   font-family: "open-sans-semibold", sans-serif;
-  font-size: var(--color-size);
-  font-weight: var(--color-weight);
-  background-color: var(--color-background);
-  color: var(--color-text);
+  font-size: var(--color-size) !important;
+  font-weight: var(--weight-text) !important;
+  background-color: var(--color-background) !important;
+  color: var(--color-text) !important;
   transition: all ease-in-out 0.3s;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: var(--weight-text) !important;
 }
 
 .grid {
