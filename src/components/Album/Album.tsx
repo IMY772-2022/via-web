@@ -38,12 +38,12 @@ const Album: React.FC = () => {
   return (
     <>
       <h5 className="is-size-5">My Album</h5>
-      <div className="">
+      <div>
         <h6 className="is-size-6">Total items: {dynamodDBitems.length}</h6>
-        <div className="grid">
+        <div className="grid gap-4 mt-4">
           {sortedDynamoDBItems.map(item => {
             return (
-              <div key={item.id} className="column">
+              <div key={item.id} className="">
                 <Item imageRecord={item} dynamoDbItems={dynamodDBitems} />
               </div>
             )
