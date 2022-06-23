@@ -1,9 +1,8 @@
 module.exports = {
   ci: {
-    // TODO assertions add assertions
-    // assert: {
-    //   preset: "lighthouse:recommended",
-    // },
+    assert: {
+      preset: "lighthouse:recommended",
+    },
     collect: {
       staticDistDir: "./public",
       autodiscoverUrlBlocklist: [
