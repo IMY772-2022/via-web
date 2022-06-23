@@ -251,7 +251,6 @@ const Analysis: React.FC = () => {
               </div>
             </div>
           </div>
-
           {authContext.userId !== null && !isLoading.image && imageData ? (
             <button className="button is-danger" onClick={saveImageRecord}>
               {isLoading.saveButton ? (
