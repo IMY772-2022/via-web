@@ -1,8 +1,8 @@
 import React from "react"
-import DarkToggle from "../Toggle/ModeToggle"
+import ModesToggle from "../Form/Toggle/Toggle"
 
 const Settings: React.FC = () => {
-  return <DarkToggle />
+  return <ModesToggle />
 }
 
 export default Settings
