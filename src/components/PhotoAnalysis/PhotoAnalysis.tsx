@@ -139,6 +139,13 @@ const Analysis: React.FC = () => {
 
   const renderImageLabels = () => {
     if (isLoading.image) return <span className="loader"></span>
+    else if (labelData.length === 0 && imageData)
+      return (
+        <p>
+          {" "}
+          Sorry, we couldn&apos;t process this image, please try another one
+        </p>
+      )
     else if (imageData) return labelImage(labelData, imageData)
     else return null
   }
