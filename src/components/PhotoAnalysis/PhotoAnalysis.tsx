@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 import {
   Predictions,
   IdentifyLabelsOutput,
@@ -11,6 +11,7 @@ import "./photoAnalysis.scss"
 import TextToSpeech from "./TextToSpeech/TextToSpeech"
 import { isValidFileType, labelImage, uploadToS3, writeToDynamo } from "./utils"
 import Alert, { NotificationType } from "../Alert/Alert"
+import { AuthContext } from "../../context/store"
 
 export interface LabelType {
   name: string
@@ -32,6 +33,7 @@ export interface ImageData {
 }
 
 const Analysis: React.FC = () => {
+  const authContext = useContext(AuthContext)
   const [rekognitionResponse, setRekognitionResponse] = useState<
     IdentifyLabelsOutput | string
   >("")
@@ -107,7 +109,7 @@ const Analysis: React.FC = () => {
     if (!isLoading.image && rekognitionResponse === "")
       return (
         <div>
-          <p className="instructions">Take or upload photo</p>
+          <p className="instructions">Take or upload a photo</p>
           <div className="cameraButton">
             <div className="is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
               <label className="file-label">
@@ -230,7 +232,7 @@ const Analysis: React.FC = () => {
             </div>
           </div>
 
-          {!isLoading.image && imageData ? (
+          {authContext.userId !== null && !isLoading.image && imageData ? (
             <button className="button is-danger" onClick={saveImageRecord}>
               {isLoading.saveButton ? (
                 <span className="loader"></span>
