@@ -73,16 +73,16 @@ const setFontSizeModeByTheme = () => {
 
   const hasUsedToggle = typeof persistedPreference === "string"
 
-  const fontWeightMode = hasUsedToggle ? persistedPreference : "normal"
+  const fontSizeMode = hasUsedToggle ? persistedPreference : "normal"
 
   let root = document.documentElement
 
-  root.style.setProperty(fontSizeModeCssProp, fontWeightMode)
+  root.style.setProperty(fontSizeModeCssProp, fontSizeMode)
 
-  Object.entries(fontSizes).forEach(([name, weightByTheme]) => {
+  Object.entries(fontSizes).forEach(([name, sizeByTheme]) => {
     const cssVarName = `--size-${name}`
 
-    root.style.setProperty(cssVarName, weightByTheme[fontWeightMode])
+    root.style.setProperty(cssVarName, sizeByTheme[fontSizeMode])
   })
 }
 
@@ -164,30 +164,17 @@ const FallbackStyles = () => {
 
   const weightsCssVariableString = Object.entries(FONT_WEIGHTS).reduce(
     (acc, [name, weightByTheme]) => {
-      return `${acc}\n--color-${name}: ${weightByTheme.normal};`
+      return `${acc}\n--weight-${name}: ${weightByTheme.normal};`
     },
     ""
   )
 
   const sizesCssVariableString = Object.entries(FONT_SIZES).reduce(
     (acc, [name, sizeByTheme]) => {
-      return `${acc}\n--color-${name}: ${sizeByTheme.normal};`
+      return `${acc}\n--size-${name}: ${sizeByTheme.normal};`
     },
     ""
   )
-
-  // const cssVariableString = Object.entries(FONT_SIZES).reduce(
-  //   (acc, [name, sizeByMode]) => {
-  //     return `${acc}\n--font-${name}: ${sizeByMode.light};`
-  //   },
-  //   ""
-  // )
-
-  // const cssTextVariableString = Object.entries(FONT_WEIGHTS).reduce(
-  //   (acc, [name, weightByTheme]) => {
-  //     return `${acc}\n--weight-${name}: ${weightByTheme.light};`
-  //   }
-  // )
 
   const wrappedInSelector = `html { ${colorsCssVariableString} ${weightsCssVariableString} ${sizesCssVariableString} }`
 
