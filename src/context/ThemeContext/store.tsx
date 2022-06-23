@@ -1,3 +1,8 @@
+// This code was heavily inspired by Josh Comeau and his
+// tutorial on his blog, accessible at:
+
+// https://www.joshwcomeau.com/react/dark-mode/
+
 import React, { createContext, useEffect, useMemo, useState } from "react"
 import {
   COLORS,
