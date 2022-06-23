@@ -1,11 +1,10 @@
-import React, { useState } from "react"
+import { faEnvelope, faEyeSlash } from "@fortawesome/free-regular-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faEnvelope } from "@fortawesome/free-regular-svg-icons"
-import { faEyeSlash } from "@fortawesome/free-regular-svg-icons"
 import { Link } from "gatsby"
-import Alert from "../Alert/Alert"
+import React, { useEffect, useState } from "react"
+import Alert, { NotificationType } from "../Alert/Alert"
+import { useSignIn } from "./hooks"
 
-import { signIn } from "./utils"
 import "./SignIn.scss"
 
 export interface User {
@@ -14,15 +13,13 @@ export interface User {
 }
 
 const SignIn: React.FC = () => {
+  const { signIn, error, loading } = useSignIn()
+
   const [formValues, setFormValues] = useState({
     username: "",
     password: "",
   })
 
-  const [displayError, setDisplayError] = useState({
-    isError: false,
-    message: "",
-  })
   const updateForm = (event: any) => {
     setFormValues({
       ...formValues,
@@ -30,29 +27,33 @@ const SignIn: React.FC = () => {
     })
   }
 
-  const signin = () => {
-    setDisplayError({
-      ...displayError,
-      isError: false,
-    })
+  const submitForm = async () => {
     const user = {
       username: formValues.username,
       password: formValues.password,
     }
-    signIn(user).then(message => {
-      setDisplayError({
-        isError: true,
-        message: message as string,
-      })
-    })
+
+    try {
+      await signIn(user)
+    } catch (error) {
+      console.warn(error)
+    }
   }
+
+  useEffect(() => {
+    console.warn(error)
+  }, [error])
+
   return (
     <div className="card">
       <div className="card-content">
         <div className="content">
           <div className="form">
-            {displayError.isError ? (
-              <Alert error={displayError.message} />
+            {error ? (
+              <Alert
+                message={error}
+                notificationType={NotificationType.isError}
+              />
             ) : null}
             <div className="field">
               <label className="label" htmlFor="email">
@@ -93,7 +94,10 @@ const SignIn: React.FC = () => {
             </div>
             <div className="field is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
               <p className="control">
-                <button className="button" onClick={signin}>
+                <button
+                  className={`button signin ${loading ? " is-loading " : ""}`}
+                  onClick={submitForm}
+                >
                   Sign in
                 </button>
               </p>

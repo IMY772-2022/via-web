@@ -1,22 +1,18 @@
-p.instructions{
+p.instructions {
   font-style: italic;
   font-size: large;
 }
 
-.cameraButton{
+.cameraButton {
   position: absolute;
   bottom: -40px;
   left: 50%;
   right: 50%;
 }
 
-Button.button{
-  margin: 10px;
-}
-
 .cameraButton span.file-cta {
   border-radius: 100px;
-  border: 13px solid #F55B6C;
+  border: 13px solid #f55b6c;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -27,7 +23,47 @@ Button.button{
   cursor: hand;
 }
 
-.card-image > img{
+.card-image > img {
   border-top-left-radius: 32px !important;
   border-top-right-radius: 32px !important;
+}
+
+.analysis-card {
+  background-color: hsla(248, 21%, 20%, 0.94) !important;
+  border-radius: 34px !important;
+  height: 100%;
+  min-height: 550px;
+}
+
+.rightControls {
+  display: flex;
+  justify-content: end;
+}
+
+.controls span.file-cta {
+  justify-content: center;
+  border: none;
+  border-radius: 100px;
+  margin: 7px;
+  background-color: #e5e5e5;
+  height: 55px;
+  width: 55px;
+}
+
+.iconCam {
+  color: #f55b6c;
+}
+
+.controls button {
+  justify-content: center;
+  border: none;
+  border-radius: 100px;
+  margin: 7px;
+  background-color: #e5e5e5;
+  height: 55px;
+  width: 55px;
+}
+
+.controls Button:hover {
+  background-color: hsl(0, 0%, 93%);
 }

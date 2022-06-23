@@ -1,15 +1,18 @@
 import React from "react"
+import { QueryClient, QueryClientProvider } from "react-query"
+
 import Edit from "../components/Edit/Edit"
-import { Layout } from "../components/Layout/Layout"
+import Seo from "../components/Seo/Seo"
+
+const queryClient = new QueryClient()
 
 export default function EditPage({ location }: any) {
   return (
-    <div className="section">
-      <div className="container is-fluid">
-        <Layout pageTitle="">
-          <Edit recordData={location} />
-        </Layout>
-      </div>
-    </div>
+    <>
+      <Seo title="Edit" />
+      <QueryClientProvider client={queryClient}>
+        <Edit recordData={location} />
+      </QueryClientProvider>
+    </>
   )
 }

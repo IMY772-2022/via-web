@@ -1,16 +1,16 @@
 import React, { useState } from "react"
 
 export enum NotificationType {
-  isPrimary = "is-primary",
-  isDanger = "is-danger",
+  isSuccess = "is-success",
+  isError = "is-danger",
 }
 interface ErrorProps {
-  error: string
+  message: string
   notificationType?: NotificationType
 }
 
 const Alert: React.FC<ErrorProps> = ({
-  error,
+  message,
   notificationType = "is-light",
 }) => {
   const [isError, setError] = useState(true)
@@ -20,9 +20,9 @@ const Alert: React.FC<ErrorProps> = ({
   return (
     <>
       {isError ? (
-        <div className={`notification is-info ${notificationType}`}>
+        <div className={`notification ${notificationType}`}>
           <button className="delete" onClick={dismissError}></button>
-          {error}
+          {message}
         </div>
       ) : null}
     </>

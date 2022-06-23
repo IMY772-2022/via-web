@@ -1,35 +1,38 @@
 .analysis-card {
-    background-color: hsla(248, 21%, 20%, 0.94) !important;
-    border-radius: 34px !important;
-    height: 100%;
-    min-height: 550px;
-    padding: 24px;
-  }
-
-.mainTitle{
-    font-size: 25px;
-    text-align: center;
+  background-color: hsla(248, 21%, 20%, 0.94) !important;
+  border-radius: 34px !important;
+  height: 100%;
+  min-height: 550px;
+  padding: 24px;
 }
 
-.mainBody{
-    text-align: center
+.mainTitle {
+  text-align: center;
+  color: #f55b6c;
 }
 
-button.button{
-    border-radius: 12px;
-    background-color: #f55b6c;
-    color: white;
-    margin: 10px;
+.mainBody {
+  text-align: center;
 }
 
-.buttonGroup{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+button.button {
+  border-radius: 12px;
+  background-color: #f55b6c;
+  color: white;
 }
 
-.logo{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.buttonGroup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.redirectText {
+  color: #f55b6c;
 }

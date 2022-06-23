@@ -2,10 +2,11 @@ import React, { useState } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons"
 import { faEye } from "@fortawesome/free-regular-svg-icons"
-import Alert from "../Alert/Alert"
+import Alert, { NotificationType } from "../Alert/Alert"
 
 import { confirmSignUp, signUp } from "./utils"
 import "./Register.scss"
+import { Link } from "gatsby"
 
 const Register: React.FC = () => {
   const [displaySignUpForm, setDisplaySignUpForm] = useState(true)
@@ -64,7 +65,10 @@ const Register: React.FC = () => {
         <div className="content">
           <div className="form">
             {displayError.isError ? (
-              <Alert error={displayError.message} />
+              <Alert
+                message={displayError.message}
+                notificationType={NotificationType.isError}
+              />
             ) : null}
             <div className="field">
               <label className="label" htmlFor="email">
@@ -140,7 +144,10 @@ const Register: React.FC = () => {
           <div className="form">
             <div className="field">
               {displayError.isError ? (
-                <Alert error={displayError.message} />
+                <Alert
+                  message={displayError.message}
+                  notificationType={NotificationType.isError}
+                />
               ) : null}
               <p>
                 {" "}
@@ -171,6 +178,11 @@ const Register: React.FC = () => {
                   </button>
                 </p>
               </div>
+            </div>
+            <div className="field is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
+              <p className="signinPage">
+                Continue to <Link to="/signin">Sign in</Link> page
+              </p>
             </div>
           </div>
         </div>

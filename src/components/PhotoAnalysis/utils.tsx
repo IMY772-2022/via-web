@@ -62,7 +62,7 @@ export const uploadToS3 = (image: File) => {
     })
     return response
   } catch (error) {
-    ;<Alert error={error as string} />
+    ;<Alert message={error as string} />
   }
 }
 
@@ -71,7 +71,7 @@ export const getFilePathFromS3 = (fileName: string) => {
     const response = Storage.get(fileName)
     return response
   } catch (error) {
-    ;<Alert error={error as string} />
+    ;<Alert message={error as string} />
   }
 }
 
@@ -119,6 +119,7 @@ export const updateDynamo = async (itemId: string, labels: LabelType[]) => {
         },
       },
     })
+    return "Successfully updated labels"
   } catch (error) {
     return error as string
   }
