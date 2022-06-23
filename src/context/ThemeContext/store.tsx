@@ -7,6 +7,7 @@ import React, { createContext, useEffect, useMemo, useState } from "react"
 import {
   COLORS,
   COLOR_MODE_KEY,
+  FONT_SIZES,
   FONT_SIZE_MODE_KEY,
   FONT_WEIGHTS,
   FONT_WEIGHT_MODE_KEY,
@@ -57,15 +58,17 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
   useEffect(() => {
     const root = window.document.documentElement
 
-    const initialColorValue = root.style.getPropertyValue(
-      INITIAL_COLOR_MODE_CSS_PROP
-    )
-    const initialFontWeightValue = root.style.getPropertyValue(
-      INITIAL_FONT_WEIGHT_MODE_CSS_PROP
-    )
-    const initialFontSizeModeValue = root.style.getPropertyValue(
-      INITIAL_FONT_SIZE_MODE_CSS_PROP
-    )
+    const initialColorValue =
+      localStorage.getItem(COLOR_MODE_KEY) ||
+      root.style.getPropertyValue(INITIAL_COLOR_MODE_CSS_PROP)
+
+    const initialFontWeightValue =
+      localStorage.getItem(FONT_WEIGHT_MODE_KEY) ||
+      root.style.getPropertyValue(INITIAL_FONT_WEIGHT_MODE_CSS_PROP)
+
+    const initialFontSizeModeValue =
+      localStorage.getItem(FONT_SIZE_MODE_KEY) ||
+      root.style.getPropertyValue(INITIAL_FONT_SIZE_MODE_CSS_PROP)
 
     rawSetColorMode(initialColorValue)
     rawSetFontWeightMode(initialFontWeightValue)
@@ -106,7 +109,7 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
 
       localStorage.setItem(FONT_SIZE_MODE_KEY, newValue)
 
-      Object.entries(FONT_WEIGHTS).forEach(([name, sizeByTheme]) => {
+      Object.entries(FONT_SIZES).forEach(([name, sizeByTheme]) => {
         const cssVarName = `--size-${name}`
 
         root.style.setProperty(cssVarName, sizeByTheme[newValue])
