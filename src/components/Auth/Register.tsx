@@ -113,7 +113,7 @@ const Register: React.FC = () => {
                 </span>
               </div>
             </div>
-            <div>
+            <div className="field is-size-7 color-primary">
               Passwords must contain 8 characters and at least 1 uppercase, 1
               lowercase, 1 number and 1 special character.
             </div>
