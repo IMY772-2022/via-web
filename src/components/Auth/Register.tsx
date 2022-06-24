@@ -14,6 +14,7 @@ const Register: React.FC = () => {
   const [formValues, setFormValues] = useState({
     username: "",
     password: "",
+    confirmPassword: "",
     code: "",
   })
   const [displayError, setDisplayError] = useState({
@@ -28,7 +29,46 @@ const Register: React.FC = () => {
     })
   }
 
+  const regex =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*d)(?=.*[@$!%*?&])[A-Za-zd@$!%*?&]{8,}$/
+
   const signin = () => {
+    setDisplayError({
+      ...displayError,
+      isError: false,
+    })
+    if (
+      regex.test(formValues.password) &&
+      regex.test(formValues.confirmPassword)
+    ) {
+      register()
+    } else if (formValues.password !== formValues.confirmPassword) {
+      return setDisplayError({
+        isError: true,
+        message: "passwords do not match",
+      })
+    } else {
+      return setDisplayError({
+        isError: true,
+        message: "Please refer to password specifications",
+      })
+    }
+  }
+
+  const submitConfirmation = () => {
+    setDisplayError({
+      ...displayError,
+      isError: false,
+    })
+    confirmSignUp(formValues.username, formValues.code).then(message => {
+      setDisplayError({
+        isError: true,
+        message: message as string,
+      })
+    })
+  }
+
+  const register = () => {
     setDisplayError({
       ...displayError,
       isError: false,
@@ -44,19 +84,6 @@ const Register: React.FC = () => {
       })
     })
     setDisplaySignUpForm(false)
-  }
-
-  const submitConfirmation = () => {
-    setDisplayError({
-      ...displayError,
-      isError: false,
-    })
-    confirmSignUp(formValues.username, formValues.code).then(message => {
-      setDisplayError({
-        isError: true,
-        message: message as string,
-      })
-    })
   }
 
   const signUpForm = (
@@ -88,6 +115,10 @@ const Register: React.FC = () => {
                 </span>
               </div>
             </div>
+            <div>
+              Passwords must contain 8 characters and at least 1 uppercase, 1
+              lowercase, 1 number and 1 special character.
+            </div>
             <div className="field">
               <label className="label" htmlFor="password">
                 Password
@@ -117,6 +148,7 @@ const Register: React.FC = () => {
                   placeholder="Confirm password"
                   name="confirmPassword"
                   id="confirmPassword"
+                  onChange={e => updateForm(e)}
                 />
                 <span className="icon is-small is-right">
                   <FontAwesomeIcon icon={faEye} fontSize="15" />
