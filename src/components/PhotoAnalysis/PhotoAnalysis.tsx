@@ -225,7 +225,7 @@ const Analysis: React.FC = () => {
                           />
                         ) : null}
                         <br />
-                        {authContext.userId !== null &&
+                         {authContext.userId !== null &&
                         !isLoading.image &&
                         imageData ? (
                           <button
