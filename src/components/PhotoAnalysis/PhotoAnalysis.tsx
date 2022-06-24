@@ -241,6 +241,7 @@ const Analysis: React.FC = () => {
                         ) : null}
                         {authContext.userId == null &&
                         !isLoading.image &&
+                        labelData.length > 0 &&
                         imageData ? (
                           <p> Sign in to save photo analysis results </p>
                         ) : null}
