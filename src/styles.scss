@@ -115,12 +115,22 @@ button {
   }
 }
 
+.grid-sm {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  @media only screen and (max-width: 640px) {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+}
+
 .rounded-md {
   border-radius: 24px !important;
 }
 
 .rounded-lg {
   border-radius: 34px !important;
+  height: 100%;
 }
 
 .button-sm {
@@ -133,6 +143,45 @@ button {
   max-width: 200px;
 }
 
+.button {
+  text-align: center !important;
+}
+.gap-0 {
+  gap: 0rem;
+}
+
+.gap-1 {
+  gap: 0.25rem;
+}
+
+.gap-2 {
+  gap: 0.5rem;
+}
+
+.gap-3 {
+  gap: 0.75rem;
+}
+
+.gap-4 {
+  gap: 1rem;
+}
+
+.gap-5 {
+  gap: 1.25rem;
+}
+
+.gap-6 {
+  gap: 1.5rem;
+}
+
+.gap-7 {
+  gap: 1.75rem;
+}
+
+.gap-8 {
+  gap: 2rem;
+}
+
 .color-primary {
   color: #f55b6c !important;
 }
@@ -142,4 +191,13 @@ button {
 .is-checkradio[type="checkbox"] + label {
   padding-top: 0 !important;
   padding-bottom: 0 !important;
+
+.is-checkradio[type="radio"] + label::after,
+.is-checkradio[type="radio"] + label:after {
+  background: #f55b6c;
 }
+
+.container {
+  padding: 10px;
+}
+

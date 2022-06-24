@@ -1,6 +1,6 @@
-p.instructions {
+h4.instructions {
   font-style: italic;
-  font-size: large;
+  color: #fff !important;
 }
 
 .cameraButton {
@@ -8,10 +8,6 @@ p.instructions {
   bottom: -40px;
   left: 50%;
   right: 50%;
-}
-
-Button.button {
-  margin: 10px;
 }
 
 .cameraButton span.file-cta {
@@ -31,15 +27,18 @@ Button.button {
   border-top-left-radius: 32px !important;
   border-top-right-radius: 32px !important;
 }
+
 .analysis-card {
   background-color: hsla(248, 21%, 20%, 0.94) !important;
   border-radius: 34px !important;
   height: 100%;
   min-height: 550px;
+  margin: 10px !important;
 }
+
 .rightControls {
   display: flex;
-  justify-content: end;
+  justify-content: left;
 }
 
 .controls span.file-cta {

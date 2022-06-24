@@ -8,7 +8,6 @@ import { navigate } from "gatsby"
 import Alert, { NotificationType } from "../Alert/Alert"
 import ConfirmModal from "../ConfirmModal/ConfirmModal"
 
-
 type Props = {
   recordData: any
 }
@@ -76,49 +75,52 @@ const Edit: React.FC<Props> = ({ recordData }) => {
                       alt="Uploaded preview"
                     />
                   </div>
-                  <div className="labels">
-                    <p>Click in the boxes below to edit the labels</p>
-                    {labelsArray.map((label: LabelType, index: number) => {
-                      return (
-                        <span key={index}>
-                          <input
-                            className="input"
-                            key={index}
-                            type="text"
-                            value={label.name}
-                            onChange={updateLabel(index)}
-                          />
-                        </span>
-                      )
-                    })}
-                  </div>
-                  <div className="is-flex is-align-self-auto">
-                    <button
-                      className="button is-danger save-button is-align-items-center"
-                      onClick={UpdateDynamoRecord}
-                    >
-                      {isLoading ? <span className="loader"></span> : "Save"}
-                    </button>
-                    <br />
-                    <button
-                      className="button is-danger is-align-items-center"
-                      onClick={deleteItem}
-                    >
-                      Delete
-                    </button>
+                  <div className="px-5 my-4">
+                    <p className="has-text-white has-text-weight-medium">
+                      Click in the boxes below to edit the labels
+                    </p>
+                    <div className="grid-sm gap-4">
+                      {labelsArray.map((label: LabelType, index: number) => {
+                        return (
+                          <span key={index}>
+                            <input
+                              className="input"
+                              key={index}
+                              type="text"
+                              value={label.name}
+                              onChange={updateLabel(index)}
+                            />
+                          </span>
+                        )
+                      })}
+                    </div>
+                    <div className="is-flex my-4 gap-4">
+                      <button
+                        className="button is-danger save-button is-align-items-center"
+                        onClick={UpdateDynamoRecord}
+                      >
+                        {isLoading ? <span className="loader"></span> : "Save"}
+                      </button>
+                      <button
+                        className="button is-danger is-align-items-center"
+                        onClick={deleteItem}
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <ConfirmModal
+          open={modalOpen}
+          setOpen={setModalOpen}
+          action={confirmDelete}
+          confirmationMessage={"Are you sure you want to delete this image?"}
+        />
       </div>
-      <ConfirmModal
-        open={modalOpen}
-        setOpen={setModalOpen}
-        action={confirmDelete}
-        confirmationMessage={"Are you sure you want to delete this image?"}
-      />
     </div>
   )
 }

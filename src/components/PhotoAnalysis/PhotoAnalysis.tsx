@@ -107,7 +107,7 @@ const Analysis: React.FC = () => {
     if (!isLoading.image && rekognitionResponse === "")
       return (
         <div>
-          <p className="instructions">Take or upload photo</p>
+          <h4 className="is-size-5 mb-1 instructions">Take or upload photo</h4>
           <div className="cameraButton">
             <div className="is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
               <label className="file-label">
@@ -139,6 +139,13 @@ const Analysis: React.FC = () => {
 
   const renderImageLabels = () => {
     if (isLoading.image) return <span className="loader"></span>
+    else if (labelData.length === 0 && imageData)
+      return (
+        <p>
+          {" "}
+          Sorry, we couldn&apos;t process this image, please try another one
+        </p>
+      )
     else if (imageData) return labelImage(labelData, imageData)
     else return null
   }
@@ -215,6 +222,19 @@ const Analysis: React.FC = () => {
                             labels={labels}
                           />
                         ) : null}
+                        <br />
+                        {!isLoading.image && imageData ? (
+                          <button
+                            className="button is-dangeris-align-items-center"
+                            onClick={saveImageRecord}
+                          >
+                            {isLoading.saveButton ? (
+                              <span className="loader"></span>
+                            ) : (
+                              "Save results"
+                            )}
+                          </button>
+                        ) : null}
                       </div>
                     </div>
                   </div>
@@ -222,16 +242,6 @@ const Analysis: React.FC = () => {
               </div>
             </div>
           </div>
-
-          {!isLoading.image && imageData ? (
-            <button className="button is-danger" onClick={saveImageRecord}>
-              {isLoading.saveButton ? (
-                <span className="loader"></span>
-              ) : (
-                "Save results"
-              )}
-            </button>
-          ) : null}
         </div>
       </div>
     </div>

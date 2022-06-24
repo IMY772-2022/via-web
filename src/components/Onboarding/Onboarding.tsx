@@ -8,17 +8,17 @@ const Onboarding: React.FC = () => {
   }
 
   const redirectToSettings = () => {
-    navigate("/")
+    navigate("/settings")
   }
 
   return (
     <div>
-      <div className="card analysis-card has-text-light">
+      <div className="card">
         <div className="media-content">
           <div className="is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
             <div className="media">
               <div className="block">
-                <div className="content">
+                <div className="content px-5">
                   <div className="logo">
                     <svg
                       height="130"
@@ -29,7 +29,7 @@ const Onboarding: React.FC = () => {
                     >
                       <path
                         d="M6 39L44 1M22 23C18.5 19 22.5 13 28.5 16.5M17.9998 26C10.9998 17.5 21.4998 5.50004 30.9998 13M1 20C18 2 32.5 2.99998 49 20C32.5 37 18 38 1 20Z"
-                        stroke="white"
+                        stroke="black"
                         strokeWidth="2"
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -52,15 +52,15 @@ const Onboarding: React.FC = () => {
                     </span>
                   </p>
 
-                  <div className="buttonGroup">
+                  <div className="is-flex my-4 gap-4">
                     <button
-                      className="button button-lg is-danger"
+                      className="button button-lg is-danger has-text-centered"
                       onClick={redirectToSettings}
                     >
                       Yes
                     </button>
                     <button
-                      className="button button-lg is-danger"
+                      className="button button-lg is-danger is-align-content-center"
                       onClick={redirectToHome}
                     >
                       No
