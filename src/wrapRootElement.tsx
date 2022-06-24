@@ -1,7 +1,8 @@
 import React from "react"
 import { QueryClient, QueryClientProvider } from "react-query"
 
-import { AuthProvider } from "./context/store"
+import { AuthProvider } from "./context/AuthContext/store"
+import { ThemeProvider } from "./context/ThemeContext/store"
 
 const queryClient = new QueryClient()
 
@@ -14,11 +15,13 @@ const WrapRootElement: React.FC<RootElementProps> = ({
 }: RootElementProps) => {
   return (
     <>
-      <AuthProvider>
-        <QueryClientProvider client={queryClient}>
-          {element}
-        </QueryClientProvider>
-      </AuthProvider>
+      <ThemeProvider>
+        <AuthProvider>
+          <QueryClientProvider client={queryClient}>
+            {element}
+          </QueryClientProvider>
+        </AuthProvider>
+      </ThemeProvider>
     </>
   )
 }
