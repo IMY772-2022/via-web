@@ -3,7 +3,7 @@ import React from "react"
 import Register from "../components/Auth/Register"
 import Seo from "../components/Seo/Seo"
 
-const SignInPage = () => {
+const RegisterPage = () => {
   return (
     <>
       <Seo title="Register" />
@@ -12,4 +12,4 @@ const SignInPage = () => {
   )
 }
 
-export default SignInPage
+export default RegisterPage
