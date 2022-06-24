@@ -22,14 +22,14 @@ const ModesToggle: React.FC = () => {
 
   return (
     <>
-      <div>
-        <div className="card analysis-card has-text-light p-5">
+      <div className="container">
+        <div className="card p-5">
           <div className="media-content">
             <div className="media">
               <div className="block">
                 <div className="content">
                   <div>
-                    <h4 className="is-size-4 mb-1 color-primary">Font Size</h4>
+                    <h4 className="is-size-5 mb-1 color-primary">Font Size</h4>
                     <RadioGroup>
                       <Radio
                         id="radio-size-small"
@@ -55,27 +55,27 @@ const ModesToggle: React.FC = () => {
                     </RadioGroup>
                   </div>
                   <div className="mt-4">
-                    <h4 className="is-size-4 mb-1 color-primary">
+                    <h4 className="is-size-5 mb-1 color-primary">
                       Font Weight
                     </h4>
                     <RadioGroup>
                       <Radio
                         id="radio-small"
-                        label="Smaller"
+                        label="Light"
                         name="radio-small"
                         onClick={() => setFontWeightMode(FontWeight.light)}
                         checked={activeWeight === FontWeight.light}
                       />
                       <Radio
                         id="radio-normal"
-                        label="Normal"
+                        label="Regular"
                         name="radio-normal"
                         onClick={() => setFontWeightMode(FontWeight.normal)}
                         checked={activeWeight === FontWeight.normal}
                       />
                       <Radio
                         id="radio-larger"
-                        label="Larger"
+                        label="Bold"
                         name="radio-larger"
                         onClick={() => setFontWeightMode(FontWeight.bold)}
                         checked={activeWeight === FontWeight.bold}
