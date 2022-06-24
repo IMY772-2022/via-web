@@ -49,6 +49,27 @@ export async function signOut() {
   }
 }
 
+export async function forgotPassword(username: string) {
+  try {
+    const password = await Auth.forgotPassword(username)
+    if (password) {
+      return "Successfully sent reset code to your email"
+    }
+  } catch (error) {
+    return JSON.stringify("error")
+  }
+}
+
+export async function setNewPassword(user: User, code: string) {
+  const { username, password } = user
+  try {
+    await Auth.forgotPasswordSubmit(username, code, password)
+    return "Successfully reset password"
+  } catch (error) {
+    return JSON.stringify(error)
+  }
+}
+
 const isBrowser = typeof window !== "undefined"
 
 export const fetchUser = () => {
