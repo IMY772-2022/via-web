@@ -12,14 +12,12 @@ export const Layout = (props: LayoutProps) => {
   const heading = <h1>{pageTitle}</h1>
   return (
     <div className="container">
-      <div className="is-flex is-flex-direction-column is-align-items-center has-text-left-mobile">
-        <Navigation />
+      <Navigation />
 
-        <main>
-          {heading}
-          {children}
-        </main>
-      </div>
+      <main>
+        {heading}
+        {children}
+      </main>
     </div>
   )
 }
