@@ -14,6 +14,7 @@ const Register: React.FC = () => {
   const [formValues, setFormValues] = useState({
     username: "",
     password: "",
+    confirmPassword: "",
     code: "",
   })
   const [displayError, setDisplayError] = useState({
@@ -28,11 +29,35 @@ const Register: React.FC = () => {
     })
   }
 
-  const signin = () => {
+  const dismissError = () => {
     setDisplayError({
-      ...displayError,
       isError: false,
+      message: "",
     })
+  }
+
+  const regex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
+
+  const signin = () => {
+    if (
+      regex.test(formValues.password) &&
+      regex.test(formValues.confirmPassword)
+    ) {
+      register()
+    } else if (formValues.password !== formValues.confirmPassword) {
+      return setDisplayError({
+        isError: true,
+        message: "passwords do not match",
+      })
+    } else {
+      return setDisplayError({
+        isError: true,
+        message: "Please refer to password specifications",
+      })
+    }
+  }
+
+  const register = () => {
     const user = {
       username: formValues.username,
       password: formValues.password,
@@ -65,10 +90,10 @@ const Register: React.FC = () => {
         <div className="content">
           <div className="form">
             {displayError.isError ? (
-              <Alert
-                message={displayError.message}
-                notificationType={NotificationType.isError}
-              />
+              <div className={`notification is-danger`}>
+                <button className="delete" onClick={dismissError}></button>
+                {displayError.message}
+              </div>
             ) : null}
             <div className="field">
               <label className="label" htmlFor="email">
@@ -87,6 +112,10 @@ const Register: React.FC = () => {
                   <FontAwesomeIcon icon={faEnvelope} fontSize="15" />
                 </span>
               </div>
+            </div>
+            <div className="field is-size-7 color-primary">
+              Passwords must contain 8 characters and at least 1 uppercase, 1
+              lowercase, 1 number and 1 special character.
             </div>
             <div className="field">
               <label className="label" htmlFor="password">
@@ -117,6 +146,7 @@ const Register: React.FC = () => {
                   placeholder="Confirm password"
                   name="confirmPassword"
                   id="confirmPassword"
+                  onChange={e => updateForm(e)}
                 />
                 <span className="icon is-small is-right">
                   <FontAwesomeIcon icon={faEye} fontSize="15" />
