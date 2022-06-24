@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 import {
   Predictions,
   IdentifyLabelsOutput,
@@ -11,6 +11,7 @@ import "./photoAnalysis.scss"
 import TextToSpeech from "./TextToSpeech/TextToSpeech"
 import { isValidFileType, labelImage, uploadToS3, writeToDynamo } from "./utils"
 import Alert, { NotificationType } from "../Alert/Alert"
+import { AuthContext } from "../../context/AuthContext/store"
 
 export interface LabelType {
   name: string
@@ -32,6 +33,7 @@ export interface ImageData {
 }
 
 const Analysis: React.FC = () => {
+  const authContext = useContext(AuthContext)
   const [rekognitionResponse, setRekognitionResponse] = useState<
     IdentifyLabelsOutput | string
   >("")
@@ -223,9 +225,11 @@ const Analysis: React.FC = () => {
                           />
                         ) : null}
                         <br />
-                        {!isLoading.image && imageData ? (
+                         {authContext.userId !== null &&
+                        !isLoading.image &&
+                        imageData ? (
                           <button
-                            className="button is-dangeris-align-items-center"
+                            className="button is-danger"
                             onClick={saveImageRecord}
                           >
                             {isLoading.saveButton ? (
@@ -234,6 +238,12 @@ const Analysis: React.FC = () => {
                               "Save results"
                             )}
                           </button>
+                        ) : null}
+                        {authContext.userId == null &&
+                        !isLoading.image &&
+                        labelData.length > 0 &&
+                        imageData ? (
+                          <p> Sign in to save photo analysis results </p>
                         ) : null}
                       </div>
                     </div>
