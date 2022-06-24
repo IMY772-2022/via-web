@@ -142,7 +142,9 @@ button {
   width: 100%;
   max-width: 200px;
 }
-
+.button {
+  text-align: center !important;
+}
 .gap-0 {
   gap: 0rem;
 }
@@ -187,4 +189,13 @@ button {
 .is-checkradio[type="checkbox"] + label {
   padding-top: 0 !important;
   padding-bottom: 0 !important;
+}
+
+.is-checkradio[type="radio"] + label::after,
+.is-checkradio[type="radio"] + label:after {
+  background: #f55b6c;
+}
+
+.container {
+  padding: 10px;
 }

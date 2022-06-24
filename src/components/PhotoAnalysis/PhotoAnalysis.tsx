@@ -11,7 +11,7 @@ import "./photoAnalysis.scss"
 import TextToSpeech from "./TextToSpeech/TextToSpeech"
 import { isValidFileType, labelImage, uploadToS3, writeToDynamo } from "./utils"
 import Alert, { NotificationType } from "../Alert/Alert"
-import { AuthContext } from "../../context/store"
+import { AuthContext } from "../../context/AuthContext/store"
 
 export interface LabelType {
   name: string
@@ -109,7 +109,7 @@ const Analysis: React.FC = () => {
     if (!isLoading.image && rekognitionResponse === "")
       return (
         <div>
-          <p className="instructions">Take or upload a photo</p>
+          <h4 className="is-size-5 mb-1 instructions">Take or upload photo</h4>
           <div className="cameraButton">
             <div className="is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
               <label className="file-label">
@@ -224,6 +224,26 @@ const Analysis: React.FC = () => {
                             labels={labels}
                           />
                         ) : null}
+                        <br />
+                        {authContext.userId !== null &&
+                        !isLoading.image &&
+                        imageData ? (
+                          <button
+                            className="button is-danger"
+                            onClick={saveImageRecord}
+                          >
+                            {isLoading.saveButton ? (
+                              <span className="loader"></span>
+                            ) : (
+                              "Save results"
+                            )}
+                          </button>
+                        ) : null}
+                        {authContext.userId == null &&
+                        !isLoading.image &&
+                        imageData ? (
+                          <p> Sign in to save photo analysis results </p>
+                        ) : null}
                       </div>
                     </div>
                   </div>
@@ -231,16 +251,6 @@ const Analysis: React.FC = () => {
               </div>
             </div>
           </div>
-
-          {authContext.userId !== null && !isLoading.image && imageData ? (
-            <button className="button is-danger" onClick={saveImageRecord}>
-              {isLoading.saveButton ? (
-                <span className="loader"></span>
-              ) : (
-                "Save results"
-              )}
-            </button>
-          ) : null}
         </div>
       </div>
     </div>
