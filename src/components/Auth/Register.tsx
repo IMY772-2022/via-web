@@ -29,14 +29,16 @@ const Register: React.FC = () => {
     })
   }
 
-  const regex =
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*d)(?=.*[@$!%*?&])[A-Za-zd@$!%*?&]{8,}$/
+  const dismissError = () => {
+    setDisplayError({
+      isError: false,
+      message: "",
+    })
+  }
+
+  const regex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
 
   const signin = () => {
-    setDisplayError({
-      ...displayError,
-      isError: false,
-    })
     if (
       regex.test(formValues.password) &&
       regex.test(formValues.confirmPassword)
@@ -55,24 +57,7 @@ const Register: React.FC = () => {
     }
   }
 
-  const submitConfirmation = () => {
-    setDisplayError({
-      ...displayError,
-      isError: false,
-    })
-    confirmSignUp(formValues.username, formValues.code).then(message => {
-      setDisplayError({
-        isError: true,
-        message: message as string,
-      })
-    })
-  }
-
   const register = () => {
-    setDisplayError({
-      ...displayError,
-      isError: false,
-    })
     const user = {
       username: formValues.username,
       password: formValues.password,
@@ -86,16 +71,29 @@ const Register: React.FC = () => {
     setDisplaySignUpForm(false)
   }
 
+  const submitConfirmation = () => {
+    setDisplayError({
+      ...displayError,
+      isError: false,
+    })
+    confirmSignUp(formValues.username, formValues.code).then(message => {
+      setDisplayError({
+        isError: true,
+        message: message as string,
+      })
+    })
+  }
+
   const signUpForm = (
     <div className="card">
       <div className="card-content">
         <div className="content">
           <div className="form">
             {displayError.isError ? (
-              <Alert
-                message={displayError.message}
-                notificationType={NotificationType.isError}
-              />
+              <div className={`notification is-danger`}>
+                <button className="delete" onClick={dismissError}></button>
+                {displayError.message}
+              </div>
             ) : null}
             <div className="field">
               <label className="label" htmlFor="email">
