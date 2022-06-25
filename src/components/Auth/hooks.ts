@@ -2,7 +2,7 @@ import { Auth } from "aws-amplify"
 import { navigate } from "gatsby"
 import { useCallback, useContext, useState } from "react"
 
-import { AuthContext } from "../../context/store"
+import { AuthContext } from "../../context/AuthContext/store"
 import { User } from "./SignIn"
 import { clearUser, storeUser } from "./utils"
 

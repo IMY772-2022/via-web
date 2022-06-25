@@ -89,7 +89,9 @@ const SignIn: React.FC = () => {
                 <span className="icon is-small is-right">
                   <FontAwesomeIcon icon={faEyeSlash} fontSize="15" />
                 </span>
-                <p className="forgotPassword">Forgot your password?</p>
+                <p className="forgotPassword">
+                  <Link to="/forgot-password">Forgot your password?</Link>
+                </p>
               </div>
             </div>
             <div className="field is-flex is-flex-direction-column is-justify-content-center is-align-items-center">

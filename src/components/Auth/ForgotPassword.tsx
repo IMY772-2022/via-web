@@ -2,14 +2,14 @@ import React, { useState } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons"
 import { faEye } from "@fortawesome/free-regular-svg-icons"
-import Alert, { NotificationType } from "../Alert/Alert"
 
-import { confirmSignUp, signUp } from "./utils"
-import "./Register.scss"
+import { forgotPassword, setNewPassword } from "./utils"
 import { Link } from "gatsby"
+import "./Register.scss"
 
-const Register: React.FC = () => {
-  const [displaySignUpForm, setDisplaySignUpForm] = useState(true)
+const ForgotPassword: React.FC = () => {
+  const [displayConfirmationCodeForm, setDisplayConfirmationCodeForm] =
+    useState(true)
 
   const [formValues, setFormValues] = useState({
     username: "",
@@ -38,16 +38,35 @@ const Register: React.FC = () => {
 
   const regex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
 
-  const signin = () => {
+  const getConfirmationCode = () => {
+    setDisplayError({
+      isError: false,
+      message: "",
+    })
+    const email = formValues.username
+    forgotPassword(email).then(message => {
+      setDisplayError({
+        isError: true,
+        message: message as string,
+      })
+    })
+    setDisplayConfirmationCodeForm(false)
+  }
+
+  const submitForgotPassword = () => {
+    setDisplayError({
+      isError: false,
+      message: "",
+    })
     if (
       regex.test(formValues.password) &&
       regex.test(formValues.confirmPassword)
     ) {
-      register()
+      confirmSubmit()
     } else if (formValues.password !== formValues.confirmPassword) {
       return setDisplayError({
         isError: true,
-        message: "passwords do not match",
+        message: "Passwords do not match",
       })
     } else {
       return setDisplayError({
@@ -57,26 +76,12 @@ const Register: React.FC = () => {
     }
   }
 
-  const register = () => {
+  const confirmSubmit = () => {
     const user = {
       username: formValues.username,
       password: formValues.password,
     }
-    signUp(user).then(message => {
-      setDisplayError({
-        isError: true,
-        message: message as string,
-      })
-    })
-    setDisplaySignUpForm(false)
-  }
-
-  const submitConfirmation = () => {
-    setDisplayError({
-      ...displayError,
-      isError: false,
-    })
-    confirmSignUp(formValues.username, formValues.code).then(message => {
+    setNewPassword(user, formValues.code).then(message => {
       setDisplayError({
         isError: true,
         message: message as string,
@@ -84,7 +89,7 @@ const Register: React.FC = () => {
     })
   }
 
-  const signUpForm = (
+  const getConfirmationCodeForm = (
     <div className="card">
       <div className="card-content">
         <div className="content">
@@ -112,6 +117,48 @@ const Register: React.FC = () => {
                   <FontAwesomeIcon icon={faEnvelope} fontSize="15" />
                 </span>
               </div>
+              <div className="field">
+                <div className="field is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
+                  <p className="control">
+                    <button className="button" onClick={getConfirmationCode}>
+                      Submit
+                    </button>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+  const forgotPasswordForm = (
+    <div className="card">
+      <div className="card-content">
+        <div className="content">
+          <div className="form">
+            <div className="field">
+              {displayError.isError ? (
+                <div className={`notification is-danger`}>
+                  <button className="delete" onClick={dismissError}></button>
+                  {displayError.message}
+                </div>
+              ) : null}
+            </div>
+            <div className="field">
+              <label className="label" htmlFor="signUpCode">
+                Confirm signup code
+              </label>
+              <div className="control">
+                <input
+                  className="input"
+                  type="text"
+                  placeholder="Code"
+                  name="code"
+                  id="signUpCode"
+                  onChange={e => updateForm(e)}
+                />
+              </div>
             </div>
             <div className="field is-size-7 color-primary">
               Passwords must contain 8 characters and at least 1 uppercase, 1
@@ -119,7 +166,7 @@ const Register: React.FC = () => {
             </div>
             <div className="field">
               <label className="label" htmlFor="password">
-                Password
+                New password
               </label>
               <div className="control has-icons-right">
                 <input
@@ -156,54 +203,7 @@ const Register: React.FC = () => {
             <div className="field">
               <div className="field is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
                 <p className="control">
-                  <button className="button" onClick={signin}>
-                    Register
-                  </button>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-  const confirmSignUpForm = (
-    <div className="card">
-      <div className="card-content">
-        <div className="content">
-          <div className="form">
-            <div className="field">
-              {displayError.isError ? (
-                <Alert
-                  message={displayError.message}
-                  notificationType={NotificationType.isError}
-                />
-              ) : null}
-              <p>
-                {" "}
-                We have sent a confirmation code to your email. Please enter it
-                below:{" "}
-              </p>
-            </div>
-            <div className="field">
-              <label className="label" htmlFor="signUpCode">
-                Confirm signup code
-              </label>
-              <div className="control">
-                <input
-                  className="input"
-                  type="text"
-                  placeholder="Code"
-                  name="code"
-                  id="signUpCode"
-                  onChange={e => updateForm(e)}
-                />
-              </div>
-            </div>
-            <div className="field">
-              <div className="field is-flex is-flex-direction-column is-justify-content-center is-align-items-center">
-                <p className="control">
-                  <button className="button" onClick={submitConfirmation}>
+                  <button className="button" onClick={submitForgotPassword}>
                     Confirm
                   </button>
                 </p>
@@ -221,10 +221,10 @@ const Register: React.FC = () => {
   )
   return (
     <div>
-      {displaySignUpForm ? signUpForm : null}{" "}
-      {!displaySignUpForm ? confirmSignUpForm : null}
+      {displayConfirmationCodeForm ? getConfirmationCodeForm : null}{" "}
+      {!displayConfirmationCodeForm ? forgotPasswordForm : null}
     </div>
   )
 }
 
-export default Register
+export default ForgotPassword
