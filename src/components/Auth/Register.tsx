@@ -36,18 +36,27 @@ const Register: React.FC = () => {
     })
   }
 
-  const regex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
+  const passwordRegex =
+    /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
+  const emailRegex =
+    /^[_a-zA-Z0-9-]+((\.[_a-zA-Z0-9-]+)*|(\+[_a-zA-Z0-9-]+)*)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,4})$/
 
   const signin = () => {
+    if (!emailRegex.test(formValues.username)) {
+      return setDisplayError({
+        isError: true,
+        message: "Please enter a valid email address",
+      })
+    }
     if (
-      regex.test(formValues.password) &&
-      regex.test(formValues.confirmPassword)
+      passwordRegex.test(formValues.password) &&
+      passwordRegex.test(formValues.confirmPassword)
     ) {
       register()
     } else if (formValues.password !== formValues.confirmPassword) {
       return setDisplayError({
         isError: true,
-        message: "passwords do not match",
+        message: "Passwords do not match",
       })
     } else {
       return setDisplayError({
