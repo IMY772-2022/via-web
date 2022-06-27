@@ -9,7 +9,7 @@ export const Navigation: React.FC = () => {
   return (
     <nav className="navbar mb-5" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
-        <Link className="navbar-item" to="/">
+        <Link className="navbar-item" to="/" title="Home">
           <BrandIcon />
         </Link>
       </div>
