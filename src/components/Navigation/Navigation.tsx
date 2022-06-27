@@ -9,13 +9,11 @@ export const Navigation: React.FC = () => {
   return (
     <nav className="navbar mb-5" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
-        <Link className="navbar-item" to="/" title="Home">
+        <Link className="navbar-item" to="/">
           <BrandIcon />
+          <span className="ml-4">Home</span>
         </Link>
       </div>
-      <Link className="navbar-item" to="/">
-        Home
-      </Link>
       <Link className="navbar-item" to="/photo-analysis">
         Photo Analysis
       </Link>
