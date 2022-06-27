@@ -30,11 +30,11 @@ type ThemeState = {
 }
 
 export const INITIAL_VALUES: ThemeState = {
-  colorMode: "light",
+  colorMode: undefined,
   setColorMode: () => emptyFn,
-  fontWeightMode: "normal",
+  fontWeightMode: undefined,
   setFontWeightMode: () => emptyFn,
-  fontSizeMode: "normal",
+  fontSizeMode: undefined,
   setFontSizeMode: () => emptyFn,
 }
 
@@ -62,22 +62,17 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
       localStorage.getItem(COLOR_MODE_KEY) ||
       root.style.getPropertyValue(INITIAL_COLOR_MODE_CSS_PROP)
 
-    if (initialColorValue !== null && initialColorValue !== "")
-      rawSetColorMode(initialColorValue)
-
     const initialFontWeightValue =
       localStorage.getItem(FONT_WEIGHT_MODE_KEY) ||
       root.style.getPropertyValue(INITIAL_FONT_WEIGHT_MODE_CSS_PROP)
-
-    if (initialFontWeightValue !== null && initialFontWeightValue !== "")
-      rawSetFontWeightMode(initialFontWeightValue)
 
     const initialFontSizeModeValue =
       localStorage.getItem(FONT_SIZE_MODE_KEY) ||
       root.style.getPropertyValue(INITIAL_FONT_SIZE_MODE_CSS_PROP)
 
-    if (initialFontSizeModeValue !== null && initialFontSizeModeValue !== "")
-      rawSetFontSizeMode(initialFontSizeModeValue)
+    rawSetColorMode(initialColorValue)
+    rawSetFontWeightMode(initialFontWeightValue)
+    rawSetFontSizeMode(initialFontSizeModeValue)
   }, [])
 
   const values = useMemo(() => {
