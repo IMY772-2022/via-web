@@ -43,10 +43,7 @@ const config: GatsbyConfig = {
         background_color: "#ffffff",
         theme_color: "#ffffff",
         display: "standalone",
-        icon: "src/images/via-logo-pink.png",
-        icon_options: {
-          purpose: `any maskable`,
-        },
+        icon: "src/images/via-logo.svg",
       },
     },
     {
